@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""KERNEL §11 validator for a canon folder. Aligned with KERNEL v0.17.
+"""KERNEL §11 validator for a canon folder. Aligned with KERNEL v0.18.
 
 Usage: python3 validate.py <world-folder>
 
@@ -144,6 +144,31 @@ def check_amount(rel, a):
             warnings.append(f"{rel}: unknown key '{k}' inside amount")
 
 
+def check_state_value(rel, fm, kind, artifact_type):
+    """Reserve top-level ``value`` for qualitative one-member states.
+
+    Numeric state series continue to use ``amount``; accepting arbitrary
+    mappings here would recreate the ambiguity that the two fields avoid.
+    """
+    if "value" not in fm:
+        return
+    is_state = artifact_type == "state" or (
+        isinstance(artifact_type, str) and artifact_type.startswith("state/")
+    )
+    if kind != "relation" or not is_state or len(member_ids(fm)) != 1:
+        warnings.append(
+            f"{rel}: top-level 'value' is reserved for qualitative one-member state relations"
+        )
+        return
+    if "amount" in fm:
+        warnings.append(
+            f"{rel}: qualitative state value cannot be combined with numeric amount"
+        )
+    value = fm["value"]
+    if not isinstance(value, str) or not value.strip():
+        warnings.append(f"{rel}: state value must be a non-empty string")
+
+
 def check_constraint_declarations():
     """Validate the small formal-constraint vocabulary on type artifacts."""
     for _, (rel, fm) in sorted(arts.items()):
@@ -233,6 +258,7 @@ for aid, (rel, fm) in sorted(arts.items()):
 
     if "amount" in fm:
         check_amount(rel, fm["amount"])
+    check_state_value(rel, fm, kind, t)
     for stray in ("per", "unit", "of"):
         if stray in fm:
             warnings.append(

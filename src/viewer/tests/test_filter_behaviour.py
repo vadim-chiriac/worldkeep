@@ -72,6 +72,27 @@ console.log(JSON.stringify({
 }));
 """
 
+FOCUS_HARNESS = r"""
+import fs from "node:fs";
+const html = fs.readFileSync(process.argv[2], "utf8").replace(/\r\n/g, "\n");
+const data = JSON.parse(html.split('id="projection-data">')[1].split("</script>")[0]);
+const details = JSON.parse(html.split('id="artifact-details">')[1].split("</script>")[0]);
+const body = html.split("<script>\n(function(){")[1];
+const take = (name) => { const start=body.indexOf(`  function ${name}(`); let i=body.indexOf("{",start),depth=0; for(;i<body.length;i++){if(body[i]==="{")depth++;else if(body[i]==="}"){depth--;if(!depth)break}} return body.slice(start,i+1); };
+const api = new Function("data", "details", `
+  const exactType=(value)=>value||"(untyped)";
+  const artifactKey=(kind,type)=>JSON.stringify([kind,exactType(type)]);
+  let activeProjection=data,artifactTypes=new Set(data.nodes.filter((n)=>n.kind!=="relation").map((n)=>artifactKey(n.kind,n.type))),relationTypes=new Set(data.edges.map((e)=>exactType(e.type)));
+  ${take("relationModel")}
+  ${take("filteredProjection")}
+  ${take("activeDisplayProjection")}
+  ${take("focusProjectionFor")}
+  return {focusProjectionFor};
+`)(data,details);
+const result=api.focusProjectionFor(process.argv[3]);
+console.log(JSON.stringify({nodes:result.nodes.map((n)=>n.id).sort(),parents:Object.fromEntries(result.nodes.map((n)=>[n.id,n.parent||null])),relations:[...new Set(result.edges.map((e)=>e.id.split("::member:")[0]))].sort()}));
+"""
+
 
 def _world(root: Path) -> None:
     """A three-deep containment chain plus one that must not compose."""
@@ -150,6 +171,17 @@ class FilterBehaviourTests(unittest.TestCase):
         self.assertEqual(done.returncode, 0, done.stderr or done.stdout)
         return json.loads(done.stdout)
 
+    def focus(self, artifact_id: str) -> dict:
+        with tempfile.NamedTemporaryFile("w", suffix=".mjs", delete=False) as handle:
+            handle.write(FOCUS_HARNESS)
+            script = handle.name
+        try:
+            done = subprocess.run(["node", script, str(self.html), artifact_id], capture_output=True, text=True, check=False)
+        finally:
+            Path(script).unlink(missing_ok=True)
+        self.assertEqual(done.returncode, 0, done.stderr or done.stdout)
+        return json.loads(done.stdout)
+
     def test_unfiltered_chain_nests_each_level_in_the_next(self) -> None:
         parents = self.filter()["parents"]
 
@@ -177,6 +209,14 @@ class FilterBehaviourTests(unittest.TestCase):
         parents = self.filter(dropped_relation="part_of")["parents"]
 
         self.assertTrue(all(parent is None for parent in parents.values()), parents)
+
+    def test_focus_is_one_hop_and_never_adds_hidden_topology(self) -> None:
+        result = self.focus("entities/seat")
+
+        self.assertEqual(result["relations"], ["relations/seat-in-county"])
+        self.assertEqual(set(result["nodes"]), {"entities/seat", "entities/county"})
+        self.assertNotIn("entities/region", result["nodes"])
+        self.assertIsNone(result["parents"]["entities/county"])
 
 
 if __name__ == "__main__":  # pragma: no cover

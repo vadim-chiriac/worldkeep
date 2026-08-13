@@ -1,4 +1,4 @@
-# KERNEL.md — Worldbuilding Canon Kernel (v0.17)
+# KERNEL.md — Worldbuilding Canon Kernel (v0.18)
 
 > Spec language is English because the project targets a public audience.
 
@@ -108,11 +108,12 @@ all other fields are free and mean something only if a `type` file says so.
 | `members` | relations | the participants. A list where each entry is either a plain ID (participant, no role) or an object `{id, role?, weight?}`. `role` is a free string; std and custom types declare expected roles (§8). One relation is one addressable statement, not necessarily one edge: use one multi-member relation only when its facets and provenance apply to every member; split independently timed, statused, sourced, described, or addressable links. **Direction is expressed by role asymmetry**, aggregation by grouping on roles. |
 | `status` | any | `canon` \| `draft` \| `deprecated` — workflow, not world-truth |
 | `amount` | any (commonly relations, actions, ideas) | magnitude with units: one `{value, unit, per?, of?}` object **or a list of them**. `value` a number or `{min, max}`. A price attaches to the thing priced: a toll `action/practice` carries `amount: {value: 2, unit: silver, per: wagon}`; a price list is a list — `[{value: 3, unit: copper, per: head}, {value: 6, unit: copper, per: cart}]`. **Proportions:** with `of:` (free string or ID naming the basis), `value` is a ratio and `unit` is omitted — "a tenth of every melt" is `{value: 0.1, of: "melt yield", per: melt}`. Compare only within identical `unit`+`per` (or `of`+`per`). Aggregable over inclusion chains by lenses. |
+| `value` | qualitative one-member `state` relations | a non-empty string giving the state of the property named by `type`: `type: state/exploration`, `value: unexplored`. It is not a general-purpose field and is not the numeric `amount.value` nested above. |
 | `fiat` | any | `true` marks an authorial decree: this stands *as written*, even against declared type constraints, established context, history, or natural law. The validator reports conflicts as notices, never errors; the AI correlates instead of resisting. |
 
 **Modeling rule — anything that changes is not a field.** Entity frontmatter
 is for stable identity only; mutable properties are relations with `when`
-(and `amount` where numeric) — a **state** (§6) when no second party is
+(and `amount` where numeric or `value` where qualitative) — a **state** (§6) when no second party is
 involved, an ordinary relation when one is.
 
 ---
@@ -245,16 +246,19 @@ relation with no `type`:
 
 **A one-member relation is a state.** A relation with a single member is
 legal and means: *a fact about that member*, carried by the relation's own
-facets — `when`, `amount`, `valence`. This is how a changing scalar
+facets — `when`, `amount`, `value`, `valence`. This is how a changing
 property is written (the §4 modeling rule forbids fields): population then
 and population now are two `state` relations on the same entity, each with
-its `when` and `amount`.
+its `when` and numeric `amount`; an exploration state carries a qualitative
+`value` such as `unexplored`.
 
 **Name the property in the type.** A bare `state` says only "something
 about X was so." Which property is the type's job: `state/population`,
-`state/size`, `state/temper`. **Series identity is (subject, type)** — that
+`state/size`, `state/exploration`. **Series identity is (subject, type)** — that
 is what lets a lens chart 600-then-280 as one line and leave the boat count
-out of it. The property type file declares the unit and anything else
+out of it. Values such as `explored` and `unexplored` are values of the same
+`state/exploration` series, never descendant types. The property type file
+declares the unit (for numeric states) and anything else
 formal:
 
 ```markdown
@@ -284,7 +288,7 @@ actually-meaningful vocabulary:
 | `participates` | relation | binds participants to one **action**. The unique `action` member must be typed `action` or a descendant (`role_types`, §11); all other roles are free vocabulary — `performer`, `target`, `instrument`, `witness`, … Agency is a role, not a type: whether something acts or is acted upon is stated per-member, per flat ontology. Several participants bundle into one file; `weight` per member = degree of involvement. |
 | `action` / `action/practice` | entity | something that happens: an episodic occurrence / a recurrent pattern. Carries the lens that used to be a hard-coded shape. |
 | `period` | entity | a span of time as an entity — era, reign, season, siege. `when` anchors point at periods (innermost applicable); periods nest via `part_of` (child period `part`, parent `whole`). |
-| `state` | relation | a one-member relation: a fact about its member, carried by `when`/`amount`/`valence`. Role: `subject`. The home of every mutable scalar property — populations, sizes, prices-of-the-day. Specialize by property (`state/population`); series identity is (subject, type). |
+| `state` | relation | a one-member relation: a fact about its member, carried by `when`, numeric `amount` or qualitative `value`, and `valence`. Role: `subject`. The home of every mutable property — populations, sizes, exploration status, prices-of-the-day. Specialize by property (`state/population`, `state/exploration`); series identity is (subject, type). |
 | `precedes` | relation | temporal order between two artifacts that occupy time — periods, actions, states. Roles: `earlier`, `later`. Ordering is then **derived** (topological sort over the `precedes` graph); numeric `when.sort` remains an optional override for worlds with a real calendar. Authors say "after the fever, before the flood"; nobody should have to invent 1700. |
 
 For example, provinces stated with the same time, status, source, and
@@ -474,10 +478,10 @@ including the built-in Everything audit projection.
 ## 9. World manifest & extensions
 
 ```yaml
-kernel_version: "0.16"
+kernel_version: "0.18"
 name: "Vvardenfell-adjacent test world"
 calendar: "Eras; sort key = era*1000 + year"
-facets: [when, where, valence, weight, members, status, amount, fiat]
+facets: [when, where, valence, weight, members, status, amount, value, fiat]
 std_types: [part_of, subordinate_to, holds, opposes, participates, action, action/practice, period, state, precedes]
 present: entities/the-long-thaw   # the world's "now" — a period entity
 extensions: []               # namespaced FACETS and lenses only — never kinds

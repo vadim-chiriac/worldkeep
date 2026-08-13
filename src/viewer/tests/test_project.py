@@ -206,6 +206,13 @@ class BehaviorProjectionTests(unittest.TestCase):
                 "members: [{id: entities/whole, role: subject}]\n"
                 "when: during-test\namount: {value: 12, unit: persons}\n",
             )
+            write_artifact(
+                root,
+                "relations/exploration",
+                "kind: relation\ntype: state/exploration\nstatus: canon\n"
+                "members: [{id: entities/part, role: subject}]\n"
+                "when: during-test\nvalue: unexplored\n",
+            )
             write_view(
                 root,
                 "name: Test\nrender: graph\nselect:\n  kinds: [entity, relation]\n"
@@ -227,6 +234,7 @@ class BehaviorProjectionTests(unittest.TestCase):
             self.assertEqual(behaviors["relations/rank"], "edge")
             self.assertEqual(behaviors["relations/order"], "hide")
             self.assertEqual(nodes["entities/whole"]["chips"][0]["amount"]["value"], 12)
+            self.assertEqual(nodes["entities/part"]["chips"][0]["value"], "unexplored")
 
     def test_nary_nest_assigns_every_part_and_where_under_keeps_all_paths(self) -> None:
         with TemporaryDirectory() as directory:

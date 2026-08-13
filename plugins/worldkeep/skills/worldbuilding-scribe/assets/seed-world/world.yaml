@@ -1,7 +1,7 @@
-kernel_version: "0.17"
+kernel_version: "0.18"
 name: "Seed template — copy this folder to start a world"
 calendar: ""            # set once the author names one; vagueness is legal
-facets: [when, where, valence, weight, members, status, amount, fiat]
+facets: [when, where, valence, weight, members, status, amount, value, fiat]
 std_types: [part_of, subordinate_to, holds, opposes, participates, action, action/practice, period, state, precedes]
 extensions:
   - scribe              # scribe.origin, scribe.session (SCRIBE.md §6)

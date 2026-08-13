@@ -1081,6 +1081,7 @@ def project_view(
                     "type": artifact.type,
                     "when": artifact.frontmatter.get("when"),
                     "amount": artifact.frontmatter.get("amount"),
+                    "value": artifact.frontmatter.get("value"),
                 }
             )
             continue

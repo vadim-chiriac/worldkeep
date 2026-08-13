@@ -1,4 +1,4 @@
-# SCRIBE.md — The Conversation → Canon Loop (v0.10)
+# SCRIBE.md — The Conversation → Canon Loop (v0.11)
 
 > The scribe is the core skill: it listens to freeform worldbuilding talk,
 > extracts structure per KERNEL.md, and proposes changes the author approves.
@@ -74,6 +74,15 @@ only a sentence in some body. Prose is invisible to every lens; structure
 is the product. The same goes for prices (`amount` on the thing priced,
 KERNEL §4) and for changes over time (a relation with `when`, never a
 field).
+
+**State properties keep their property in the type and their reading in the
+facet.** A numeric changing property uses `amount`, such as
+`state/population` with `amount: {value: 280, unit: persons}`. A qualitative
+one uses a non-empty top-level `value`, such as `state/exploration` with
+`value: unexplored`. Do not make `state/unexplored`: `explored` and
+`unexplored` are readings in one `(subject, state/exploration)` series. Under
+the default `types: ask`, propose the property type when it earns a reusable
+file; do not silently create an undeclared descendant path.
 
 **Several links of one type to one target are one relation.** This is the
 default, not a permission. Two or more links that share a type, share a member

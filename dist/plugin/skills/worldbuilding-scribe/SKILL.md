@@ -124,6 +124,12 @@ When none fits, propose a new type only if it earns its file under SCRIBE.md
 §4, and otherwise leave the artifact untyped. Never invent an undeclared
 descendant path and call it reuse.
 
+For a changing property with one subject, the property belongs in a `state/*`
+type. Use `amount` for a numeric magnitude; use non-empty top-level `value`
+for a qualitative reading. Thus a proposed `state/exploration` can carry
+`value: unexplored`; do not invent `state/unexplored`, because that breaks the
+one property series into separate types.
+
 ## During the session
 
 The loop lives in SCRIBE.md §2–3. Under the default `approval: strict`, write

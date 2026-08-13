@@ -119,6 +119,14 @@ class RendererTests(unittest.TestCase):
         self.assertIn('"target-arrow-fill":"filled"', rendered)
         self.assertIn('"arrow-scale":.9', rendered)
 
+    def test_renderer_formats_qualitative_states_and_numeric_ranges(self) -> None:
+        rendered = render_graph(self.projection, self.canon)
+
+        self.assertIn('const chipLabel=(chip)=>typeLabel(chip.type)+": "+(chip.value!==undefined&&chip.value!==null?String(chip.value):amountLabel(chip.amount));', rendered)
+        self.assertIn('if(min!==undefined&&max!==undefined)return numberLabel(min)+"–"+numberLabel(max);', rendered)
+        self.assertIn('if(min!==undefined)return "at least "+numberLabel(min);', rendered)
+        self.assertIn('if(max!==undefined)return "at most "+numberLabel(max);', rendered)
+
     def test_single_view_has_no_multi_view_shell(self) -> None:
         rendered = render_graph(self.projection, self.canon, vendor=True)
 
@@ -151,10 +159,11 @@ class RendererTests(unittest.TestCase):
         self.assertNotIn('node.kind+"\\u0000"', rendered)
         self.assertNotIn('key.split("\\u0000")', rendered)
         self.assertIn('input.dataset.filterKey=key', rendered)
-        self.assertIn('window.__WB_DATA__=result.projection', rendered)
+        self.assertIn('function drawTemporaryProjection(projection,viewport,selectedId,remember=true)', rendered)
+        self.assertIn('window.__WB_DATA__=projection', rendered)
         self.assertIn('function clearInspector(){inspector.innerHTML=', rendered)
         self.assertLess(rendered.index('function clearInspector(){inspector.innerHTML='), rendered.index('function applyCurrentFilters()'))
-        self.assertIn('clearInspector();if(!cy.nodes().length)', rendered)
+        self.assertIn('else clearInspector();renderLegend();', rendered)
         self.assertIn('if(enabled)clearFilterSearch()', rendered)
         self.assertIn('data-filter-action="all" disabled', rendered)
         self.assertIn('aria-label="Search filter types" disabled', rendered)
@@ -173,12 +182,10 @@ class RendererTests(unittest.TestCase):
         self.assertIn('function markViewerReady(state){rememberNodePositions();setFilterControlsReady(true);window.__WB_VIEWER_READY__=true', rendered)
         self.assertIn('function elementsFor(projection,positions=positionMemory)', rendered)
         self.assertIn('const position=positions.get(node.id);if(position)item.position=position', rendered)
-        self.assertIn('rememberNodePositions();const result=filteredProjection(activeProjection)', filter_code)
-        self.assertIn('cy.add(elementsFor(result.projection,positionMemory))', filter_code)
-        self.assertIn('const options={name:"preset",animate:false,fit:false,padding:58}', filter_code)
+        self.assertIn('drawTemporaryProjection(activeDisplayProjection(),viewport,selected.length?selected[0].id():null)', filter_code)
         self.assertNotIn('randomize:true', filter_code)
         self.assertIn('const pan=cy.pan(),viewport={zoom:cy.zoom(),pan:{x:pan.x,y:pan.y}}', filter_code)
-        self.assertEqual(filter_code.count('restoreViewport(viewport)'), 2)
+        self.assertIn('if(focusState)return', filter_code)
         self.assertIn('function restoreViewport(viewport){cy.zoom(viewport.zoom);cy.pan(viewport.pan)}', rendered)
         self.assertIn('function setFilterControlsReady(ready)', rendered)
         self.assertIn('input.disabled=!filtersReady', rendered)
@@ -272,14 +279,34 @@ class ViewerAffordanceTests(unittest.TestCase):
         self.assertIn("function renderSearchResults(ids)", self.rendered)
         self.assertIn('button.dataset.goto=id;', self.rendered)
 
-    def test_inspector_lists_the_relations_an_artifact_is_in(self) -> None:
-        """An artifact's connections are canon, so they come from the whole
-        view rather than from whatever the filters currently leave visible."""
-        self.assertIn("function connectionsFor(id)", self.rendered)
-        self.assertIn("const projection=activeProjection,found=new Map();", self.rendered)
-        self.assertIn("function renderConnections(id)", self.rendered)
-        self.assertIn('relation.dataset.goto=item.relationId;', self.rendered)
-        self.assertIn('other.dataset.goto=item.otherId;', self.rendered)
+    def test_inspector_groups_relations_and_focus_stays_in_active_projection(self) -> None:
+        self.assertIn("function relationMembers(relationId,model)", self.rendered)
+        self.assertIn("function relationIdsFor(id)", self.rendered)
+        self.assertIn('heading.textContent="Relations ("+relationIds.length+")"', self.rendered)
+        self.assertIn('self.textContent="This artifact"', self.rendered)
+        self.assertIn('not in this view', self.rendered)
+        self.assertIn("function focusProjectionFor(id)", self.rendered)
+        self.assertIn("const source=activeDisplayProjection()", self.rendered)
+        self.assertIn('relationIds.has(edge.id.split("::member:")[0])', self.rendered)
+        self.assertIn("window.__WB_CLEAR_FOCUS__=clearFocus", self.rendered)
+        self.assertIn('positions:new Map(positionMemory)', self.rendered)
+        self.assertIn('positionMemory=new Map(prior.positions)', self.rendered)
+        self.assertIn('drawTemporaryProjection(activeDisplayProjection(),prior.viewport,prior.selectedId,false)', self.rendered)
+        self.assertIn('parent:retained.has(node.parent)?node.parent:null', self.rendered)
+
+    def test_inspector_frontmatter_is_collapsed_and_legend_uses_rendered_styles(self) -> None:
+        self.assertIn('document.createElement("details")', self.rendered)
+        self.assertIn('detailsBox.className="frontmatter-details"', self.rendered)
+        self.assertIn("function renderLegend()", self.rendered)
+        self.assertIn('cy.nodes().forEach((node)=>', self.rendered)
+        self.assertIn('cy.edges().filter((edge)=>edge.data("behavior")!=="hide")', self.rendered)
+        self.assertIn('" shown as "', self.rendered)
+        self.assertIn('.relation-card-title,.relation-card-title button', self.rendered)
+        self.assertIn('relations.add(chip.source)', self.rendered)
+        self.assertIn('node.isParent()', self.rendered)
+        self.assertIn('node.data("dormant")===1', self.rendered)
+        self.assertIn('node.data("practice")===1', self.rendered)
+        self.assertIn('node.data("fiat")===1', self.rendered)
 
     def test_nesting_collapses_only_through_one_relation_type(self) -> None:
         """part_of composes, so hiding a county must not orphan its seat. A

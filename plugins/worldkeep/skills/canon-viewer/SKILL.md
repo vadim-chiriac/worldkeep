@@ -188,6 +188,14 @@ ask for approval before saving it. Never create `views/everything.yaml` (or
 cannot be customized. Migrate an old such recipe to a descriptive name (for
 example `Styled world overview`) and retain its named-view lens behavior.
 
+The inspector groups each connection into one relation card, preserving the
+canon member order and roles. **Focus relation** temporarily draws only that
+relation and its participants; **Focus neighborhood** draws an artifact, its
+direct relations, and their participants. Both are one-hop browser-only aids:
+they honour the active view and filters, never reveal excluded canon, and clear
+on a view switch. The legend describes the final styles actually on screen;
+never treat it as a statement of canon meaning or provenance.
+
 ## Composing reusable modules
 
 When a request keeps reappearing — "the same people set again", "our faction
@@ -302,6 +310,11 @@ one:
 | `nest` | one container member as a compound node holding one or more contained members |
 | `chip` | rendered on the member rather than between members (states) |
 | `hide` | present in the projection, never drawn |
+
+State chips show the property from their type and either its qualitative
+`value` (for example `Exploration: unexplored`) or numeric `amount`. Ranges
+remain numeric state data; they render as a readable lower bound, upper bound,
+or interval.
 
 **A nest reads its role names from the same `direction` an edge would.** The
 pair is `[contained, container]`, which is why the standard `part_of` lens

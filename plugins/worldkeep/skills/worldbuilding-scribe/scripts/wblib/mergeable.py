@@ -17,7 +17,7 @@ from collections import defaultdict
 from typing import Any, Callable, Iterable
 
 #: Relation-level facets that must match before a merge can be suggested.
-FACETS = ("when", "where", "valence", "weight", "status", "amount", "fiat")
+FACETS = ("when", "where", "valence", "weight", "status", "amount", "value", "fiat")
 
 #: Provenance, compared as strictly as any facet. SCRIBE §2 names it among the
 #: things that make two links different statements, and it is exactly what

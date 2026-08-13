@@ -92,7 +92,7 @@ autonomous author.
 
 ## Before you rely on it
 
-**The format is young and nothing migrates it.** The kernel is at v0.17 and has
+**The format is young and nothing migrates it.** The kernel is at v0.18 and has
 changed several times, twice breakingly in the week before this release. When a
 rule changes the tooling tells you — it will not rewrite your files. Keep your
 worlds in git; the canon is plain text, so a commit is a complete snapshot and

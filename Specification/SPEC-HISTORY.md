@@ -7,6 +7,14 @@ belong here rather than in their runtime preambles.
 
 ## KERNEL
 
+### v0.18
+
+Added qualitative one-member state values. `value` is now a standardized,
+non-empty string facet only for one-member `state` relations; numeric
+magnitudes remain `amount`. A property stays in the type path, so
+`state/exploration` can move between `explored` and `unexplored` without
+splitting its `(subject, type)` series.
+
 ### v0.17
 
 Retired the `action` kind, leaving four: `entity`, `idea`, `relation`, `type`.
@@ -126,6 +134,12 @@ v0.5 introduced the flat ontology and networks/zoom. v0.4 added the
 as a principle.
 
 ## SCRIBE
+
+### v0.11
+
+Clarified capture of qualitative mutable properties: reuse or propose a
+property type such as `state/exploration`, then write its reading in
+top-level `value`; never encode the reading as a descendant type.
 
 ### v0.10
 

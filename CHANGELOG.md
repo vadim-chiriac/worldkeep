@@ -5,6 +5,12 @@ do not rewrite released history.
 
 ## [Unreleased]
 
+### Added
+
+- The viewer now groups inspector relations into readable member-and-role cards,
+  supports one-hop temporary relation or neighborhood focus, and generates a
+  legend from the styles currently shown after filters or focus.
+
 ### Changed
 
 - Tightened the first-release documentation into one newcomer path: install,
@@ -20,6 +26,13 @@ do not rewrite released history.
 
 ### Fixed
 
+- Qualitative one-member states now carry a structured top-level `value`, while
+  numeric states keep `amount`. The viewer renders those values as chips and
+  formats numeric ranges instead of exposing JavaScript's `[object Object]`.
+  The Kernel, Scribe, seed world, and skill guidance now distinguish the two
+  forms and retain one property series such as `state/exploration`.
+- Public guides that name the current format version now track KERNEL v0.18 and
+  SCRIBE v0.11, including the seed-manifest facet list.
 - `CanonReader` no longer reports an unreadable body as an empty one.
   `body_of` turned any read failure into `""`, which the merge detector then
   read as "this relation has no prose" — so two files nobody could open looked

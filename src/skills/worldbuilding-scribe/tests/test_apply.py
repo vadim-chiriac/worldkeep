@@ -265,6 +265,69 @@ class ValidatorCardinalityTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1)
         self.assertIn("roles_unique must be a list", result.stdout)
 
+    def test_qualitative_one_member_state_value_is_accepted(self) -> None:
+        artifact(self.world, "types/state", "kind: type\n")
+        artifact(self.world, "types/state/exploration", "kind: type\n")
+        artifact(
+            self.world,
+            "relations/frontier",
+            "kind: relation\ntype: state/exploration\nvalue: unexplored\n"
+            "members: [{id: entities/north, role: subject}]\n",
+        )
+
+        result = self.run_validate()
+
+        self.assertEqual(result.returncode, 0, result.stdout)
+        self.assertNotIn("state value", result.stdout)
+
+    def test_state_value_rejects_non_qualitative_or_non_state_use(self) -> None:
+        artifact(
+            self.world,
+            "relations/bad-value",
+            "kind: relation\ntype: part_of\nvalue: unexplored\n"
+            "members: [{id: entities/realm, role: whole}, {id: entities/north, role: part}]\n",
+        )
+
+        result = self.run_validate()
+
+        self.assertEqual(result.returncode, 0, result.stdout)
+        self.assertIn("top-level 'value' is reserved", result.stdout)
+
+    def test_state_value_requires_a_non_empty_string(self) -> None:
+        artifact(self.world, "types/state", "kind: type\n")
+        for suffix, value in (
+            ("empty", "''"),
+            ("number", "12"),
+            ("list", "[unexplored]"),
+            ("mapping", "{status: unexplored}"),
+        ):
+            artifact(
+                self.world,
+                f"relations/{suffix}-state",
+                "kind: relation\ntype: state/exploration\n"
+                f"value: {value}\nmembers: [{{id: entities/north, role: subject}}]\n",
+            )
+
+        result = self.run_validate()
+
+        self.assertEqual(result.returncode, 0, result.stdout)
+        self.assertEqual(result.stdout.count("state value must be a non-empty string"), 4)
+
+    def test_state_value_and_amount_are_mutually_exclusive(self) -> None:
+        artifact(self.world, "types/state", "kind: type\n")
+        artifact(
+            self.world,
+            "relations/ambiguous-state",
+            "kind: relation\ntype: state/exploration\nvalue: unexplored\n"
+            "amount: {value: 12, unit: persons}\n"
+            "members: [{id: entities/north, role: subject}]\n",
+        )
+
+        result = self.run_validate()
+
+        self.assertEqual(result.returncode, 0, result.stdout)
+        self.assertIn("qualitative state value cannot be combined with numeric amount", result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -18,7 +18,7 @@ out to be understating something, that is a bug in the document.
 
 This is the one that can actually cost you work.
 
-The kernel is at v0.17 and the capture specification at v0.10. Both have
+The kernel is at v0.18 and the capture specification at v0.11. Both have
 changed in response to real use, several times, and both may change again. Two
 of those changes have been breaking within the last week of development: a
 whole kind was retired, and the meaning of a lens key was widened.

@@ -8,6 +8,20 @@ Most of the time you never write one: you ask the agent for what you want and
 it writes the file. This document is for when you want to know what it wrote,
 or write one yourself.
 
+## Reading a busy view
+
+The right-hand inspector groups an artifact's connections into one card per
+relation. A card keeps the canon member order and role names, marks the item
+you selected as **This artifact**, and leaves a muted **not in this view** note
+where a saved view excluded another member. Only visible members can be opened.
+
+Use **Focus relation** to temporarily show that relation and its participants,
+or **Focus neighborhood** to show one artifact, its direct relations, and each
+of their members. Focus is one hop, never traverses further, honours the active
+view and its filters, and is cleared by **Clear** or by switching views. It
+does not edit a view file or canon. The generated legend describes only what is
+currently shown: the final node and edge styles, shapes, direction, and counts.
+
 ---
 
 ## `Everything`, and why it ignores you

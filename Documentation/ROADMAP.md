@@ -26,7 +26,7 @@ views without requiring the agent to reread the full specifications.
 
 ## Next
 
-**Migration tooling.** The format is at kernel v0.17 and has changed several
+**Migration tooling.** The format is at kernel v0.18 and has changed several
 times, each time by hand. Nothing migrates a world from one version to the
 next, and "keep it in git" is honest advice rather than a solution. This is the
 single largest gap between the current state and one where the format can be
