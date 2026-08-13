@@ -1,0 +1,11 @@
+name: "People — affiliations and leadership"
+render: graph
+select:
+  kinds: [entity, relation]
+  types:
+    [person, community/polity, community/polity/*, community/religion,
+     community/religion/*, community/priesthood, community/priesthood/*]
+  status: [canon]
+edges:
+  include: [part_of/membership, leads]
+layout: dagre

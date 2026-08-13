@@ -1,0 +1,9 @@
+name: "Places — nesting and what sits where"
+render: graph
+select:
+  kinds: [entity, relation]
+  types: [place, place/*, community, community/*, person, "<untyped>"]
+  status: [canon, draft]
+edges:
+  include: [part_of, part_of/*, subordinate_to]
+layout: dagre

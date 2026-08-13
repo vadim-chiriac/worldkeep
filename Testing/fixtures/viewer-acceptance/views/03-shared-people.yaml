@@ -1,0 +1,10 @@
+name: "Shared people"
+render: graph
+select:
+  kinds: [entity, relation]
+  status: [canon, draft]
+edges:
+  include: [part_of, part_of/*, subordinate_to]
+emphasis:
+  color_by: valence
+  size_by: weight

@@ -1,0 +1,10 @@
+name: "People, affiliations, and authority"
+render: graph
+compose:
+  selection:
+    any_of: [people]
+  relations:
+    include: [affiliation-and-leadership]
+  styles: [community-colors]
+  lenses: [membership-as-links]
+layout: dagre

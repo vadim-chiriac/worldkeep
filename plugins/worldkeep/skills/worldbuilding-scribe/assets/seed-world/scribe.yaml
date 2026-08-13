@@ -1,0 +1,9 @@
+# How you like the scribe to work. Delete this file for these same defaults.
+# Full reference: SCRIBE.md §10. The scribe reports the effective values once
+# at session start; validation always runs after every complete change batch.
+
+approval: strict         # strict | material_only | deferred
+prose: compose           # compose | quote | none
+types: ask               # existing_only | ask | free
+extraction: eager        # eager | stated_only
+bundles: full            # full | terse | none

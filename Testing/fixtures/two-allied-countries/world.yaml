@@ -1,0 +1,7 @@
+kernel_version: "0.11"
+name: "Two Allied Countries"
+facets: [when, where, valence, weight, members, status, amount, fiat]
+std_types: [part_of, subordinate_to, holds, opposes, participates, instance, practice, period, state, precedes]
+extensions:
+  - scribe
+

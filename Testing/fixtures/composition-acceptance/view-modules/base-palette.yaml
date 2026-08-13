@@ -1,0 +1,9 @@
+schema: wb.view-module/v1
+id: base-palette
+version: 1
+kind: style
+rules:
+  - match: {kind: entity, type: person}
+    set: {color: "#7a8ba6", shape: ellipse}
+  - match: {kind: entity, type: community/*}
+    set: {color: "#8d9c86"}

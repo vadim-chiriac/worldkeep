@@ -1,0 +1,14 @@
+name: "Ranked actions"
+render: graph
+select:
+  kinds: [entity, relation]
+  status: [canon]
+  # Actions are a type now, so the anchor is a type path; `action/*` and
+  # `action/practice` inherit it the way type paths do everywhere.
+  connected_to_types: [action, "action/*"]
+edges:
+  include: [participates, precedes]
+layout: dagre
+emphasis:
+  color_by: valence
+  size_by: weight

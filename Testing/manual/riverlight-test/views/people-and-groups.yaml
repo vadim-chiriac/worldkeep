@@ -1,0 +1,10 @@
+name: "People, groups, and command"
+render: graph
+select:
+  kinds: [entity, action, relation]
+  status: [canon, draft]
+edges:
+  include: [part_of/membership, subordinate_to, participates, part_of]
+layout: dagre
+emphasis:
+  size_by: weight

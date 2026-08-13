@@ -1,0 +1,17 @@
+schema: wb.view-module/v1
+id: community-colors
+version: 1
+kind: style
+rules:
+  - match:
+      type: community/religion*
+    set:
+      color: "#7B2CBF"
+  - match:
+      type: community/polity*
+    set:
+      color: "#2563EB"
+  - match:
+      type: community/guild*
+    set:
+      color: "#D4A017"

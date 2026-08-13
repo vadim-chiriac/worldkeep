@@ -1,0 +1,103 @@
+[
+  {
+    "id": "entities/lume",
+    "kind": "entity",
+    "type": "place",
+    "name": "Lume"
+  },
+  {
+    "id": "entities/river-covenant",
+    "kind": "entity",
+    "type": "community",
+    "name": "The River Covenant"
+  },
+  {
+    "id": "ideas/river-remembers-every-oath",
+    "kind": "idea",
+    "name": "The river remembers every oath"
+  },
+  {
+    "id": "relations/river-covenant-holds-oath-doctrine",
+    "kind": "relation",
+    "type": "holds",
+    "members": [
+      {"id": "entities/river-covenant", "role": "holder"},
+      {"id": "ideas/river-remembers-every-oath", "role": "held"}
+    ]
+  },
+  {
+    "id": "relations/river-covenant-strongest-in-lume",
+    "kind": "relation",
+    "members": ["entities/river-covenant", "entities/lume"],
+    "body": "The River Covenant is strongest in Lume."
+  },
+  {
+    "id": "entities/river-covenant-priests",
+    "kind": "entity",
+    "type": "community",
+    "name": "Priests of the River Covenant"
+  },
+  {
+    "id": "relations/river-covenant-priests-membership",
+    "kind": "relation",
+    "type": "part_of/membership",
+    "members": [
+      {"id": "entities/river-covenant-priests", "role": "part"},
+      {"id": "entities/river-covenant", "role": "whole"}
+    ]
+  },
+  {
+    "id": "entities/lantern-way",
+    "kind": "entity",
+    "type": "community",
+    "name": "The Lantern Way"
+  },
+  {
+    "id": "ideas/fog-protects-by-hiding",
+    "kind": "idea",
+    "name": "The fog protects people by hiding them from hostile powers"
+  },
+  {
+    "id": "relations/lantern-way-holds-fog-doctrine",
+    "kind": "relation",
+    "type": "holds",
+    "members": [
+      {"id": "entities/lantern-way", "role": "holder"},
+      {"id": "ideas/fog-protects-by-hiding", "role": "held"}
+    ]
+  },
+  {
+    "id": "relations/lantern-way-popular-in-veyra",
+    "kind": "relation",
+    "members": ["entities/lantern-way", "entities/veyra"],
+    "body": "The Lantern Way is popular in Veyra."
+  },
+  {
+    "id": "relations/crown-tolerates-lantern-way",
+    "kind": "relation",
+    "members": ["entities/crown-of-lume", "entities/lantern-way"],
+    "body": "The Crown of Lume tolerates the Lantern Way."
+  },
+  {
+    "id": "relations/river-covenant-priests-distrust-lantern-way",
+    "kind": "relation",
+    "members": ["entities/river-covenant-priests", "entities/lantern-way"],
+    "body": "Priests of the River Covenant distrust the Lantern Way."
+  },
+  {
+    "id": "actions/household-ancestor-rites",
+    "kind": "action",
+    "type": "practice",
+    "name": "Household ancestor rites",
+    "body": "Varied household rites of the Orven clans, rather than one shared religion."
+  },
+  {
+    "id": "relations/orven-clans-practice-ancestor-rites",
+    "kind": "relation",
+    "type": "participates",
+    "members": [
+      {"id": "entities/orven-hill-clans", "role": "practitioner"},
+      {"id": "actions/household-ancestor-rites", "role": "action"}
+    ]
+  }
+]

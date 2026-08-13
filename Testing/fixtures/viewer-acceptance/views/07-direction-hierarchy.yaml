@@ -1,0 +1,8 @@
+name: "Direction hierarchy"
+render: graph
+select:
+  kinds: [entity, relation]
+  status: [canon, draft]
+edges:
+  include: [subordinate_to]
+layout: dagre

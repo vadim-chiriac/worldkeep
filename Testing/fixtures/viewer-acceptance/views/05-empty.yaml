@@ -1,0 +1,8 @@
+name: "Empty selection"
+render: graph
+select:
+  kinds: [entity, relation]
+  types: [does-not-exist/*]
+  status: [canon]
+edges:
+  include: [does-not-exist/*]

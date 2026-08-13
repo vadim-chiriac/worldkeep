@@ -1,0 +1,8 @@
+name: "Styled world overview"
+render: graph
+select:
+  status: [canon, draft]
+layout: fcose
+emphasis:
+  color_by: valence
+  size_by: weight

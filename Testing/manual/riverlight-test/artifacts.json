@@ -1,0 +1,126 @@
+[
+  {
+    "id": "entities/river",
+    "kind": "entity",
+    "type": "place",
+    "name": "The river",
+    "body": "A long river crosses the fertile basin and empties into the inland sea."
+  },
+  {
+    "id": "entities/fertile-basin",
+    "kind": "entity",
+    "type": "place",
+    "name": "The fertile basin",
+    "body": "None of the stated powers controls the entire basin."
+  },
+  {
+    "id": "entities/inland-sea",
+    "kind": "entity",
+    "type": "place",
+    "name": "The foggy inland sea"
+  },
+  {
+    "id": "entities/upper-valley",
+    "kind": "entity",
+    "type": "place",
+    "name": "The upper valley"
+  },
+  {
+    "id": "entities/auric-ford",
+    "kind": "entity",
+    "type": "place",
+    "name": "Auric Ford",
+    "where": ["entities/upper-valley"]
+  },
+  {
+    "id": "entities/river-mouth",
+    "kind": "entity",
+    "type": "place",
+    "name": "The river mouth"
+  },
+  {
+    "id": "entities/veyra",
+    "kind": "entity",
+    "type": "place",
+    "name": "Veyra",
+    "where": ["entities/river-mouth"]
+  },
+  {
+    "id": "entities/western-heights",
+    "kind": "entity",
+    "type": "place",
+    "name": "The western heights"
+  },
+  {
+    "id": "entities/crown-of-lume",
+    "kind": "entity",
+    "type": "community",
+    "name": "The Crown of Lume",
+    "where": ["entities/auric-ford"]
+  },
+  {
+    "id": "entities/free-port-of-veyra",
+    "kind": "entity",
+    "type": "community",
+    "name": "The Free Port of Veyra",
+    "where": ["entities/veyra"]
+  },
+  {
+    "id": "entities/orven-hill-clans",
+    "kind": "entity",
+    "type": "community",
+    "name": "The Orven hill clans",
+    "where": ["entities/western-heights"]
+  },
+  {
+    "id": "entities/orven-moot",
+    "kind": "entity",
+    "type": "community",
+    "name": "The Orven moot"
+  },
+  {
+    "id": "types/controls",
+    "kind": "type",
+    "name": "Controls",
+    "applies_to_kind": "relation",
+    "constraints": {"roles_required": ["controller", "domain"]},
+    "lens": {"as": "edge", "direction": ["controller", "domain"]},
+    "body": "A power controls a place."
+  },
+  {
+    "id": "relations/river-crosses-basin",
+    "kind": "relation",
+    "members": ["entities/river", "entities/fertile-basin"],
+    "body": "The river crosses the fertile basin."
+  },
+  {
+    "id": "relations/river-empties-into-inland-sea",
+    "kind": "relation",
+    "members": ["entities/river", "entities/inland-sea"],
+    "body": "The river empties into the foggy inland sea."
+  },
+  {
+    "id": "relations/crown-controls-upper-valley",
+    "kind": "relation",
+    "type": "controls",
+    "members": [
+      {"id": "entities/crown-of-lume", "role": "controller"},
+      {"id": "entities/upper-valley", "role": "domain"}
+    ]
+  },
+  {
+    "id": "relations/free-port-controls-river-mouth",
+    "kind": "relation",
+    "type": "controls",
+    "members": [
+      {"id": "entities/free-port-of-veyra", "role": "controller"},
+      {"id": "entities/river-mouth", "role": "domain"}
+    ]
+  },
+  {
+    "id": "relations/orven-clans-and-moot",
+    "kind": "relation",
+    "members": ["entities/orven-hill-clans", "entities/orven-moot"],
+    "body": "The moot loosely unites the Orven hill clans."
+  }
+]

@@ -1,0 +1,6 @@
+schema: wb.view-module/v1
+id: membership-only
+version: 1
+kind: relation
+edges:
+  include: [part_of/membership]

@@ -1,0 +1,12 @@
+name: "Beliefs — who holds what, and what fights what"
+render: graph
+select:
+  kinds: [entity, idea, relation]
+  status: [canon, draft]
+  connected_to_kinds: [idea]
+edges:
+  include: [holds, opposes, opposes/*, part_of]
+layout: fcose
+emphasis:
+  color_by: valence
+  size_by: weight

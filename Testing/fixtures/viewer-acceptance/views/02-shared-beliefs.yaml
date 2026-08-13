@@ -1,0 +1,11 @@
+name: "Shared beliefs"
+render: graph
+select:
+  kinds: [entity, idea, relation]
+  status: [canon, draft, deprecated]
+  connected_to_kinds: [idea]
+edges:
+  include: [holds, part_of]
+emphasis:
+  color_by: valence
+  size_by: weight

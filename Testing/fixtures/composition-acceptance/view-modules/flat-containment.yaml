@@ -1,0 +1,7 @@
+schema: wb.view-module/v1
+id: flat-containment
+version: 1
+kind: lens
+overlays:
+  - match: {kind: relation, type: part_of}
+    set: {as: edge}

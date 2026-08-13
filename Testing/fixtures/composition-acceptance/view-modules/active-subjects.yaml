@@ -1,0 +1,7 @@
+schema: wb.view-module/v1
+id: active-subjects
+version: 1
+kind: selection
+select:
+  kinds: [entity]
+  status: [canon]

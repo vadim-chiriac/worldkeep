@@ -1,0 +1,31 @@
+name: "Composed overview — people, guilds, and places"
+render: graph
+
+compose:
+  selection:
+    # Overlapping membership: Tomas and the guild are each chosen by two
+    # modules. Union first, then intersect, then subtract.
+    any_of: [people, organizations, places, notable-figures]
+    all_of: [active-subjects]
+    exclude: [retired-figures]
+  relations:
+    include: [leadership, affiliations, containment]
+  # Declared order decides the style cascade, property by property.
+  styles: [base-palette, faction-palette]
+  # These two disagree about how containment should be drawn.
+  lenses: [nest-containment, flat-containment]
+
+# An exact view-local rule resolves that structural conflict. A '*' wildcard
+# deliberately would not.
+lenses:
+  - match: {kind: relation, type: part_of}
+    set: {as: nest}
+
+layout: fcose
+emphasis:
+  color_by: valence
+
+assert:
+  nonempty: true
+  contains_types: [person, community]
+  no_structural_conflicts: true

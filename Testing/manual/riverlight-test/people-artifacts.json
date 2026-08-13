@@ -1,0 +1,96 @@
+[
+  {
+    "id": "entities/queen-mara",
+    "kind": "entity",
+    "type": "person",
+    "name": "Queen Mara",
+    "where": ["entities/auric-ford"]
+  },
+  {
+    "id": "types/leads",
+    "kind": "type",
+    "name": "Leads",
+    "applies_to_kind": "relation",
+    "constraints": {"roles_required": ["leader", "body"]},
+    "lens": {"as": "edge", "direction": ["leader", "body"]},
+    "body": "A person leads a community."
+  },
+  {
+    "id": "relations/queen-mara-leads-crown",
+    "kind": "relation",
+    "type": "leads",
+    "members": [
+      {"id": "entities/queen-mara", "role": "leader"},
+      {"id": "entities/crown-of-lume", "role": "body"}
+    ]
+  },
+  {
+    "id": "relations/queen-mara-river-covenant-membership",
+    "kind": "relation",
+    "type": "part_of/membership",
+    "members": [
+      {"id": "entities/queen-mara", "role": "part"},
+      {"id": "entities/river-covenant", "role": "whole"}
+    ]
+  },
+  {
+    "id": "entities/tomas-veyra",
+    "kind": "entity",
+    "type": "person",
+    "name": "Tomas Veyra",
+    "body": "Elected Speaker of the Free Port of Veyra."
+  },
+  {
+    "id": "relations/tomas-veyra-leads-free-port",
+    "kind": "relation",
+    "type": "leads",
+    "members": [
+      {"id": "entities/tomas-veyra", "role": "leader"},
+      {"id": "entities/free-port-of-veyra", "role": "body"}
+    ]
+  },
+  {
+    "id": "relations/tomas-veyra-lantern-way-membership",
+    "kind": "relation",
+    "type": "part_of/membership",
+    "members": [
+      {"id": "entities/tomas-veyra", "role": "part"},
+      {"id": "entities/lantern-way", "role": "whole"}
+    ]
+  },
+  {
+    "id": "entities/old-eren",
+    "kind": "entity",
+    "type": "person",
+    "name": "Old Eren",
+    "body": "He convenes the Orven moot, but the clans do not obey him as a ruler."
+  },
+  {
+    "id": "relations/old-eren-convenes-orven-moot",
+    "kind": "relation",
+    "members": ["entities/old-eren", "entities/orven-moot"],
+    "body": "Old Eren convenes the Orven moot."
+  },
+  {
+    "id": "entities/priest-nalia",
+    "kind": "entity",
+    "type": "person",
+    "name": "Priest Nalia",
+    "body": "The most visible River Covenant critic of the Lantern Way."
+  },
+  {
+    "id": "relations/priest-nalia-river-covenant-membership",
+    "kind": "relation",
+    "type": "part_of/membership",
+    "members": [
+      {"id": "entities/priest-nalia", "role": "part"},
+      {"id": "entities/river-covenant", "role": "whole"}
+    ]
+  },
+  {
+    "id": "relations/priest-nalia-criticizes-lantern-way",
+    "kind": "relation",
+    "members": ["entities/priest-nalia", "entities/lantern-way"],
+    "body": "Priest Nalia is the most visible River Covenant critic of the Lantern Way."
+  }
+]

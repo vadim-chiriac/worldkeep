@@ -1,0 +1,19 @@
+[
+  {
+    "id": "entities/veyra-merchants-guild",
+    "kind": "entity",
+    "type": "community/guild",
+    "name": "The Veyra Merchants' Guild",
+    "scribe.origin": "ai"
+  },
+  {
+    "id": "relations/tomas-veyra-merchants-guild-membership",
+    "kind": "relation",
+    "type": "part_of/membership",
+    "members": [
+      {"id": "entities/tomas-veyra", "role": "part"},
+      {"id": "entities/veyra-merchants-guild", "role": "whole"}
+    ],
+    "scribe.origin": "ai"
+  }
+]

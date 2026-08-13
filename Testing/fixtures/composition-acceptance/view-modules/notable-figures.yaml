@@ -1,0 +1,8 @@
+schema: wb.view-module/v1
+id: notable-figures
+version: 1
+kind: selection
+select:
+  kinds: [entity]
+  types: [person, person/*, community, community/*]
+  status: [canon]

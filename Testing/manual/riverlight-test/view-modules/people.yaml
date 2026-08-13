@@ -1,0 +1,8 @@
+schema: wb.view-module/v1
+id: people
+version: 1
+kind: selection
+select:
+  kinds: [entity, relation]
+  types: [person, person/*, community, community/*]
+  connected_to_types: [person, person/*]

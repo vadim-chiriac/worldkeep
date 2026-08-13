@@ -1,0 +1,4 @@
+kernel_version: "0.16"
+name: "Viewer Acceptance World"
+facets: [when, where, valence, weight, members, status, amount, fiat]
+std_types: [part_of, subordinate_to, holds, participates, instance, practice, period, state, precedes]

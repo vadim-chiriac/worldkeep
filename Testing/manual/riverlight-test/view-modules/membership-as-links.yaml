@@ -1,0 +1,9 @@
+schema: wb.view-module/v1
+id: membership-as-links
+version: 1
+kind: lens
+overlays:
+  - match:
+      type: part_of/membership
+    set:
+      as: edge

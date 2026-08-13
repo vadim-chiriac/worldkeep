@@ -1,0 +1,17 @@
+# Default view. It covers only the default group vocabulary shipped with the
+# kernel — part_of/membership, subordinate_to, participates, part_of. Custom
+# relation types this world invents are not included; write a named view for
+# those rather than widening this one.
+name: "Groups"
+render: graph
+select:
+  kinds: [entity, idea, relation]
+  status: [canon, draft]
+edges:
+  include: [part_of/membership, subordinate_to, participates, part_of]
+# fcose, not dagre: this view includes part_of, which renders as nesting, and
+# dagre cannot lay out nested graphs. The viewer substitutes fcose anyway; the
+# default should not need rescuing.
+layout: fcose
+emphasis:
+  size_by: weight

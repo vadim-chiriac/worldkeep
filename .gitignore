@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Scratch render output.
+src/viewer/gallery/
+src/viewer/out/
+dist/_build/
+
+# Rendered views are build output. `wb view ... -o out.html` regenerates any of
+# them in one command, and three of them once accounted for 98% of the folder
+# they were committed into.
+User artifacts/
+Testing/manual/**/*.html

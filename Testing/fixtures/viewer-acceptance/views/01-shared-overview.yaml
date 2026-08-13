@@ -1,0 +1,10 @@
+name: "Shared overview"
+render: graph
+select:
+  kinds: [entity, idea, relation]
+  status: [canon, draft, deprecated]
+edges:
+  include: ["*", "<untyped>"]
+emphasis:
+  color_by: valence
+  size_by: weight

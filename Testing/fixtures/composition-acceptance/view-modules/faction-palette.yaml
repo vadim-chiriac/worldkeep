@@ -1,0 +1,9 @@
+schema: wb.view-module/v1
+id: faction-palette
+version: 2
+kind: style
+rules:
+  - match: {kind: entity, type: person}
+    set: {color: "#5d78a6"}
+  - match: {kind: entity, type: community/polity}
+    set: {color: "#c9a227"}

@@ -1,0 +1,9 @@
+name: "Political geography — places, powers, and control"
+render: graph
+select:
+  kinds: [entity, relation]
+  types: [place, place/*, community/polity, community/polity/*]
+  status: [canon]
+edges:
+  include: [controls]
+layout: dagre

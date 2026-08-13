@@ -1,0 +1,13 @@
+name: "Viewer v0 — all behaviors"
+render: graph
+select:
+  kinds: [entity, idea, relation]
+  types: ["*", "<untyped>"]
+  status: [canon, draft, deprecated]
+edges:
+  include: ["*", "<untyped>"]
+  exclude: []
+layout: dagre
+emphasis:
+  color_by: valence
+  size_by: weight

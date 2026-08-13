@@ -1,0 +1,11 @@
+name: "Explicit force layout"
+render: graph
+select:
+  kinds: [entity, idea, relation]
+  status: [canon, draft, deprecated]
+edges:
+  include: [holds, part_of, participates]
+layout: fcose
+emphasis:
+  color_by: valence
+  size_by: weight

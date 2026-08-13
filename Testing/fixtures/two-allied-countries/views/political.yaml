@@ -1,0 +1,14 @@
+name: "Political View"
+render: graph
+select:
+  kinds: [entity, relation]
+  types: [place/*, alliance, separates]
+  status: [canon]
+edges:
+  include: [alliance, separates]
+  exclude: []
+layout: fcose
+emphasis:
+  color_by: valence
+  size_by: weight
+

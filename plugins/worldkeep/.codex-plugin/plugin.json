@@ -1,0 +1,33 @@
+{
+  "name": "worldkeep",
+  "version": "0.2.0+codex.20260813160115",
+  "description": "Worldkeep: capture and view a structured worldbuilding canon",
+  "author": {
+    "name": "Worldkeep project",
+    "url": "https://github.com/vadim-chiriac/worldbuilder"
+  },
+  "repository": "https://github.com/vadim-chiriac/worldbuilder",
+  "keywords": [
+    "worldbuilding",
+    "canon",
+    "capture",
+    "visualization"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Worldkeep",
+    "shortDescription": "Capture and visualize structured worldbuilding canon.",
+    "longDescription": "Capture freeform worldbuilding into a Markdown/YAML canon, validate it, and render configurable offline graph views.",
+    "developerName": "Worldkeep project",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Help me capture this worldbuilding into canon.",
+      "Render a graph of my worldbuilding canon.",
+      "Show me who rules what in this canon."
+    ]
+  }
+}

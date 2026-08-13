@@ -1,0 +1,10 @@
+name: "People and memberships"
+render: graph
+compose:
+  selection:
+    any_of: [people]
+  relations:
+    include: [membership-only]
+  styles: [community-colors]
+  lenses: [membership-as-links]
+layout: fcose

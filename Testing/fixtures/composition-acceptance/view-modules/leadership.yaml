@@ -1,0 +1,6 @@
+schema: wb.view-module/v1
+id: leadership
+version: 1
+kind: relation
+edges:
+  include: [leads]

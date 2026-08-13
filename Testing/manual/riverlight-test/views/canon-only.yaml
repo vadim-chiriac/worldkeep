@@ -1,0 +1,7 @@
+name: "Canon only (no drafts)"
+render: graph
+select:
+  status: [canon]
+layout: fcose
+emphasis:
+  color_by: valence
