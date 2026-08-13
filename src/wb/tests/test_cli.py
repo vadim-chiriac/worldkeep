@@ -183,6 +183,17 @@ class ValidateTests(WorldCopyTestCase):
 
 
 class ViewerCommandTests(unittest.TestCase):
+    def test_view_defaults_to_every_view(self) -> None:
+        """`wb view <world>` is what an agent runs when someone says "show me my
+        world". Everything is the audit projection — it ignores every style the
+        world declared — so it is the wrong thing to hand back by default."""
+        result = run_wb("view", str(RIVERLIGHT), "--json")
+        document = json.loads(result.stdout)
+
+        self.assertIn("views", document)
+        self.assertEqual(document["views"][0]["view"]["name"], "Everything")
+        self.assertGreater(len(document["views"]), 1)
+
     def test_everything_matches_the_underlying_viewer(self) -> None:
         through_wb = run_wb("view", str(RIVERLIGHT), "--everything", "--json")
         direct = subprocess.run(

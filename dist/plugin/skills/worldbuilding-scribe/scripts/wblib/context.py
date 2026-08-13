@@ -171,7 +171,7 @@ class CanonReader:
         self.paths = paths or ToolPaths()
         self.apply = import_apply(self.paths)
         self._artifacts: list[tuple[str, str, dict]] | None = None
-        self._bodies: dict[str, str] = {}
+        self._bodies: dict[str, str | None] = {}
 
     @property
     def artifacts(self) -> list[tuple[str, str, dict]]:
@@ -183,20 +183,33 @@ class CanonReader:
     def by_id(self) -> dict[str, tuple[str, str, dict]]:
         return {row[0]: row for row in self.artifacts}
 
-    def body_of(self, artifact_id: str) -> str:
+    def body_or_none(self, artifact_id: str) -> str | None:
+        """Return an artifact's prose, or None when it could not be read.
+
+        The distinction matters to anything that compares bodies: a file that
+        cannot be opened or decoded is not an empty body, and treating it as one
+        makes two unreadable artifacts look identical. Callers that only want to
+        display prose can use `body_of` and take the empty string.
+        """
         if artifact_id in self._bodies:
             return self._bodies[artifact_id]
         path = self.apply.find_path_for_id(str(self.world), artifact_id)
-        text = ""
-        if path:
-            try:
-                raw = Path(path).read_text(encoding="utf-8")
-            except (OSError, UnicodeError):
-                raw = ""
-            match = re.match(r"^---\n.*?\n---\n?", raw, re.S)
-            text = raw[match.end():] if match else raw
+        if not path:
+            self._bodies[artifact_id] = None
+            return None
+        try:
+            raw = Path(path).read_text(encoding="utf-8")
+        except (OSError, UnicodeError):
+            self._bodies[artifact_id] = None
+            return None
+        match = re.match(r"^---\n.*?\n---\n?", raw, re.S)
+        text = raw[match.end():] if match else raw
         self._bodies[artifact_id] = text.strip()
         return self._bodies[artifact_id]
+
+    def body_of(self, artifact_id: str) -> str:
+        """An artifact's prose, with unreadable treated as empty."""
+        return self.body_or_none(artifact_id) or ""
 
     def index_state(self) -> dict[str, Any]:
         """Report whether INDEX.md exists and still lists the artifacts on disk.

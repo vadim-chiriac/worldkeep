@@ -94,8 +94,8 @@ not a diagram. Views and filters are the answer, which means large worlds
 require you to know what you are asking rather than looking at everything.
 
 Rendering itself was slow on nested graphs until recently, and the fix was to
-drop edges during interaction on graphs above sixty edges. If you notice edges
-vanishing while you drag, that is the trade, and it is deliberate.
+drop edges during interaction on graphs of sixty edges or more. If you notice
+edges vanishing while you drag, that is the trade, and it is deliberate.
 
 ### Composed views
 

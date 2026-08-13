@@ -185,7 +185,7 @@ ok · ok 1 3 · no 2 · 2: she's the ferryman's daughter · later 3 · show 2
 3. **Never silently generalize.** If the author says "smuggling ring," the
    scribe may propose `community/criminal-org` as the type but records the
    author's term in `name`/`tags` — the author's vocabulary is data.
-4. **Types, never kinds.** The five kinds are closed for everyone
+4. **Types, never kinds.** The four kinds are closed for everyone
    (KERNEL §3). If input seems to demand a new kind, it doesn't; find the
    kernel expression or ask the one permitted question (§7).
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""KERNEL §11 validator for a canon folder. Aligned with KERNEL v0.14.
+"""KERNEL §11 validator for a canon folder. Aligned with KERNEL v0.17.
 
 Usage: python3 validate.py <world-folder>
 
@@ -48,7 +48,8 @@ for dirpath, _, files in os.walk(root):
             continue
         p = os.path.join(dirpath, fn)
         rel = os.path.relpath(p, root)[:-3].replace(os.sep, "/")
-        text = open(p, encoding="utf-8").read()
+        with open(p, encoding="utf-8") as handle:
+            text = handle.read()
         m = re.match(r"^---\n(.*?)\n---\n?", text, re.S)
         if not m:
             if rel.upper().startswith(("FRICTION", "README", "MANIFEST", "INDEX")):

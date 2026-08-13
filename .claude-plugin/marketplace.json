@@ -1,8 +1,8 @@
 {
-  "name": "worldbuilder",
+  "name": "worldkeep",
   "owner": {
     "name": "Vadim Chiriac",
-    "url": "https://github.com/vadim-chiriac/worldbuilder"
+    "url": "https://github.com/vadim-chiriac/worldkeep"
   },
   "metadata": {
     "description": "Worldkeep — capture and view a structured worldbuilding canon."

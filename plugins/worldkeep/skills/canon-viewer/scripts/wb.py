@@ -186,7 +186,14 @@ def build_parser() -> argparse.ArgumentParser:
 
     # -- looking at the canon ---------------------------------------------
     view = commands.add_parser(
-        "view", help="render or project a view through the existing viewer"
+        "view",
+        help="render or project a view through the existing viewer",
+        description=(
+            "With no target, renders every view into one document with a "
+            "picker, which is almost always what is wanted: switching views "
+            "keeps node positions, so the views are comparable. Ask for "
+            "--everything when you want the neutral audit instead."
+        ),
     )
     view.add_argument("world", type=Path)
     target = view.add_mutually_exclusive_group()
@@ -321,7 +328,8 @@ def _report_mergeable(world: Path, paths: ToolPaths) -> None:
         from wblib.context import CanonReader
         from wblib.mergeable import find_mergeable, format_mergeable
 
-        found = find_mergeable(CanonReader(world, paths).artifacts)
+        reader = CanonReader(world, paths)
+        found = find_mergeable(reader.artifacts, reader.body_or_none)
     except Exception:  # pragma: no cover - never let a hint break a write
         return
     if not found:
@@ -375,8 +383,16 @@ def cmd_view(args: argparse.Namespace) -> int:
     elif args.view_path:
         for path in args.view_path:
             arguments += ["--view", str(path)]
-    else:
+    elif args.everything:
         arguments.append("--everything")
+    else:
+        # Everything is the audit projection: it ignores every style the world
+        # declared, which makes it the wrong thing to hand someone who just
+        # asked to see their world. The skill and the documentation both said
+        # the default was all views; only this line disagreed. `--everything`
+        # used to reach the viewer by being this fallback rather than by being
+        # read, which is why it needs its own branch now.
+        arguments.append("--all-views")
     if args.json:
         arguments.append("--json")
     if args.vendor:

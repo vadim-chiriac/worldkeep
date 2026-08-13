@@ -19,7 +19,7 @@ src/
   runtime/                       Python launchers, one vendored PyYAML copy
 Specification/                   KERNEL.md, SCRIBE.md — normative, shipped verbatim
 Documentation/                   user documentation
-Internal/                        design notes and spec history; not distributed
+Internal/                        private design notes; not distributed
 Testing/                         fixtures the suites assert against, run evidence
 Examples/                        example worlds
 dist/                            generated release artifacts

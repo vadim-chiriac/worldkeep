@@ -10,6 +10,8 @@ dist/_build/
 
 # Rendered views are build output. `wb view ... -o out.html` regenerates any of
 # them in one command, and three of them once accounted for 98% of the folder
-# they were committed into.
+# they were committed into. The root rule catches the renders the documentation
+# tells a reader to produce, which otherwise land beside README.md.
+/*.html
 User artifacts/
 Testing/manual/**/*.html

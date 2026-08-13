@@ -34,8 +34,8 @@ Claude installs plugins from a **marketplace**, which is just a repository
 containing a catalogue file. Add the marketplace once, then install from it.
 
 ```
-/plugin marketplace add vadim-chiriac/worldbuilder
-/plugin install worldkeep@worldbuilder
+/plugin marketplace add vadim-chiriac/worldkeep
+/plugin install worldkeep@worldkeep
 ```
 
 Restart Claude afterwards so it loads the plugin.
@@ -52,28 +52,45 @@ If you would rather read the source before running it — a reasonable habit for
 any plugin — clone the repository and point Claude at the folder:
 
 ```powershell
-git clone https://github.com/vadim-chiriac/worldbuilder.git
+git clone https://github.com/vadim-chiriac/worldkeep.git
 ```
 
 ```
-/plugin marketplace add ./worldbuilder
-/plugin install worldkeep@worldbuilder
+/plugin marketplace add ./worldkeep
+/plugin install worldkeep@worldkeep
 ```
 
 ---
 
 ## ChatGPT / Codex
 
-Codex reads its catalogue from `.agents/plugins/marketplace.json`, which the
-repository already contains, pointing at the generated mirror in
-`plugins/worldkeep/`.
+ChatGPT and Codex use the catalogue at `.agents/plugins/marketplace.json`. Add
+the public repository as a marketplace from a terminal:
 
-Clone the repository and register the local marketplace through Codex's plugin
-installation flow, selecting the **personal** marketplace and the
-**worldkeep** plugin. Restart Codex afterwards.
+```powershell
+codex plugin marketplace add vadim-chiriac/worldkeep --ref main
+codex plugin marketplace list
+```
 
-> Self-serve publishing to the official Codex directory is not available yet,
-> so a local marketplace is currently the only route there.
+Then restart the ChatGPT desktop app, open **Plugins Directory**, choose the
+**Worldkeep** marketplace and install **worldkeep**. Start a new chat after
+installation so the two skills are loaded into the conversation.
+
+This repository marketplace is the direct GitHub distribution route. A listing
+in the universal public Plugins Directory shared by ChatGPT and Codex is a
+separate release step that requires submission and review by OpenAI.
+
+### Installing ChatGPT / Codex from a local clone instead
+
+Clone the repository, then register the clone as the marketplace root:
+
+```powershell
+git clone https://github.com/vadim-chiriac/worldkeep.git
+codex plugin marketplace add .\worldkeep
+```
+
+Restart the ChatGPT desktop app and install **worldkeep** from the
+**Worldkeep** source in Plugins Directory.
 
 ---
 
@@ -98,18 +115,28 @@ is the fastest way to tell a bad install from a bad path.
 
 ## Updating
 
-**From a marketplace:** re-run the install command; Claude fetches the current
-version.
+**Claude:** refresh the marketplace, then update or reinstall the plugin from
+Claude's plugin manager:
 
-**From a clone:** pull, rebuild, and restart the host.
+```
+/plugin marketplace update worldkeep
+```
+
+**ChatGPT / Codex:** refresh the marketplace snapshot, restart the desktop app,
+then update or reinstall **worldkeep** from Plugins Directory:
+
+```powershell
+codex plugin marketplace upgrade worldkeep
+```
+
+**From a local clone:** pull the released files and restart the host:
 
 ```powershell
 git pull
-.\update-plugins.ps1
 ```
 
-`update-plugins.ps1` runs the full test suite before it rebuilds, so a failed
-update tells you something is wrong rather than quietly shipping it.
+`update-plugins.ps1` is the maintainer build pipeline; users installing a
+released plugin do not need to run it.
 
 **Your worlds are not touched by an update.** A canon is a folder of your own
 files, entirely outside the plugin. That is also why nothing migrates them: see
@@ -119,14 +146,23 @@ files, entirely outside the plugin. That is also why nothing migrates them: see
 
 ## Uninstalling
 
+In Claude:
+
 ```
-/plugin uninstall worldkeep@worldbuilder
+/plugin uninstall worldkeep@worldkeep
 ```
 
 Optionally remove the marketplace as well:
 
 ```
-/plugin marketplace remove worldbuilder
+/plugin marketplace remove worldkeep
+```
+
+In ChatGPT / Codex, uninstall or disable **worldkeep** in Plugins Directory.
+To forget the repository marketplace as well:
+
+```powershell
+codex plugin marketplace remove worldkeep
 ```
 
 **Your worlds survive.** They are plain Markdown and YAML in whatever folder

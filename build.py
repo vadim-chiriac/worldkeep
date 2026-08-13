@@ -37,7 +37,7 @@ DIST = ROOT / "dist"
 PLUGIN_NAME = "worldkeep"
 PLUGIN_VERSION = "0.2.0"
 PLUGIN_DESCRIPTION = "Worldkeep: capture and view a structured worldbuilding canon"
-PLUGIN_REPOSITORY = "https://github.com/vadim-chiriac/worldbuilder"
+PLUGIN_REPOSITORY = "https://github.com/vadim-chiriac/worldkeep"
 PLUGIN_DEVELOPER = "Worldkeep project"
 
 VENDOR_DIR = RUNTIME / "_vendor"
@@ -234,6 +234,22 @@ def build_viewer(build_dir: Path) -> tuple[Path, dict]:
 # Packaging
 # ---------------------------------------------------------------------------
 
+#: A fixed timestamp for every archive member. Without it two builds of
+#: identical content produce different bytes, which is a poor claim to
+#: reproducibility and, with dist/ committed, four files permanently dirty in
+#: git. The date a build happened is recoverable from the commit that carries
+#: it; it does not belong in the artifact.
+ZIP_EPOCH = (1980, 1, 1, 0, 0, 0)
+
+
+def _add_to_zip(zf: zipfile.ZipFile, path: Path, arcname: str) -> None:
+    """Add one file with a fixed timestamp and mode, so builds are repeatable."""
+    info = zipfile.ZipInfo(arcname, date_time=ZIP_EPOCH)
+    info.compress_type = zipfile.ZIP_DEFLATED
+    info.external_attr = 0o644 << 16
+    zf.writestr(info, path.read_bytes())
+
+
 def zip_skill(bundle_dir: Path, out_path: Path) -> None:
     """Write skill_name.skill at out_path."""
     skill_name = bundle_dir.name
@@ -243,7 +259,7 @@ def zip_skill(bundle_dir: Path, out_path: Path) -> None:
             if path.is_dir():
                 continue
             arcname = Path(skill_name) / path.relative_to(bundle_dir)
-            zf.write(path, arcname.as_posix())
+            _add_to_zip(zf, path, arcname.as_posix())
 
 
 def zip_plugin(plugin_dir: Path, out_path: Path) -> None:
@@ -254,7 +270,7 @@ def zip_plugin(plugin_dir: Path, out_path: Path) -> None:
             if path.is_dir():
                 continue
             arcname = Path(plugin_dir.name) / path.relative_to(plugin_dir)
-            zf.write(path, arcname.as_posix())
+            _add_to_zip(zf, path, arcname.as_posix())
 
 
 def claude_plugin_manifest(kernel_version: str, scribe_version: str) -> dict:
@@ -528,7 +544,6 @@ def write_build_txt(
     manifests: dict[str, dict],
 ) -> None:
     lines = [
-        f"date: {__import__('datetime').datetime.now().isoformat(timespec='seconds')}",
         f"KERNEL.md version: {kernel_version}",
         f"SCRIBE.md version: {scribe_version}",
         "",

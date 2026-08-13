@@ -1,7 +1,7 @@
 {
-  "name": "personal",
+  "name": "worldkeep",
   "interface": {
-    "displayName": "Personal"
+    "displayName": "Worldkeep"
   },
   "plugins": [
     {

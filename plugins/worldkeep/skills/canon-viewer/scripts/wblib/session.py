@@ -237,7 +237,7 @@ def build_session(
         "warnings": warnings,
     }
 
-    mergeable = find_mergeable(reader.artifacts)
+    mergeable = find_mergeable(reader.artifacts, reader.body_or_none)
     if mergeable:
         document["mergeable"] = mergeable
 

@@ -1,12 +1,12 @@
 {
   "name": "worldkeep",
-  "version": "0.2.0+codex.20260813160115",
+  "version": "0.2.0+codex.20260813181646",
   "description": "Worldkeep: capture and view a structured worldbuilding canon",
   "author": {
     "name": "Worldkeep project",
-    "url": "https://github.com/vadim-chiriac/worldbuilder"
+    "url": "https://github.com/vadim-chiriac/worldkeep"
   },
-  "repository": "https://github.com/vadim-chiriac/worldbuilder",
+  "repository": "https://github.com/vadim-chiriac/worldkeep",
   "keywords": [
     "worldbuilding",
     "canon",

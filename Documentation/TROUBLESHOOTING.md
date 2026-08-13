@@ -14,7 +14,9 @@ missing artifact from a hidden one. Ask the agent to run either.
 
 **The agent does not mention worldbuilding at all.** Restart the host. Plugins
 load at startup, so a plugin installed mid-session is not there yet. If you
-built from a clone, `.\update-plugins.ps1` and then restart.
+installed from a clone, pull the released files, update or reinstall the plugin
+from its marketplace, and then restart. `update-plugins.ps1` is only for
+maintainers rebuilding the plugin from source.
 
 **It knows about the skill but nothing runs.** Ask for `wb doctor`. It prints
 where it looked and what it found:
@@ -145,7 +147,7 @@ A misspelling. The four known layouts are the four named in that message.
 
 ### Edges disappear while I pan or drag
 
-Deliberate, above sixty edges: dropping them during interaction is what keeps a
+Deliberate, at sixty edges or more: dropping them during interaction keeps a
 large nested graph responsive. They come back the moment you stop. Below sixty
 edges nothing is dropped, so if you are seeing it on a small world, that is
 worth reporting.

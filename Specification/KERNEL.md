@@ -8,7 +8,7 @@
 
 ## 1. Design principles
 
-1. **Minimal closed kernel, open vocabulary.** The kernel defines five
+1. **Minimal closed kernel, open vocabulary.** The kernel defines four
    `kind`s and a small set of uniform *facets*. All domain concepts are
    user/AI-invented `type`s layered on top. **The kinds are closed for
    everyone — including module authors.** A model with different base kinds

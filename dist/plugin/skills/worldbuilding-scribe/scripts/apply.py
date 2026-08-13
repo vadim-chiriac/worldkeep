@@ -45,7 +45,7 @@ only if INDEX.md could not be written.
 Artifact JSON shape (one element of the array):
   {
     "id": "entities/marrow-reach",   # required; also the file path
-    "kind": "entity",                # required; entity|idea|action|relation|type
+    "kind": "entity",                # required; entity|idea|relation|type
     "type": "place/village",         # optional
     "name": "Marrow Reach",          # optional
     "tags": ["fen", "ford"],         # optional
@@ -156,8 +156,11 @@ def write_artifact(world, art, session, default_status):
 
 def cmd_write(world, session, default_status, input_file=None):
     try:
-        raw = (open(input_file, encoding="utf-8").read()
-               if input_file else sys.stdin.read())
+        if input_file:
+            with open(input_file, encoding="utf-8") as handle:
+                raw = handle.read()
+        else:
+            raw = sys.stdin.read()
     except OSError as e:
         print(f"could not read input JSON: {e}")
         sys.exit(2)
@@ -193,7 +196,8 @@ def cmd_write(world, session, default_status, input_file=None):
 
 
 def load_frontmatter_text(path):
-    text = open(path, encoding="utf-8").read()
+    with open(path, encoding="utf-8") as handle:
+        text = handle.read()
     m = re.match(r"^---\n(.*?\n)---\n?", text, re.S)
     if not m:
         return None, text

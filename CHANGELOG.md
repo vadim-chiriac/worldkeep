@@ -5,6 +5,65 @@ do not rewrite released history.
 
 ## [Unreleased]
 
+### Changed
+
+- Unified the public marketplace identity as `worldkeep` across Claude and
+  ChatGPT/Codex. Installation now uses the public GitHub marketplace directly,
+  distinguishes repository distribution from OpenAI's reviewed universal
+  directory, and gives users host-specific install, update and uninstall
+  instructions without asking them to run the maintainer build pipeline.
+
+### Fixed
+
+- `CanonReader` no longer reports an unreadable body as an empty one.
+  `body_of` turned any read failure into `""`, which the merge detector then
+  read as "this relation has no prose" — so two files nobody could open looked
+  like the same statement and were offered for folding on a comparison that
+  never happened. `body_or_none` returns `None` for unreadable and the detector
+  skips those relations; `body_of` keeps its old contract for callers that only
+  display prose. The regression test runs the real path: frontmatter is read
+  once and cached while bodies are read lazily afterwards, so a file can be
+  gone by the time its prose is wanted.
+- Pointed the install instructions at the public repository. Every one of them
+  — the marketplace to add, the clone URL, and `repository`/`homepage` in both
+  plugin manifests — named `vadim-chiriac/worldbuilder`, which is the private
+  development repository. Anyone following the documentation would have got a
+  404 on the very first step. They now name `vadim-chiriac/worldkeep`, and the
+  Claude marketplace is `worldkeep` to match.
+- `publish.py --update` syncs an existing clone instead of demanding an empty
+  directory, and **deletes** files the allowlist no longer names. Without that
+  half, publishing is append-only: a file withdrawn from the allowlist would
+  stay public forever. It refuses a target that is not a git repository, so a
+  mistyped path cannot be emptied, and it is idempotent.
+- The merge detector could recommend folding relations that SCRIBE requires be
+  kept apart. Its own docstring claimed it compared provenance; the signature
+  compared seven facets and nothing else, so two links differing only in
+  `scribe.origin`, in their description, or in a field the world invented
+  looked identical to it. All three now count, provenance is read in either
+  spelling the format allows, and a relation whose prose cannot be read is left
+  alone rather than guessed at — a wrong hint trains authors to ignore the
+  right ones.
+- The same detector required three relations before saying anything, while
+  SCRIBE says "two or more". A plain pair is exactly the case a reader is least
+  likely to spot unaided, and it was the one case that went unmentioned.
+- `wb view <world>` rendered only `Everything`, while the skill, the session
+  report and the documentation all said the default was every view. Everything
+  is the audit projection — it ignores every style the world declared — so it
+  was the wrong thing to hand back to "show me my world". Fixing it exposed
+  that `--everything` had only ever worked by being the fallback branch rather
+  than by being read; it now has its own.
+- Corrected texts left behind by KERNEL v0.17: `KERNEL` §1.1 and `SCRIBE` §4
+  still said five kinds, `apply.py`'s schema comment still listed `action` as a
+  kind, and `validate.py` still claimed alignment with v0.14.
+- Reconciled the changelog with itself. One entry said the plugin id stays
+  `worldbuilding-canon` while a later one renamed it; both were in the same
+  unreleased section.
+- Documentation said edge-dropping starts "above sixty" edges; the code uses
+  sixty or more.
+- `apply.py` and `validate.py` read files without closing them, which raised
+  `ResourceWarning` under the test suite. The suites now pass with warnings
+  promoted to errors.
+
 ### Added
 
 - Added `publish.py`, which assembles the public repository from an explicit
@@ -18,6 +77,21 @@ do not rewrite released history.
   commands in `DEVELOPMENT.md` did not work, because each suite resolves imports
   against its own package and has to be run from its own directory, which is
   what `build.py` does and what the document did not say.
+- Made the build idempotent. Two runs over identical sources produced different
+  bytes, because `BUILD.txt` recorded the wall-clock time and every archive
+  member carried its own timestamp — so with `dist/` committed, four files were
+  permanently dirty in git and `DEVELOPMENT.md`'s claim that the build is
+  byte-reproducible was only true across platforms, not across runs. Archive
+  members now use a fixed timestamp and mode, and the build date is left to the
+  commit that carries it.
+- `publish.py` copies content and sets a fixed file mode rather than using
+  `copy2`. A filesystem that reports everything as `0755` — a Windows mount,
+  for one — would otherwise land every Markdown file in the public repository
+  marked executable.
+- Recorded the private/public split in `AGENTS.md` and `CLAUDE.md`: a new file
+  defaults to private, adding one the public repository needs means adding it
+  to the allowlist in the same change, and no path joins the allowlist without
+  someone checking what is inside it.
 - Moved `SPEC-HISTORY.md` from `Internal/` to `Specification/`. It explains why
   the format changed, which is worth publishing beside the specifications it
   documents; `Internal/` is now private notes only.
@@ -106,7 +180,7 @@ do not rewrite released history.
 - Stopped small graphs paying for a problem they do not have. Dropping edges
   during a pan, a zoom or a drag was applied unconditionally, so a 14-edge
   canon lost its relations while being moved to buy smoothness it never
-  lacked. Both measures now switch on only past 60 edges; below that
+  lacked. Both measures now switch on at 60 edges or more; below that
   everything stays drawn, and `textureOnViewport`, which costs nothing, stays
   on throughout.
 - Removed the retired `action` kind from the shipped `Groups` view, which still
@@ -287,9 +361,9 @@ do not rewrite released history.
 ### Changed
 
 - Set the first public release version to `0.2.0` and the user-visible product
-  name to Worldkeep in both plugin manifests. The plugin id stays
-  `worldbuilding-canon`: it is tied to the local marketplace path and the mirror
-  folder, and the name is still provisional.
+  name to Worldkeep in both plugin manifests. The plugin id was left alone at
+  this point because the name was still provisional; it was renamed to
+  `worldkeep` once the name settled, in the entry at the top of this section.
 
 - Reorganized the repository so the source layout mirrors the shipped layout.
   Everything that ships now lives under `src/` — both skill manifests with the
