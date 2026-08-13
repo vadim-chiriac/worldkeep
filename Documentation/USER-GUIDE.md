@@ -7,6 +7,19 @@ you.
 If you have not built a world yet, start with
 [GETTING-STARTED.md](GETTING-STARTED.md).
 
+The day-to-day loop is short:
+
+| you want to | do this |
+|---|---|
+| add or change canon | talk normally and name the world folder |
+| accept a proposal | reply `ok`, `ok 1 3`, or correct a numbered bundle |
+| inspect before deciding | reply `show 2` or leave it with `later 2` |
+| check the files | ask the agent to validate the world |
+| see the world | ask “Show me my world” or name a saved view |
+| change how often it asks | edit `scribe.yaml`; see [Configuration](CONFIGURATION.md) |
+
+The rest of this guide explains the cases where that loop needs more control.
+
 ---
 
 ## Talking

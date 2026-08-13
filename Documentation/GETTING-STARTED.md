@@ -84,7 +84,11 @@ Validation: clean
 
 ---
 
-## 4. What you now own
+## 4. Optional: what you now own
+
+This is the structure under the conversation. If you would rather see the
+result first, skip to [Look at it](#6-look-at-it) and come back when you want
+to edit or inspect the files yourself.
 
 ```markdown
 ---
@@ -154,10 +158,11 @@ and one relation are yours.
 
 > Show me my world.
 
-You get a self-contained HTML file. One file, no network, opens in any browser
-now and in ten years. Click any node to read its canon file; use **Find by
-name** to locate something in a large world; use the filters to hide a whole
-category and watch what survives.
+The agent returns a link to a generated, self-contained `.html` file. Your
+canon remains in `Worlds/Hask`; the HTML is a disposable view of it. One file,
+no network, it opens in any browser now and in ten years. Click any node to
+read its canon file; use **Find by name** to locate something in a large world;
+use the filters to hide a whole category and watch what survives.
 
 Ask for something narrower and the viewer writes a view for it:
 
@@ -198,3 +203,4 @@ The format is young and may still change — see [LIMITATIONS.md](LIMITATIONS.md
 | get exactly the picture you want | [VIEWS.md](VIEWS.md) |
 | be asked less often, or more | [CONFIGURATION.md](CONFIGURATION.md) |
 | model something awkward | `Specification/KERNEL.md` |
+| inspect a finished small world | [`Examples/lower-fen`](../Examples/lower-fen) |

@@ -96,9 +96,16 @@ Restart the ChatGPT desktop app and install **worldkeep** from the
 
 ## Verifying the installation
 
-The surest check is to make the tooling talk. Point the agent at any folder
-containing a `world.yaml` — `Examples/lower-fen` in the repository will do —
-and ask:
+The surest check is a new chat and the first real instruction:
+
+> Let's start a world in `Worlds/Hask`.
+
+A working installation creates that folder from the seed world and asks what
+the world is called. Continue from there with
+[Getting started](GETTING-STARTED.md).
+
+If you installed from a clone and want a read-only check instead, point the
+agent at `Examples/lower-fen` inside that clone and ask:
 
 > What's in this world?
 

@@ -9,19 +9,18 @@ document are the non-goals at the bottom.
 
 ---
 
-## Now
+## Shipped in 0.2.0
 
-**Release documentation.** The specifications have been readable for a while;
-the user-facing documents have not. Most of what is missing is written, and
-what remains is listed in the README's documentation table.
+**Release documentation.** The public repository includes the overview,
+installation, first-world walkthrough, user guide, view and configuration
+references, troubleshooting, limitations, release notes and one worked world.
 
 **Installation hardening.** The launcher resolves a Python runtime by probing
-known locations, and its failure message is the first thing a new user sees
-when it does not find one.
+known locations and reports the blocker when it cannot find one.
 
 **Diagnostics.** `wb doctor` reports what the tooling found and what it did
-not. Every failure that has cost real time so far should be answerable by
-running it once.
+not; `wb session` reports the effective world, configuration and available
+views without requiring the agent to reread the full specifications.
 
 ---
 

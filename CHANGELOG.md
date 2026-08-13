@@ -7,6 +7,11 @@ do not rewrite released history.
 
 ### Changed
 
+- Tightened the first-release documentation into one newcomer path: install,
+  create a real folder, approve a proposal, open the generated HTML, then move
+  into the reference guides. The roadmap now distinguishes shipped 0.2.0 work
+  from future work, and the examples page states exactly which demonstrations
+  exist instead of implying a broader gallery.
 - Unified the public marketplace identity as `worldkeep` across Claude and
   ChatGPT/Codex. Installation now uses the public GitHub marketplace directly,
   distinguishes repository distribution from OpenAI's reviewed universal

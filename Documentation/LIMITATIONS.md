@@ -8,6 +8,10 @@ the things that are *deliberate* absences live in
 This document is written to be believed rather than to reassure. If it turns
 out to be understating something, that is a bug in the document.
 
+> **Before you begin:** the format is young and there is no migration tool.
+> Keep each world in git and commit before upgrades or large editing sessions.
+> That turns an incompatible change into a visible diff you can reverse.
+
 ---
 
 ## The format is young and there is no migration tooling

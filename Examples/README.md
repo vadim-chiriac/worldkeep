@@ -3,6 +3,10 @@
 Worked canons you can open, render and read. Each is a real folder — validate
 it, view it, copy it and start editing.
 
+If you want to create a world rather than inspect one, start with the
+[five-minute walkthrough](../Documentation/GETTING-STARTED.md). The examples
+are finished results, not mandatory templates.
+
 ---
 
 ## [The Lower Fen](lower-fen)
@@ -30,6 +34,15 @@ wb view Examples/lower-fen --all-views -o lower-fen.html
 wb validate Examples/lower-fen
 ```
 
+Useful prompts after pointing an installed agent at this folder:
+
+> What's in this world?
+
+> Show me every saved view.
+
+> Explain why the Bell Wardens and the Rope are drawn differently in the bell
+> dispute view.
+
 ---
 
 ## What is not here yet
@@ -49,3 +62,13 @@ until a proper example exists.
 There are no genre templates. The kernel is domain-neutral, and shipping a
 fantasy starter before the packaging that would let it be updated would be
 handing you a fork to maintain. See [ROADMAP.md](../Documentation/ROADMAP.md).
+
+Current coverage, stated plainly:
+
+| need | available now |
+|---|---|
+| simple prompt → approval → view | the [Getting started](../Documentation/GETTING-STARTED.md) walkthrough |
+| readable richer world and saved view | [The Lower Fen](lower-fen) |
+| composed view modules | technical fixture in `Testing/fixtures/composition-acceptance` |
+| complete conversation transcript | not yet |
+| non-fantasy and cross-genre gallery | not yet |

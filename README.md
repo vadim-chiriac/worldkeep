@@ -82,6 +82,11 @@ You get self-contained HTML (one file, no network) that opens in any
 browser. Ask for something narrower ("just who rules what", "only the religious
 conflicts") and the agent writes a view for it.
 
+That is the complete first loop: a new folder at `Worlds/Hask`, an approval you
+can inspect, and a browser-openable `.html` view. Continue with the
+[step-by-step walkthrough](Documentation/GETTING-STARTED.md), or inspect the
+finished [`Lower Fen`](Examples/lower-fen) example before creating anything.
+
 ---
 
 ## Why these four kinds
@@ -167,7 +172,7 @@ A fen village at the ford, half of it on stilts.
 | host | status |
 |---|---|
 | Claude Desktop / Claude Code (Windows) | supported |
-| Codex / ChatGPT Work (Windows) | supported |
+| ChatGPT / Codex (Windows) | supported |
 
 macOS and Linux launchers ship in the bundle and nothing in the code is
 Windows-specific, but the pipeline has not been run end to end on either, so
