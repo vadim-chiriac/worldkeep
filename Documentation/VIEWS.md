@@ -13,13 +13,16 @@ or write one yourself.
 The right-hand inspector groups an artifact's connections into one card per
 relation. A card keeps the canon member order and role names, marks the item
 you selected as **This artifact**, and leaves a muted **not in this view** note
-where a saved view excluded another member. Only visible members can be opened.
+where a saved view excluded another member. Every relation card can be opened;
+only members present in the active view are navigable.
 
 Use **Focus relation** to temporarily show that relation and its participants,
 or **Focus neighborhood** to show one artifact, its direct relations, and each
 of their members. Focus is one hop, never traverses further, honours the active
 view and its filters, and is cleared by **Clear** or by switching views. It
-does not edit a view file or canon. The generated legend describes only what is
+does not edit a view file or canon. While focused, the summary and **Clear** sit
+directly below the focus control in the right-hand inspector. Expand **Shown in
+this view** when you need the generated legend; it describes only what is
 currently shown: the final node and edge styles, shapes, direction, and counts.
 
 ---
@@ -38,6 +41,9 @@ artifact is missing from the canon or merely missing from the view, and only a
 projection that obeys nothing can answer it.
 
 It shows drafts too, which no named view has to.
+Standard state relations remain neutral, but their structured `value` or
+`amount` is included in the relation label so the audit graph does not reduce
+"unexplored" or a population range to the word "State".
 
 ---
 

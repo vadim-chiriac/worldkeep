@@ -189,12 +189,15 @@ cannot be customized. Migrate an old such recipe to a descriptive name (for
 example `Styled world overview`) and retain its named-view lens behavior.
 
 The inspector groups each connection into one relation card, preserving the
-canon member order and roles. **Focus relation** temporarily draws only that
+canon member order and roles; every relation card opens even when its relation
+is represented as an edge, chip, or hidden structural rule. **Focus relation** temporarily draws only that
 relation and its participants; **Focus neighborhood** draws an artifact, its
 direct relations, and their participants. Both are one-hop browser-only aids:
 they honour the active view and filters, never reveal excluded canon, and clear
-on a view switch. The legend describes the final styles actually on screen;
-never treat it as a statement of canon meaning or provenance.
+from the right-hand inspector or on a view switch. The collapsible legend
+describes the final styles actually on screen; never treat it as a statement of
+canon meaning or provenance. Everything labels standard state relation nodes
+with their structured value or amount without applying any custom lens.
 
 ## Composing reusable modules
 

@@ -123,6 +123,11 @@ class RendererTests(unittest.TestCase):
         rendered = render_graph(self.projection, self.canon)
 
         self.assertIn('const chipLabel=(chip)=>typeLabel(chip.type)+": "+(chip.value!==undefined&&chip.value!==null?String(chip.value):amountLabel(chip.amount));', rendered)
+        self.assertIn('const relationNodeLabel=(node)=>', rendered)
+        self.assertIn('return prefix+": "+String(frontmatter.value)', rendered)
+        self.assertIn('const amount=amountLabel(frontmatter.amount)', rendered)
+        self.assertIn('return detail.name||node.label||prefix', rendered)
+        self.assertIn('let label=node.kind==="relation"?relationNodeLabel(node):node.label', rendered)
         self.assertIn('if(min!==undefined&&max!==undefined)return numberLabel(min)+"–"+numberLabel(max);', rendered)
         self.assertIn('if(min!==undefined)return "at least "+numberLabel(min);', rendered)
         self.assertIn('if(max!==undefined)return "at most "+numberLabel(max);', rendered)
@@ -293,6 +298,13 @@ class ViewerAffordanceTests(unittest.TestCase):
         self.assertIn('positionMemory=new Map(prior.positions)', self.rendered)
         self.assertIn('drawTemporaryProjection(activeDisplayProjection(),prior.viewport,prior.selectedId,false)', self.rendered)
         self.assertIn('parent:retained.has(node.parent)?node.parent:null', self.rendered)
+        self.assertIn('const navigable=Boolean(details[relationId])', self.rendered)
+        self.assertIn('title.dataset.goto=relationId', self.rendered)
+        self.assertNotIn('visible.has(relationId)?"button":"div"', self.rendered)
+        self.assertIn('focusState={focusId:id,kind:', self.rendered)
+        self.assertIn('id="inspector-focus-status"', self.rendered)
+        self.assertNotIn('id="focus-status"', self.rendered)
+        self.assertIn('if(event.target.closest("[data-focus-clear]")){clearFocus();return}', self.rendered)
 
     def test_inspector_frontmatter_is_collapsed_and_legend_uses_rendered_styles(self) -> None:
         self.assertIn('document.createElement("details")', self.rendered)
@@ -301,12 +313,21 @@ class ViewerAffordanceTests(unittest.TestCase):
         self.assertIn('cy.nodes().forEach((node)=>', self.rendered)
         self.assertIn('cy.edges().filter((edge)=>edge.data("behavior")!=="hide")', self.rendered)
         self.assertIn('" shown as "', self.rendered)
-        self.assertIn('.relation-card-title,.relation-card-title button', self.rendered)
+        self.assertIn('<details class="legend" id="legend"><summary>Shown in this view</summary><div id="legend-content"></div></details>', self.rendered)
+        self.assertIn('const legend=document.getElementById("legend-content");legend.innerHTML=""', self.rendered)
+        self.assertIn('.relation-card-title:is(button)', self.rendered)
         self.assertIn('relations.add(chip.source)', self.rendered)
         self.assertIn('node.isParent()', self.rendered)
         self.assertIn('node.data("dormant")===1', self.rendered)
         self.assertIn('node.data("practice")===1', self.rendered)
         self.assertIn('node.data("fiat")===1', self.rendered)
+
+    def test_desktop_has_no_burger_and_mobile_keeps_labelled_controls(self) -> None:
+        self.assertNotIn('id="menu"', self.rendered)
+        self.assertNotIn('>☰</button>', self.rendered)
+        self.assertIn('id="mobile-controls"', self.rendered)
+        self.assertIn('aria-controls="left-panel"', self.rendered)
+        self.assertIn('event.currentTarget.textContent=open?"Close controls":"Controls"', self.rendered)
 
     def test_nesting_collapses_only_through_one_relation_type(self) -> None:
         """part_of composes, so hiding a county must not orphan its seat. A

@@ -13,6 +13,11 @@ do not rewrite released history.
 
 ### Changed
 
+- Everything now labels standard state relation nodes with their qualitative or
+  numeric value; relation cards remain inspectable regardless of graph
+  representation. Focus status and Clear now stay beside the focused artifact,
+  the generated legend is collapsed until requested, and the desktop burger
+  icon is gone while small screens retain a labelled Controls button.
 - Tightened the first-release documentation into one newcomer path: install,
   create a real folder, approve a proposal, open the generated HTML, then move
   into the reference guides. The roadmap now distinguishes shipped 0.2.0 work

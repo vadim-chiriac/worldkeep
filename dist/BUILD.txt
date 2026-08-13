@@ -64,7 +64,7 @@ SCRIBE.md version: v0.11
   sha256 777a47bffb42bac3801c2f8351d8c0b2457de1d858da66714a145014e86ea824  worldbuilding-scribe/scripts/wblib/session.py
 
 [canon-viewer]
-  sha256 01f139c7153cd22e778eb378807f55638eafe8de2dabb2ece38bbeb41c6cbd2f  canon-viewer/SKILL.md
+  sha256 db83b7df7676de391f6ccc19805d3e64618409d9628804ad91f363f904ccdded  canon-viewer/SKILL.md
   sha256 bf674af2f58ec118ac3b34c407a6808ac3804f7d8103a77c55eb684461b4202b  canon-viewer/assets/views-library/canon-only.yaml
   sha256 8dd78a398b2e28937e9785bd43a5d0fe9940a59b40be653b34f813c0e7ba7718  canon-viewer/assets/views-library/groups.yaml
   sha256 8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4  canon-viewer/scripts/_vendor/PyYAML-LICENSE.txt
@@ -105,7 +105,7 @@ SCRIBE.md version: v0.11
   sha256 2a525eee1cc853a74c4a8684cdf283aaa64fafd0d86cd66d34b328588b0e1274  canon-viewer/scripts/viewer/load.py
   sha256 5d5ca752f418985d632f91b67ad3fd49e5fdd371acced17643bb39b24efaa689  canon-viewer/scripts/viewer/modules.py
   sha256 374bb595dbeaf12989d97acb66089f9e7a81abc03046f8fbcaf66850bdbd2907  canon-viewer/scripts/viewer/project.py
-  sha256 d75a094b888651a266e6aa928d3770f1cee8351a5fa385db5286dd473a2961c2  canon-viewer/scripts/viewer/render_graph.py
+  sha256 d77f6cc5d8a9a525beaab70a2a8f65ac3e1b4d95a18286820124c840c4b89d6c  canon-viewer/scripts/viewer/render_graph.py
   sha256 f3fd2f22548361261e543b5961ee742f94445f75d439383e7b01863eefecf357  canon-viewer/scripts/viewer/validate_view.py
   sha256 e57ae39002625de4a96032a6e3d4ed05c7f4735d74318cef0b20b260044f95cb  canon-viewer/scripts/wb.py
   sha256 05081356ef6b13cf341183c8919a41f4601fde3c20c13a36a6570959cf20e368  canon-viewer/scripts/wblib/__init__.py

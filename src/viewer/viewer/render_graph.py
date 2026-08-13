@@ -143,20 +143,21 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;background:rad
 .shell{display:grid;grid-template-columns:238px minmax(0,1fr) 328px;height:100%}.panel{position:relative;z-index:3;background:rgba(22,28,34,.94);backdrop-filter:blur(14px)}
 .left{border-right:1px solid var(--line);padding:28px 24px;overflow:auto}.right{border-left:1px solid var(--line);padding:30px 26px;overflow:auto}.stage{position:relative;min-width:0}.title{margin:0 0 26px;font-size:27px;line-height:1.1;letter-spacing:-.025em}.menu{width:46px;height:46px;border:1px solid #3a444e;border-radius:9px;background:#1b2229;color:var(--text);font-size:23px;cursor:pointer}.menu:hover{border-color:#66737e}.filters,.legend{margin-top:28px}.filters summary,.legend h2,.inspector h2{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 15px}.filter-actions{display:flex;gap:7px;margin:9px 0}.filter-actions button{border:1px solid #3a444e;border-radius:6px;background:#1b2229;color:var(--text);font:12px inherit;padding:4px 7px;cursor:pointer}.filter-search{width:100%;margin:5px 0 9px;padding:6px 8px;border:1px solid #3a444e;border-radius:6px;background:#11171d;color:var(--text);font:12px inherit}.filter-group h3{margin:13px 0 5px;font-size:11px;color:var(--muted)}.filter-row{display:flex;gap:7px;align-items:start;margin:5px 0;font-size:12px;overflow-wrap:anywhere}.filter-row input{margin:3px 0 0}.filter-count{color:var(--muted);font-size:11px}.filter-summary{margin:8px 0;color:#c8d0d6;font-size:12px}.finder{margin-top:26px}.finder label{display:block;margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}.finder-toggle{display:flex;gap:7px;align-items:center;margin:7px 0 4px;color:#c8d0d6;font-size:12px;cursor:pointer}.finder-clear{margin-top:7px;padding:4px 7px;border:1px solid #3a444e;border-radius:6px;background:#1b2229;color:var(--text);font:12px inherit;cursor:pointer}.finder-clear:hover{border-color:#66737e}.finder-summary{min-height:15px;margin:2px 0 0;color:var(--muted);font-size:11px}.finder-results{list-style:none;max-height:220px;overflow-y:auto;margin:8px 0 0;padding:0}.finder-results:empty{margin:0}.finder-hit{display:flex;flex-direction:column;gap:1px;width:100%;padding:5px 7px;border:1px solid transparent;border-radius:6px;background:none;color:var(--text);font:12px/1.3 inherit;text-align:left;cursor:pointer}.finder-hit:hover{border-color:#3a444e;background:#1b2229}.finder-hit-name{overflow-wrap:anywhere}.finder-hit-type{color:var(--muted);font-size:10px}.relation-cards{display:grid;gap:10px}.relation-card{border:1px solid #303943;border-radius:8px;padding:10px;background:#11171d}.relation-card-title,.relation-card-title button{display:block;margin:0 0 8px;padding:0;border:0;background:none;color:#d8e3ea;font:700 13px inherit;text-align:left}.relation-card-title button{cursor:pointer}.relation-card-title button:hover{color:#fff}.relation-member{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:baseline;margin:5px 0;font-size:12px}.relation-member-role{color:#87939d}.relation-member button{padding:0;border:0;background:none;color:#c7d2da;font:inherit;text-align:left;cursor:pointer;overflow-wrap:anywhere}.relation-member button:hover{color:#fff;text-decoration:underline}.relation-member-muted{color:#7f8b95;font-style:italic}.focus-status{margin:14px 0 0;color:#c8d0d6;font-size:12px}.focus-status button{margin-left:7px;border:1px solid #3a444e;border-radius:6px;background:#1b2229;color:var(--text);font:12px inherit;padding:3px 7px;cursor:pointer}.focus-status button:hover{border-color:#66737e}.legend{margin-top:28px}.legend-row{display:flex;gap:10px;align-items:center;margin:10px 0;color:#c8d0d6;font-size:12px}.legend-group{margin-top:15px}.legend-group h3{margin:0 0 6px;font-size:11px;color:var(--muted)}.swatch{width:24px;height:3px;border-radius:3px;background:#8d99a3;flex:none}.swatch.node{height:14px;border:2px solid currentColor;background:var(--swatch);color:var(--swatch)}.swatch.dashed{background:repeating-linear-gradient(90deg,#5f8fc9 0 6px,transparent 6px 10px)}.swatch.hidden{opacity:.25}.legend-note{margin-top:22px;color:#7f8b95;font-size:12px}.warnings{position:absolute;left:18px;bottom:17px;z-index:4;padding:8px 11px;border:1px solid #765f33;border-radius:8px;background:#231f17;color:#d9bd82;font-size:12px;display:none}
 #cy{position:absolute;inset:0}.inspector-title{margin:14px 0 8px;font-size:27px;line-height:1.2;letter-spacing:-.02em}.inspector-id{font:11px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace;color:#7f8b95;overflow-wrap:anywhere}.divider{height:1px;background:var(--line);margin:22px 0}.meta{display:grid;grid-template-columns:72px 1fr;gap:9px 10px;margin-bottom:22px}.meta dt{color:#87939d}.meta dd{margin:0;overflow-wrap:anywhere}.body-copy{color:#d2d8dc}.body-copy p{margin:.8em 0}.body-copy h3,.body-copy h4,.body-copy h5,.body-copy h6{margin:1.2em 0 .45em}.body-copy blockquote{margin:1em 0;padding-left:13px;border-left:3px solid #596a77;color:#adb8c0}.body-copy code{padding:2px 5px;border-radius:4px;background:#0e1419;color:#d7e6ef}.body-copy .empty{color:#7f8b95;font-style:italic}.frontmatter{white-space:pre-wrap;overflow-wrap:anywhere;padding:14px;border:1px solid #303943;border-radius:8px;background:#0f151a;color:#aeb8bf;font:12px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.empty-state{margin-top:45%;color:#7f8b95;text-align:center}.chip-list{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.chip{padding:4px 8px;border:1px solid #4b5963;border-radius:999px;background:#202830;color:#c7d2da;font-size:12px}
+.mobile-controls{display:none;border:1px solid #3a444e;border-radius:7px;background:#1b2229;color:var(--text);font:13px inherit;padding:7px 10px;cursor:pointer}.mobile-controls:hover{border-color:#66737e}.legend>summary{cursor:pointer;font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 15px}.relation-card-title:is(button){cursor:pointer}.relation-card-title:is(button):hover{color:#fff}
 @media(max-width:900px){.shell{grid-template-columns:minmax(0,1fr) 290px}.left{position:absolute;left:12px;top:12px;width:220px;border:1px solid var(--line);border-radius:12px;padding:17px;transform:translateX(calc(-100% - 22px));transition:transform .2s}.left.open{transform:none}.title{font-size:21px;margin-bottom:14px}.right{padding:22px 20px}.stage{grid-column:1}.right{grid-column:2}.menu{position:fixed;left:14px;top:14px;z-index:6}.left .menu{position:static}}
+@media(max-width:900px){.mobile-controls{display:block;position:fixed;left:14px;top:14px;z-index:8}.left{top:54px;max-height:calc(100% - 66px)}}
 @media(max-width:640px){.shell{display:block}.right{position:absolute;z-index:5;right:0;bottom:0;left:0;height:42%;border-left:0;border-top:1px solid var(--line)}.stage{height:58%}.left{z-index:7}}
 </style>
 __SCRIPT_TAGS__
 </head>
 <body>
 <div class="shell">
+  <button class="mobile-controls" id="mobile-controls" type="button" aria-controls="left-panel" aria-expanded="false">Controls</button>
   <aside class="panel left" id="left-panel">
     <h1 class="title">__TITLE__</h1>
-    <button class="menu" id="menu" aria-label="Toggle legend">☰</button>
     <section class="finder"><label for="node-search">Find by name</label><input class="filter-search" id="node-search" type="search" placeholder="Name, id or type" aria-label="Find artifacts by name"><label class="finder-toggle"><input type="checkbox" id="node-search-highlight" checked> Highlight in graph</label><div class="finder-summary" id="node-search-summary"></div><ul class="finder-results" id="node-search-results"></ul><button type="button" class="finder-clear" id="node-search-clear" hidden>Clear results</button></section>
     <details class="filters" id="filters" open><summary>Filter this view</summary><div class="filter-actions"><button type="button" data-filter-action="all" disabled>All / Reset</button><button type="button" data-filter-action="none" disabled>None</button></div><input class="filter-search" id="filter-search" type="search" placeholder="Search filter types" aria-label="Search filter types" disabled><div class="filter-summary" id="filter-summary"></div><div id="filter-catalogue"></div></details>
-    <div class="focus-status" id="focus-status" hidden></div>
-    <section class="legend" id="legend"><h2>Shown in this view</h2></section>
+    <details class="legend" id="legend"><summary>Shown in this view</summary><div id="legend-content"></div></details>
     <p class="legend-note">Pan by dragging the background. Scroll to zoom. Click a node or edge to inspect its canon file.</p>
   </aside>
   <main class="stage"><div id="cy" role="img" aria-label="Interactive canon graph"></div><div class="warnings" id="warnings"></div><output id="runtime-status" hidden data-state="loading"></output></main>
@@ -177,6 +178,7 @@ __SCRIPT_TAGS__
   const amountValueLabel=(value)=>{if(!value||typeof value!=="object"||Array.isArray(value))return numberLabel(value);const min=value.min,max=value.max;if(min!==undefined&&max!==undefined)return numberLabel(min)+"–"+numberLabel(max);if(min!==undefined)return "at least "+numberLabel(min);if(max!==undefined)return "at most "+numberLabel(max);return String(value)};
   const amountLabel=(amount)=>{if(!amount)return "state";const one=Array.isArray(amount)?amount[0]:amount;if(!one||typeof one!=="object")return String(amount);const label=amountValueLabel(one.value);if(one.of)return label+" of "+String(one.of);return [label,one.unit].filter((x)=>x!==undefined&&x!==null&&x!=="").join(" ")||"state"};
   const chipLabel=(chip)=>typeLabel(chip.type)+": "+(chip.value!==undefined&&chip.value!==null?String(chip.value):amountLabel(chip.amount));
+  const relationNodeLabel=(node)=>{if(node.type!=="state"&&!String(node.type||"").startsWith("state/"))return typeLabel(node.type);const detail=details[node.id]||{},frontmatter=detail.frontmatter||{},prefix=typeLabel(node.type);if(frontmatter.value!==undefined&&frontmatter.value!==null)return prefix+": "+String(frontmatter.value);const amount=amountLabel(frontmatter.amount);if(amount!=="state")return prefix+": "+amount;return detail.name||node.label||prefix};
   let activeProjection=data,artifactTypes=new Set(),relationTypes=new Set(),positionMemory=new Map(),filtersReady=false,focusState=null;
   let searchResults=[],searchActive=false;
   const exactType=(value)=>value||"(untyped)";
@@ -320,7 +322,7 @@ __SCRIPT_TAGS__
     const elements=[];
     projection.nodes.forEach((node)=>{
       const chipText=(node.chips||[]).map(chipLabel);
-      let label=node.kind==="relation"?typeLabel(node.type):node.label;
+      let label=node.kind==="relation"?relationNodeLabel(node):node.label;
       if((node.badges||[]).includes("fiat"))label+="  ◆";
       if(chipText.length)label+="\n"+chipText.map((x)=>"▰ "+x).join("\n");
       const item={data:{id:node.id,detailId:node.id,label:label,kind:node.kind||"unknown",type:node.type||"",shape:node.style.shape,color:node.style.color||fallback[node.kind]||"#8b949c",opacity:node.style.opacity,dormant:(node.badges||[]).includes("dormant")?1:0,practice:(node.badges||[]).includes("practice")?1:0,fiat:(node.badges||[]).includes("fiat")?1:0}};
@@ -418,9 +420,9 @@ __SCRIPT_TAGS__
     const cards=document.createElement("div");cards.className="relation-cards";
     relationIds.forEach((relationId)=>{
       const detail=details[relationId]||{},card=document.createElement("article");card.className="relation-card";
-      const title=document.createElement(visible.has(relationId)?"button":"div");title.className="relation-card-title";
+      const navigable=Boolean(details[relationId]),title=document.createElement(navigable?"button":"div");title.className="relation-card-title";
       title.textContent=(detail.name||relationId)+" · "+typeLabel(detail.type||(model.get(relationId)||{}).type);
-      if(visible.has(relationId)){title.type="button";title.dataset.goto=relationId}card.appendChild(title);
+      if(navigable){title.type="button";title.dataset.goto=relationId}card.appendChild(title);
       relationMembers(relationId,model).forEach((member)=>{
         const row=document.createElement("div");row.className="relation-member";
         if(member.id===id){const self=document.createElement("span");self.textContent="This artifact";row.appendChild(self)}
@@ -468,8 +470,8 @@ __SCRIPT_TAGS__
     const edges=(source.edges||[]).filter((edge)=>relationIds.has(edge.id.split("::member:")[0])&&visible.has(edge.source)&&visible.has(edge.target));
     return {...source,nodes,edges};
   }
-  function renderFocusStatus(){const status=document.getElementById("focus-status");if(!focusState){status.hidden=true;status.textContent="";return}const projection=window.__WB_DATA__,relations=new Set(projection.edges.map((edge)=>edge.id.split("::member:")[0]));projection.nodes.forEach((node)=>(node.chips||[]).forEach((chip)=>relations.add(chip.source)));status.hidden=false;status.textContent="Focused "+projection.nodes.length+" artifacts · "+relations.size+" relations";const clear=document.createElement("button");clear.type="button";clear.dataset.focusClear="1";clear.textContent="Clear";status.appendChild(clear)}
-  function focus(id){if(!details[id])return;const pan=cy.pan(),selected=cy.nodes(":selected");rememberNodePositions();focusState={viewport:{zoom:cy.zoom(),pan:{x:pan.x,y:pan.y}},selectedId:selected.length?selected[0].id():null,positions:new Map(positionMemory)};drawTemporaryProjection(focusProjectionFor(id),focusState.viewport,id);setFilterControlsReady(filtersReady);renderFocusStatus()}
+  function renderFocusStatus(){const status=document.getElementById("inspector-focus-status");if(!status)return;if(!focusState){status.hidden=true;status.textContent="";return}const projection=window.__WB_DATA__,relations=new Set(projection.edges.map((edge)=>edge.id.split("::member:")[0]));projection.nodes.forEach((node)=>(node.chips||[]).forEach((chip)=>relations.add(chip.source)));status.hidden=false;status.textContent="Focused "+projection.nodes.length+" artifacts · "+relations.size+" relations";const clear=document.createElement("button");clear.type="button";clear.dataset.focusClear="1";clear.textContent="Clear";status.appendChild(clear)}
+  function focus(id){if(!details[id]||focusState)return;const pan=cy.pan(),selected=cy.nodes(":selected");rememberNodePositions();focusState={focusId:id,kind:details[id].kind==="relation"?"relation":"neighborhood",viewport:{zoom:cy.zoom(),pan:{x:pan.x,y:pan.y}},selectedId:selected.length?selected[0].id():null,positions:new Map(positionMemory)};drawTemporaryProjection(focusProjectionFor(id),focusState.viewport,id);inspect(id);setFilterControlsReady(filtersReady);renderFocusStatus()}
   function clearFocus(){if(!focusState)return;const prior=focusState;focusState=null;positionMemory=new Map(prior.positions);drawTemporaryProjection(activeDisplayProjection(),prior.viewport,prior.selectedId,false);setFilterControlsReady(filtersReady);updateFilterSummary();renderFocusStatus()}
   window.__WB_CLEAR_FOCUS__=clearFocus;
   window.__WB_DISCARD_FOCUS__=()=>{focusState=null;renderFocusStatus();setFilterControlsReady(filtersReady)};
@@ -483,7 +485,8 @@ __SCRIPT_TAGS__
     const artifactId=document.createElement("div");artifactId.className="inspector-id";artifactId.textContent=item.id;inspector.appendChild(artifactId);
     const divider=document.createElement("div");divider.className="divider";inspector.appendChild(divider);
     const dl=document.createElement("dl");dl.className="meta";meta.forEach((pair)=>{const dt=document.createElement("dt");dt.textContent=pair[0];const dd=document.createElement("dd");dd.textContent=pair[1];dl.append(dt,dd)});inspector.appendChild(dl);
-    const focusButton=document.createElement("button");focusButton.type="button";focusButton.className="finder-clear";focusButton.dataset.focus=id;focusButton.textContent=item.kind==="relation"?"Focus relation":"Focus neighborhood";inspector.appendChild(focusButton);
+    const focusButton=document.createElement("button");focusButton.type="button";focusButton.className="finder-clear";focusButton.dataset.focus=id;focusButton.textContent=item.kind==="relation"?"Focus relation":"Focus neighborhood";if(focusState){focusButton.disabled=true;focusButton.textContent=focusState.kind==="relation"?"Focused relation":"Focused neighborhood"}inspector.appendChild(focusButton);
+    const focusStatus=document.createElement("div");focusStatus.className="focus-status";focusStatus.id="inspector-focus-status";focusStatus.hidden=true;focusStatus.setAttribute("role","status");focusStatus.setAttribute("aria-live","polite");inspector.appendChild(focusStatus);renderFocusStatus();
     if(chips.length){const holder=document.createElement("div");holder.className="chip-list";chips.forEach((chip)=>{const span=document.createElement("span");span.className="chip";span.textContent=chipLabel(chip);holder.appendChild(span)});inspector.appendChild(holder)}
     const body=document.createElement("div");body.className="body-copy";body.innerHTML=item.body_html;inspector.appendChild(body);
     const connections=renderConnections(id);
@@ -507,11 +510,11 @@ __SCRIPT_TAGS__
   }
   window.__WB_GO_TO__=goTo;
   inspector.addEventListener("click",(event)=>{
+    if(event.target.closest("[data-focus-clear]")){clearFocus();return}
     const focusButton=event.target.closest("[data-focus]");if(focusButton){focus(focusButton.dataset.focus);return}
     const button=event.target.closest("[data-goto]");
     if(button)goTo(button.dataset.goto);
   });
-  document.getElementById("focus-status").addEventListener("click",(event)=>{if(event.target.closest("[data-focus-clear]"))clearFocus()});
   document.getElementById("node-search-results").addEventListener("click",(event)=>{
     const button=event.target.closest("[data-goto]");
     if(button)goTo(button.dataset.goto);
@@ -532,7 +535,7 @@ __SCRIPT_TAGS__
   const first=data.nodes.find((node)=>node.kind!=="relation")||data.nodes[0];if(first){cy.getElementById(first.id).select();inspect(first.id)}
 
   function renderLegend(){
-    const legend=document.getElementById("legend");legend.innerHTML="<h2>Shown in this view</h2>";
+    const legend=document.getElementById("legend-content");legend.innerHTML="";
     const nodeGroups=new Map(),edgeGroups=new Map();
     cy.nodes().forEach((node)=>{const d=node.data(),key=[d.kind,d.type,d.shape,d.color,d.opacity].join("|");if(!nodeGroups.has(key))nodeGroups.set(key,{...d,count:0});nodeGroups.get(key).count++});
     cy.edges().filter((edge)=>edge.data("behavior")!=="hide").forEach((edge)=>{const d=edge.data(),key=[d.type,d.behavior,d.directed,d.line,d.width,d.color].join("|");if(!edgeGroups.has(key))edgeGroups.set(key,{...d,count:0});edgeGroups.get(key).count++});
@@ -542,7 +545,7 @@ __SCRIPT_TAGS__
   }
   window.__WB_RENDER_LEGEND__=renderLegend;renderLegend();
   if(data.warnings.length){const warning=document.getElementById("warnings");warning.style.display="block";warning.textContent=data.warnings.length+" projection warning"+(data.warnings.length===1?"":"s");warning.title=data.warnings.join("\n")}
-  document.getElementById("menu").addEventListener("click",()=>document.getElementById("left-panel").classList.toggle("open"));
+  document.getElementById("mobile-controls").addEventListener("click",(event)=>{const panel=document.getElementById("left-panel"),open=panel.classList.toggle("open");event.currentTarget.setAttribute("aria-expanded",String(open));event.currentTarget.textContent=open?"Close controls":"Controls"});
 })();
 </script>
 </body>
@@ -717,6 +720,6 @@ def render_graph_document(
     script = MULTI_VIEW_SCRIPT.replace("__MULTI_JSON__", _safe_json(bundle))
     return (
         document.replace("</style>", MULTI_VIEW_CSS + "\n</style>", 1)
-        .replace('</h1>\n    <button class="menu"', f"</h1>\n    {picker}\n    <button class=\"menu\"", 1)
+        .replace("</h1>", f"</h1>\n    {picker}", 1)
         .replace("</body>", script + "\n</body>", 1)
     )
