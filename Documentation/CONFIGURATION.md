@@ -95,7 +95,7 @@ captured or what reaches canon changes.
 ## `world.yaml` — what this world is
 
 ```yaml
-kernel_version: "0.18"
+kernel_version: "0.19"
 name: "The Lower Fen"
 calendar: ""
 facets: [when, where, valence, weight, members, status, amount, value, fiat]
@@ -112,7 +112,7 @@ are told rather than silently reinterpreted:
 
 ```
 warnings (1):
-  world.yaml kernel_version 0.11 != packaged KERNEL 0.18; re-read KERNEL.md
+  world.yaml kernel_version 0.11 != packaged KERNEL 0.19; re-read KERNEL.md
   before relying on version-specific rules
 ```
 

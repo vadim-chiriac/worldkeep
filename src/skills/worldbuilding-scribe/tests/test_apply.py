@@ -265,6 +265,98 @@ class ValidatorCardinalityTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1)
         self.assertIn("roles_unique must be a list", result.stdout)
 
+    def test_repeated_directed_roles_warn_without_banning_shared_anchors(self) -> None:
+        artifact(
+            self.world,
+            "types/governs",
+            "kind: type\nlens:\n  as: edge\n  direction: [governor, domain]\n",
+        )
+        artifact(self.world, "types/governs/local", "kind: type\n")
+        artifact(
+            self.world,
+            "types/governs/undirected",
+            "kind: type\nlens:\n  color: '#8899aa'\n",
+        )
+        for artifact_id in (
+            "entities/governor-a",
+            "entities/governor-b",
+            "entities/domain-a",
+            "entities/domain-b",
+        ):
+            artifact(self.world, artifact_id, "kind: entity\n")
+        artifact(
+            self.world,
+            "relations/ambiguous-governance",
+            "kind: relation\ntype: governs/local\nmembers:\n"
+            "  - {id: entities/governor-a, role: governor}\n"
+            "  - {id: entities/domain-a, role: domain}\n"
+            "  - {id: entities/governor-b, role: governor}\n"
+            "  - {id: entities/domain-b, role: domain}\n",
+        )
+        artifact(
+            self.world,
+            "relations/shared-governor",
+            "kind: relation\ntype: governs\nmembers:\n"
+            "  - {id: entities/governor-a, role: governor}\n"
+            "  - {id: entities/domain-a, role: domain}\n"
+            "  - {id: entities/domain-b, role: domain}\n",
+        )
+        artifact(
+            self.world,
+            "relations/shared-domain",
+            "kind: relation\ntype: governs\nmembers:\n"
+            "  - {id: entities/governor-a, role: governor}\n"
+            "  - {id: entities/governor-b, role: governor}\n"
+            "  - {id: entities/domain-a, role: domain}\n",
+        )
+        artifact(
+            self.world,
+            "relations/nearest-lens-is-undirected",
+            "kind: relation\ntype: governs/undirected\nmembers:\n"
+            "  - {id: entities/governor-a, role: governor}\n"
+            "  - {id: entities/domain-a, role: domain}\n"
+            "  - {id: entities/governor-b, role: governor}\n"
+            "  - {id: entities/domain-b, role: domain}\n",
+        )
+        artifact(
+            self.world,
+            "relations/duplicate-entries-are-one-role-member",
+            "kind: relation\ntype: governs\nmembers:\n"
+            "  - {id: entities/governor-a, role: governor}\n"
+            "  - {id: entities/domain-a, role: domain}\n"
+            "  - {id: entities/governor-a, role: governor}\n"
+            "  - {id: entities/domain-a, role: domain}\n",
+        )
+
+        result = self.run_validate()
+
+        self.assertEqual(result.returncode, 0, result.stdout)
+        self.assertEqual(result.stdout.count("member order does not pair them"), 1)
+        self.assertIn("relations/ambiguous-governance", result.stdout)
+
+    def test_relation_artifacts_can_be_grouped_by_a_higher_order_relation(self) -> None:
+        artifact(self.world, "types/governs", "kind: type\n")
+        artifact(self.world, "types/governance-system", "kind: type\n")
+        artifact(
+            self.world,
+            "relations/one-jurisdiction",
+            "kind: relation\ntype: governs\nmembers:\n"
+            "  - {id: entities/realm, role: governor}\n"
+            "  - {id: entities/north, role: domain}\n",
+        )
+        artifact(
+            self.world,
+            "relations/governance-system",
+            "kind: relation\ntype: governance-system\nmembers:\n"
+            "  - {id: relations/one-jurisdiction, role: jurisdiction}\n"
+            "  - {id: entities/realm, role: scope}\n",
+        )
+
+        result = self.run_validate()
+
+        self.assertEqual(result.returncode, 0, result.stdout)
+        self.assertNotIn("dangling reference", result.stdout)
+
     def test_qualitative_one_member_state_value_is_accepted(self) -> None:
         artifact(self.world, "types/state", "kind: type\n")
         artifact(self.world, "types/state/exploration", "kind: type\n")

@@ -1,4 +1,4 @@
-# SCRIBE.md — The Conversation → Canon Loop (v0.12)
+# SCRIBE.md — The Conversation → Canon Loop (v0.13)
 
 > The scribe is the core skill: it listens to freeform worldbuilding talk,
 > extracts structure per KERNEL.md, and proposes changes the author approves.
@@ -97,6 +97,15 @@ scribe weighing an uncertain condition will always split, and every graph
 formalism in its training is binary — the pull is toward one edge per file even
 when nothing distinguishes them. Stating the merge as the default corrects for
 that, and the tooling reports the groups left behind (KERNEL §4).
+
+Do not mistake a repeated role list for a list of pairs. Member order carries
+no correspondence: two `governor` members and two `domain` members say that
+both governors collectively govern both domains. Preserve distinct pairwise
+claims as distinct relations. When the pairwise claims also belong to one
+meaningful arrangement, group those relation IDs in a higher-order relation
+instead of flattening them into one many-to-many statement. When defining a
+type with an intrinsically singular role, declare it in `roles_unique`; do not
+invent uniqueness when collective participation is legitimate.
 
 **Drafts never resurface uninvited** — the viewer shows them, and
 `drafts?` lists them on request. Parking is not forgetting, and it is not

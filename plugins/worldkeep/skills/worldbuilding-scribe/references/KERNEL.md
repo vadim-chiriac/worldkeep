@@ -1,4 +1,4 @@
-# KERNEL.md — Worldbuilding Canon Kernel (v0.18)
+# KERNEL.md — Worldbuilding Canon Kernel (v0.19)
 
 > Spec language is English because the project targets a public audience.
 
@@ -110,6 +110,16 @@ all other fields are free and mean something only if a `type` file says so.
 | `amount` | any (commonly relations, actions, ideas) | magnitude with units: one `{value, unit, per?, of?}` object **or a list of them**. `value` a number or `{min, max}`. A price attaches to the thing priced: a toll `action/practice` carries `amount: {value: 2, unit: silver, per: wagon}`; a price list is a list — `[{value: 3, unit: copper, per: head}, {value: 6, unit: copper, per: cart}]`. **Proportions:** with `of:` (free string or ID naming the basis), `value` is a ratio and `unit` is omitted — "a tenth of every melt" is `{value: 0.1, of: "melt yield", per: melt}`. Compare only within identical `unit`+`per` (or `of`+`per`). Aggregable over inclusion chains by lenses. |
 | `value` | qualitative one-member `state` relations | a non-empty string giving the state of the property named by `type`: `type: state/exploration`, `value: unexplored`. It is not a general-purpose field and is not the numeric `amount.value` nested above. |
 | `fiat` | any | `true` marks an authorial decree: this stands *as written*, even against declared type constraints, established context, history, or natural law. The validator reports conflicts as notices, never errors; the AI correlates instead of resisting. |
+
+**Roles are sets, not columns in a table.** Member order never pairs repeated
+roles. If both ends of a directed relation repeat, the artifact states one
+collective many-to-many relation between the two role sets. When correspondence
+matters, write the pairwise claims as separate atomic relations. If those
+claims also form a meaningful system, group their relation IDs in a
+higher-order relation; relations are addressable members like any other
+artifact. A type whose vocabulary makes one role intrinsically singular may
+declare that role in `constraints.roles_unique`; do not use uniqueness merely
+to force every relation to be binary.
 
 **Modeling rule — anything that changes is not a field.** Entity frontmatter
 is for stable identity only; mutable properties are relations with `when`
@@ -478,7 +488,7 @@ including the built-in Everything audit projection.
 ## 9. World manifest & extensions
 
 ```yaml
-kernel_version: "0.18"
+kernel_version: "0.19"
 name: "Vvardenfell-adjacent test world"
 calendar: "Eras; sort key = era*1000 + year"
 facets: [when, where, valence, weight, members, status, amount, value, fiat]
@@ -531,8 +541,10 @@ type path, tightened by children) — *unless the artifact carries
 Warnings: type with no file anywhere on its path; `applies_to_kind`
 mismatch; declared `suggested_fields` absent; `weight` outside 0–1 or
 non-numeric; `amount` missing `unit` without `of`; bare `"now"` as a `when`
-value. Ordering is derived (§6 `precedes`), so a missing `sort` is never
-itself a warning.
+value; and both roles of a declared `lens.direction` repeated in one relation,
+because member order cannot pair them. The last is a semantic-shape warning,
+not a ban on collective many-to-many relations. Ordering is derived (§6
+`precedes`), so a missing `sort` is never itself a warning.
 
 ---
 

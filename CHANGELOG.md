@@ -20,6 +20,11 @@ do not rewrite released history.
 
 ### Changed
 
+- Relation member order no longer invites accidental pairwise interpretation:
+  the Kernel and Scribe now require correspondence-sensitive claims to remain
+  atomic, permit higher-order relations to group those claims semantically,
+  and warn when a directed relation repeats both endpoint roles.
+
 - Everything now labels standard state relation nodes with their qualitative or
   numeric value; relation cards remain inspectable regardless of graph
   representation. Focus status and Clear now stay beside the focused artifact,
@@ -43,8 +48,8 @@ do not rewrite released history.
   formats numeric ranges instead of exposing JavaScript's `[object Object]`.
   The Kernel, Scribe, seed world, and skill guidance now distinguish the two
   forms and retain one property series such as `state/exploration`.
-- Public guides that name the current format version now track KERNEL v0.18 and
-  SCRIBE v0.11, including the seed-manifest facet list.
+- Public guides that name the current format version now track KERNEL v0.19 and
+  SCRIBE v0.13, including the seed-manifest facet list.
 - `CanonReader` no longer reports an unreadable body as an empty one.
   `body_of` turned any read failure into `""`, which the merge detector then
   read as "this relation has no prose" — so two files nobody could open looked

@@ -146,7 +146,7 @@ secrecy get modelled without any special machinery.
 
 ```
 world: Hask
-versions: kernel 0.18 (doc v0.18), scribe v0.11, wb 0.1
+versions: kernel 0.19 (doc v0.19), scribe v0.13, wb 0.2
 artifacts: 21 (entity 3, relation 1, type 17)
 status:    canon 21
 scribe:    approval=strict, prose=compose, types=ask, extraction=eager, bundles=full

@@ -276,8 +276,8 @@ bundle — but it has been used by very few people on very few worlds.
 
 Concretely, what that means for you:
 
-- **The schema may evolve.** The kernel is at v0.18 and the capture spec at
-  v0.11. Both have changed in response to real use, and both may change again.
+- **The schema may evolve.** The kernel is at v0.19 and the capture spec at
+  v0.13. Both have changed in response to real use, and both may change again.
 - **There is no migration tooling yet.** If a future version changes how
   something is written, you may have to adjust files by hand.
 - **Keep your worlds in git.** This is the honest mitigation, and it costs

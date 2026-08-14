@@ -236,6 +236,12 @@ different date, a different status, a different source, or a link that
 something else needs to point at. Those are common and legitimate. Habit is
 not.
 
+Member order does not create pairs. A relation containing two `governor`
+members and two `domain` members means collective governance across both role
+sets. If the intended facts are A governs X and B governs Y, keep two atomic
+relations. You can still describe their shared meaning by making those
+relation IDs members of a higher-order relation.
+
 ---
 
 ## Being asked less, or more

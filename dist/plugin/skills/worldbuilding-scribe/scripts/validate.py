@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""KERNEL §11 validator for a canon folder. Aligned with KERNEL v0.18.
+"""KERNEL §11 validator for a canon folder. Aligned with KERNEL v0.19.
 
 Usage: python3 validate.py <world-folder>
 
@@ -10,7 +10,8 @@ ERRORS   duplicate IDs; dangling references; missing/invalid `kind`; relation
 WARNINGS type with no file anywhere on its path; `applies_to_kind` mismatch;
          declared `suggested_fields` absent; `weight` not a number in 0..1;
          `amount` without `unit` and without `of`; bare "now" as `when`;
-         `status` outside the closed set; id != path; (scribe-managed worlds
+         repeated roles at both ends of a declared direction; `status` outside
+         the closed set; id != path; (scribe-managed worlds
          only) missing scribe provenance.
 Ordering is derived (§6 `precedes`), so a missing `sort` is never a warning.
 """
@@ -113,6 +114,29 @@ def inherited_constraints(t):
             if f not in merged["suggested_fields"]:
                 merged["suggested_fields"].append(f)
     return (merged if found else None)
+
+
+def inherited_direction(t):
+    """Resolve direction exactly like the viewer's nearest declared lens."""
+    for path in ancestors(t):                    # leaf first, root last
+        tf = arts.get(f"types/{path}")
+        if not tf:
+            continue
+        lens = tf[1].get("lens")
+        if lens is None:
+            continue
+        if not isinstance(lens, dict):
+            return None
+        candidate = lens.get("direction")
+        return (
+            tuple(candidate)
+            if isinstance(candidate, list)
+            and len(candidate) == 2
+            and candidate[0] != candidate[1]
+            and all(isinstance(role, str) and role for role in candidate)
+            else None
+        )
+    return None
 
 
 def type_owner(t):
@@ -289,6 +313,19 @@ for aid, (rel, fm) in sorted(arts.items()):
             for mem in fm.get("members") or []:
                 if isinstance(mem, dict) and mem.get("role"):
                     roles.setdefault(mem["role"], []).append(mem["id"])
+            direction = inherited_direction(t)
+            if direction:
+                source_role, target_role = direction
+                source_count = len(set(roles.get(source_role, [])))
+                target_count = len(set(roles.get(target_role, [])))
+                if source_count > 1 and target_count > 1:
+                    warnings.append(
+                        f"{rel}: type {t} repeats both directed roles "
+                        f"'{source_role}' ({source_count}) and '{target_role}' "
+                        f"({target_count}); member order does not pair them. "
+                        "This is one collective many-to-many statement; split "
+                        "it if pairwise correspondence is intended"
+                    )
             for req in cons.get("roles_required") or []:
                 if req not in roles:
                     bucket.append(f"{rel}: type {t} requires role '{req}' (absent)")

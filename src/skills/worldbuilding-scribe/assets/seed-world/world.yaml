@@ -1,4 +1,4 @@
-kernel_version: "0.18"
+kernel_version: "0.19"
 name: "Seed template — copy this folder to start a world"
 calendar: ""            # set once the author names one; vagueness is legal
 facets: [when, where, valence, weight, members, status, amount, value, fiat]

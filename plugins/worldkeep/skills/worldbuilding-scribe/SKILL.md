@@ -146,6 +146,13 @@ same `when`, `status`, provenance, description — write **one** relation with
 several members. For `part_of`, one `whole` takes as many `part` members as
 the author named. Ten counties in a region is one file, not ten.
 
+**Member order never pairs repeated roles.** Two `governor` members and two
+`domain` members mean one collective many-to-many arrangement, not two
+governor/domain pairs. Keep correspondence-sensitive claims as separate
+relations. If they also form one meaningful system, group those relation IDs
+with a higher-order relation. Declare `roles_unique` only when the type itself
+makes a role singular, not simply to force binary files.
+
 Split only when something actually differs: independent time, status,
 provenance, description, or a link another artifact needs to point at. Those
 are real reasons and they are common; what is not a reason is habit. Every

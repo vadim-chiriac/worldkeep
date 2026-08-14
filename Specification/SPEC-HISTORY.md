@@ -7,6 +7,13 @@ belong here rather than in their runtime preambles.
 
 ## KERNEL
 
+### v0.19
+
+Clarified that relation members are role sets, not ordered columns: repeated
+source and target roles express one collective many-to-many statement rather
+than zipped pairs. Pairwise claims remain atomic relations and may themselves
+be grouped in a higher-order relation.
+
 ### v0.18
 
 Added qualitative one-member state values. `value` is now a standardized,
@@ -134,6 +141,13 @@ v0.5 introduced the flat ontology and networks/zoom. v0.4 added the
 as a principle.
 
 ## SCRIBE
+
+### v0.13
+
+Added the pair-preservation rule: do not flatten several
+correspondence-sensitive claims into one repeated-role relation. Preserve the
+atomic relations and use a higher-order relation when their shared semantic
+grouping is itself meaningful.
 
 ### v0.12
 
