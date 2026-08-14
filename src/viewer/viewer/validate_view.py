@@ -44,6 +44,7 @@ class ValidationResult:
     errors: list[dict[str, Any]] = field(default_factory=list)
     warnings: list[dict[str, Any]] = field(default_factory=list)
     counts: dict[str, int] = field(default_factory=dict)
+    style_rules: list[dict[str, Any]] = field(default_factory=list)
     fingerprint: str | None = None
     lock_state: str = "absent"
     lock_changes: list[str] = field(default_factory=list)
@@ -57,6 +58,7 @@ class ValidationResult:
             "errors": self.errors,
             "warnings": self.warnings,
             "counts": self.counts,
+            "style_rules": self.style_rules,
             "fingerprint": self.fingerprint,
             "lock": {"state": self.lock_state, "changes": self.lock_changes},
         }
@@ -69,6 +71,16 @@ class ValidationResult:
                 f"projected: {self.counts.get('nodes', 0)} node(s), "
                 f"{self.counts.get('edges', 0)} edge(s)"
             )
+        if self.style_rules:
+            lines.append(f"style rules ({len(self.style_rules)}):")
+            for rule in self.style_rules:
+                match = ", ".join(
+                    f"{key}: {value}" for key, value in sorted(rule["match"].items())
+                )
+                lines.append(
+                    f"  {rule['source']}: {rule['matched_count']} match(es) for "
+                    f"{{{match}}}"
+                )
         if self.fingerprint:
             lines.append(f"fingerprint: {self.fingerprint[:16]}…")
         lines.append(f"lock: {self.lock_state}")
@@ -92,6 +104,78 @@ def _entry(code: str, message: str, **detail: Any) -> dict[str, Any]:
     if detail:
         record["detail"] = detail
     return record
+
+
+def _style_rule_records(canon: Canon, plan: CompiledViewPlan) -> list[dict[str, Any]]:
+    """Describe each style selector against the exact cascade input scope.
+
+    This is deliberately observational. A literal ``place`` remains distinct
+    from ``place/*``; the report only makes that narrowness visible before an
+    author mistakes a valid recipe for a fully styled type family.
+    """
+    artifacts = [
+        canon.artifacts[artifact_id]
+        for artifact_id in sorted(plan.base_ids | plan.relation_ids)
+        if artifact_id in canon.artifacts
+    ]
+    records: list[dict[str, Any]] = []
+    for rule in plan.style_rules:
+        matched = [artifact for artifact in artifacts if rule.matches(artifact)]
+        record: dict[str, Any] = {
+            "source": rule.source,
+            "match": dict(rule.match),
+            "set": dict(rule.set),
+            "matched_count": len(matched),
+        }
+
+        pattern = rule.match.get("type")
+        if pattern is not None and not any(character in pattern for character in "*?["):
+            kind = rule.match.get("kind")
+            descendants = [
+                artifact
+                for artifact in artifacts
+                if (kind is None or artifact.kind == kind)
+                and artifact.type is not None
+                and artifact.type.startswith(f"{pattern}/")
+            ]
+            if descendants:
+                record["descendant_count"] = len(descendants)
+                record["descendant_types"] = sorted(
+                    {artifact.type for artifact in descendants if artifact.type is not None}
+                )
+        records.append(record)
+    return records
+
+
+def _style_rule_warnings(view: View, records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Return non-failing notices for inert or accidentally narrow styles."""
+    warnings: list[dict[str, Any]] = []
+    for record in records:
+        descendants = record.get("descendant_count", 0)
+        if descendants:
+            pattern = record["match"]["type"]
+            types = ", ".join(record["descendant_types"])
+            warnings.append(
+                _entry(
+                    "style.exact-type-descendants",
+                    f"{view.relative_path}: {record['source']}: exact type {pattern!r} "
+                    f"matches {record['matched_count']} selected artifact(s), but "
+                    f"{descendants} selected descendant artifact(s) use {types} and are "
+                    f"not matched; add a separate rule with type {pattern + '/*'!r} "
+                    "if descendants should share this style",
+                    **record,
+                )
+            )
+        elif record["matched_count"] == 0:
+            warnings.append(
+                _entry(
+                    "style.rule-unmatched",
+                    f"{view.relative_path}: {record['source']}: style rule matches "
+                    "0 selected artifact(s)",
+                    **record,
+                )
+            )
+    return warnings
 
 
 def _validate_assertions(
@@ -246,6 +330,8 @@ def validate_view(
 
     result.plan = plan
     result.fingerprint = plan.fingerprint()
+    result.style_rules = _style_rule_records(canon, plan)
+    result.warnings.extend(_style_rule_warnings(view, result.style_rules))
 
     for item in plan.diagnostics:
         record = _entry(item.code, item.message, **dict(item.detail))

@@ -220,8 +220,13 @@ so the semantics below are unchanged.
   (or pipe the JSON on stdin) — write or update artifacts from a JSON array
   (one object per artifact, same keys as the frontmatter; free-form body under
   `"body"`). New work lands as a draft. Stamps `scribe.origin`/`scribe.session`,
-  runs the validator, and reports exactly which paths were written — that
-  report is the bundle's arithmetic.
+  runs the validator, and reports the resulting structure. For a 2–5-bundle
+  approval batch, use a `wb.capture/v1` envelope with `artifacts` plus bundles
+  containing `id`, `headline`, and `artifact_ids`. `wb` rejects unknown,
+  duplicated, or unassigned IDs before writing and computes all counts; never
+  author a bundle total yourself. In the conversational summary, separately
+  name what was captured structurally, what remains prose-only, and what was
+  deferred or omitted.
 - `& scripts/run-python.ps1 wb.py approve <world> <id>…` — flip `status: draft`
   to `canon`, a single-field change, in the reply turn, before anything else.
 - `& scripts/run-python.ps1 wb.py reject <world> <id>…` — delete a draft;

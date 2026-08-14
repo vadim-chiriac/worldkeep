@@ -55,6 +55,13 @@ Validation: clean
 ok · ok 1 3 · no 2 · 2: it's downstream of the ford · later 3 · show 2
 ```
 
+For a bundled capture, those file counts are checked from the draft batch
+before anything is written: an artifact cannot be absent from a bundle or
+appear in two. The scribe reports the resulting structure as well (new versus
+updated artifacts, new type files, relation member counts, and any changed
+kind/type). That is an audit aid, not a judgment that a classification is
+correct. The prose summary also says what was left prose-only or deferred.
+
 The reply line is the whole interface:
 
 | you say | what happens |

@@ -22,7 +22,8 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 from wblib import context as context_module  # noqa: E402
-from wblib.delegate import check_capture_payload, read_input, run_tool  # noqa: E402
+from wblib.capture_report import build_report, format_report, snapshot  # noqa: E402
+from wblib.delegate import parse_capture_payload, read_input, run_tool  # noqa: E402
 from wblib.discovery import DiscoveryError, resolve_canon  # noqa: E402
 from wblib.paths import TOOL_VERSION, ToolNotFound, ToolPaths, parse_document_version  # noqa: E402
 from wblib.session import build_session, format_session  # noqa: E402
@@ -301,18 +302,45 @@ def cmd_capture(args: argparse.Namespace) -> int:
         print(f"error: {exc}", file=sys.stderr)
         return EXIT_USAGE
 
-    ok, detail = check_capture_payload(raw)
-    if not ok:
-        print(f"error: {detail}", file=sys.stderr)
+    try:
+        payload = parse_capture_payload(raw)
+    except ValueError as exc:
+        print(f"error: {exc}", file=sys.stderr)
         return EXIT_USAGE
+
+    artifact_ids = [artifact["id"] for artifact in payload.artifacts]
+    before_reader = context_module.CanonReader(world, paths)
+    before = snapshot(before_reader, artifact_ids)
 
     arguments = [str(world), "--session", args.session]
     if args.status:
         arguments += ["--status", args.status]
-    code = _delegate(args, paths, "apply", arguments, stdin_text=raw)
-    if code == 0 and not getattr(args, "json", False):
-        _report_mergeable(world, paths)
-    return code
+    result = run_tool(paths, "apply", arguments, stdin_text=payload.writer_input(), capture=True)
+    report = None
+    if result.returncode == 0:
+        after_reader = context_module.CanonReader(world, paths)
+        after = snapshot(after_reader, artifact_ids)
+        post_frontmatter = {
+            artifact_id: after_reader.by_id()[artifact_id][2]
+            for artifact_id in after
+        }
+        report = build_report(before, after, payload.bundles, post_frontmatter)
+
+    if getattr(args, "json", False):
+        document = result.as_json()
+        if report is not None:
+            document["capture"] = report
+        _emit(json.dumps(document, ensure_ascii=False, indent=2) + "\n", args.output)
+    else:
+        human = result.stdout
+        if report is not None:
+            human += "\n" + format_report(report)
+        _emit(human, args.output)
+        if result.stderr:
+            sys.stderr.write(result.stderr)
+        if report is not None and args.output is None:
+            _report_mergeable(world, paths)
+    return result.returncode
 
 
 def _report_mergeable(world: Path, paths: ToolPaths) -> None:

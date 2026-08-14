@@ -22,7 +22,7 @@ from pathlib import Path
 SCRIPT_DIR = Path(__file__).resolve().parent.parent
 
 #: Bumped when the JSON documents wb emits change shape.
-TOOL_VERSION = "0.1"
+TOOL_VERSION = "0.2"
 
 
 def _ensure_vendored_yaml() -> None:

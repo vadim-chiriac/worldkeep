@@ -151,6 +151,14 @@ warnings (1):
   (known: concentric, dagre, fcose, preset)
 ```
 
+When a view has style rules, validation also reports how many selected
+artifacts each rule matches. Type selectors are deliberately exact: `place`
+does not also match `place/settlement`. If a literal ancestor selector misses
+selected descendants, validation gives a non-failing notice and suggests a
+separate `place/*` rule; it never widens the selector for you. A zero-match
+rule is reported too, so an unused palette entry does not disappear quietly
+behind an otherwise valid view.
+
 ---
 
 ## Modules: when the same concern keeps coming back

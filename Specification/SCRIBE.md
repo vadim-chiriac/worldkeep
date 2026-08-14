@@ -1,4 +1,4 @@
-# SCRIBE.md — The Conversation → Canon Loop (v0.11)
+# SCRIBE.md — The Conversation → Canon Loop (v0.12)
 
 > The scribe is the core skill: it listens to freeform worldbuilding talk,
 > extracts structure per KERNEL.md, and proposes changes the author approves.
@@ -162,6 +162,18 @@ ok · ok 1 3 · no 2 · 2: she's the ferryman's daughter · later 3 · show 2
   summary that undercounts is worse than no summary: it is the author's
   only view of what happened. If the scribe changes its mind after
   writing, that is a `REFINE`, never silent drift.
+- **Computed accounting is preferred.** For a 2–5-bundle `wb` capture, use
+  the `wb.capture/v1` envelope: `artifacts`, plus bundle `id`, `headline`, and
+  `artifact_ids`. Before writing, `wb` rejects unknown, duplicate, and
+  unassigned artifact IDs; its report computes bundle and artifact counts from
+  that membership. Do not supply or repeat a model-authored total. The report
+  is structural only: it may show kinds, types, relation member shapes, and
+  reclassifications, but never declares a modelling choice semantically right.
+- **Long-source coverage is explicit.** When the author supplies a long
+  passage, the approval summary separately names what was captured as
+  structure, what remains represented only by artifact prose, and what was
+  deferred or omitted. An empty category is stated as `none`; silence must not
+  imply that every supplied fact became structured canon.
 - **If a write or delete fails**, say so in that turn, name the file, and
   leave the artifact's `status` truthful (a rejected file that cannot be
   deleted stays `draft` and is reported — never quietly promoted, never

@@ -7,6 +7,13 @@ do not rewrite released history.
 
 ### Added
 
+- `wb capture` now accepts an approval-batch envelope that verifies every
+  artifact belongs to exactly one semantic bundle before writing, then reports
+  computed structural counts, relation shapes, new type files, and
+  reclassifications after a successful capture.
+- View validation now reports deterministic match counts for every style rule
+  and non-failing notices for unused rules or literal ancestor selectors that
+  miss selected descendant types, without changing selector semantics.
 - The viewer now groups inspector relations into readable member-and-role cards,
   supports one-hop temporary relation or neighborhood focus, and generates a
   legend from the styles currently shown after filters or focus.

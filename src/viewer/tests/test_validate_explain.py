@@ -177,6 +177,106 @@ class ValidationTests(ValidationTestCase):
             "structure.multiple-nest-parents", {item["code"] for item in result.errors}
         )
 
+    def test_style_report_exposes_exact_ancestor_selector_that_misses_descendants(self) -> None:
+        self.world.module(
+            "place-colors",
+            "style",
+            'rules:\n  - match: {kind: entity, type: place}\n    set: {color: "#225588"}\n',
+        )
+        path = self.world.view(
+            "narrow-place-style",
+            """\
+            name: Narrow place style
+            compose:
+              selection:
+                any_of: [settlements]
+              styles: [place-colors]
+            """,
+        )
+
+        result = self.validate(path)
+
+        self.assertTrue(result.ok, result.errors)
+        self.assertEqual(result.style_rules[0]["source"], "module 'place-colors' styles[1]")
+        self.assertEqual(result.style_rules[0]["matched_count"], 0)
+        self.assertEqual(result.style_rules[0]["descendant_count"], 1)
+        self.assertEqual(result.style_rules[0]["descendant_types"], ["place/settlement"])
+        warning = next(
+            item for item in result.warnings if item["code"] == "style.exact-type-descendants"
+        )
+        self.assertIn("place/*", warning["message"])
+        self.assertNotIn("style.rule-unmatched", {item["code"] for item in result.warnings})
+        self.assertIn("style rules (1):", result.as_text())
+        self.assertEqual(result.as_json()["style_rules"], result.style_rules)
+
+    def test_style_report_names_zero_match_rule_without_descendants(self) -> None:
+        self.world.module(
+            "vehicle-colors",
+            "style",
+            'rules:\n  - match: {kind: entity, type: vehicle}\n    set: {color: "#225588"}\n',
+        )
+        path = self.world.view(
+            "unmatched-style",
+            """\
+            name: Unmatched style
+            compose:
+              selection:
+                any_of: [people]
+              styles: [vehicle-colors]
+            """,
+        )
+
+        result = self.validate(path)
+
+        self.assertTrue(result.ok, result.errors)
+        self.assertEqual(result.style_rules[0]["matched_count"], 0)
+        self.assertIn("style.rule-unmatched", {item["code"] for item in result.warnings})
+
+    def test_style_report_keeps_wildcards_and_cascade_rules_separate(self) -> None:
+        self.world.module(
+            "place-colors",
+            "style",
+            'rules:\n  - match: {kind: entity, type: place/*}\n    set: {color: "#225588"}\n',
+        )
+        self.world.module(
+            "person-shapes",
+            "style",
+            'rules:\n  - match: {kind: entity, type: person}\n    set: {shape: ellipse}\n',
+        )
+        self.world.module(
+            "person-colors",
+            "style",
+            'rules:\n  - match: {kind: entity, type: person}\n    set: {color: "#225588"}\n',
+        )
+        path = self.world.view(
+            "style-cascade-report",
+            """\
+            name: Style cascade report
+            compose:
+              selection:
+                any_of: [people, settlements]
+              styles: [place-colors, person-shapes, person-colors]
+            styles:
+              - match: {kind: entity, type: person}
+                set: {color: "#111111"}
+            """,
+        )
+
+        result = self.validate(path)
+
+        self.assertTrue(result.ok, result.errors)
+        self.assertEqual([rule["matched_count"] for rule in result.style_rules], [1, 3, 3, 3])
+        self.assertEqual(
+            result.style_rules[-1]["source"], f"{path}: styles[1]"
+        )
+        self.assertFalse(
+            any(
+                item["code"] in {"style.rule-unmatched", "style.exact-type-descendants"}
+                for item in result.warnings
+            ),
+            result.warnings,
+        )
+
 
 class AssertionTests(ValidationTestCase):
     def test_nonempty_assertion_fails_on_an_empty_selection(self) -> None:

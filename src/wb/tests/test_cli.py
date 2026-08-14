@@ -58,6 +58,42 @@ ONE_ARTIFACT = json.dumps(
     ]
 )
 
+BUNDLED_ARTIFACTS = json.dumps(
+    {
+        "schema": "wb.capture/v1",
+        "artifacts": [
+            {
+                "id": "entities/ada",
+                "kind": "entity",
+                "type": "person",
+                "name": "Ada Wren",
+            },
+            {
+                "id": "relations/ada-membership",
+                "kind": "relation",
+                "type": "part_of/membership",
+                "members": [
+                    {"id": "entities/ada", "role": "member"},
+                    {"id": "entities/guild", "role": "whole"},
+                ],
+            },
+            {"id": "entities/guild", "kind": "entity", "type": "community/guild"},
+        ],
+        "bundles": [
+            {
+                "id": "ada",
+                "headline": "Ada and her place in the guild",
+                "artifact_ids": ["entities/ada", "relations/ada-membership"],
+            },
+            {
+                "id": "guild",
+                "headline": "The guild itself",
+                "artifact_ids": ["entities/guild"],
+            },
+        ],
+    }
+)
+
 
 class CaptureTests(WorldCopyTestCase):
     def test_capture_through_stdin_writes_a_draft_and_validates(self) -> None:
@@ -105,6 +141,75 @@ class CaptureTests(WorldCopyTestCase):
 
         self.assertEqual(result.returncode, 2)
         self.assertIn("not valid JSON", result.stderr)
+
+    def test_bundled_capture_computes_structure_after_a_successful_write(self) -> None:
+        result = run_wb("capture", str(self.world), "--session", "s1", stdin=BUNDLED_ARTIFACTS)
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("Capture structure: 3 written (3 new, 0 updated)", result.stdout)
+        self.assertIn("Bundles: ada 2; guild 1", result.stdout)
+        self.assertIn("Relations: relations/ada-membership [part_of/membership; 2 members: member 1, whole 1]", result.stdout)
+        self.assertIn("New type IDs: none", result.stdout)
+
+    def test_bundled_capture_json_preserves_result_envelope_and_adds_report(self) -> None:
+        result = run_wb(
+            "capture", str(self.world), "--session", "s1", "--json", stdin=BUNDLED_ARTIFACTS
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        document = json.loads(result.stdout)
+        self.assertEqual(document["schema"], "wb.result/v1")
+        self.assertEqual(document["capture"]["schema"], "wb.capture-report/v1")
+        self.assertEqual(document["capture"]["bundles"][0]["artifacts"], 2)
+        self.assertEqual(document["capture"]["relations"][0]["roles"], {"member": 1, "whole": 1})
+
+    def test_bundled_capture_rejects_unassigned_unknown_or_duplicate_ids_before_writing(self) -> None:
+        payload = json.loads(BUNDLED_ARTIFACTS)
+        payload["bundles"][1]["artifact_ids"] = ["entities/missing"]
+
+        result = run_wb("capture", str(self.world), "--session", "s1", stdin=json.dumps(payload))
+
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("unknown artifact", result.stderr)
+        self.assertEqual(list((self.world / "entities").glob("*.md")), [])
+
+    def test_bundled_capture_rejects_duplicate_bundle_assignments_before_writing(self) -> None:
+        payload = json.loads(BUNDLED_ARTIFACTS)
+        payload["bundles"][1]["artifact_ids"] = ["entities/guild", "entities/ada"]
+
+        result = run_wb("capture", str(self.world), "--session", "s1", stdin=json.dumps(payload))
+
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("more than one bundle", result.stderr)
+        self.assertEqual(list((self.world / "entities").glob("*.md")), [])
+
+    def test_bundled_capture_requires_two_to_five_bundles_before_writing(self) -> None:
+        payload = json.loads(BUNDLED_ARTIFACTS)
+        payload["bundles"] = [payload["bundles"][0]]
+
+        result = run_wb("capture", str(self.world), "--session", "s1", stdin=json.dumps(payload))
+
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("2 to 5 bundles", result.stderr)
+        self.assertEqual(list((self.world / "entities").glob("*.md")), [])
+
+    def test_bundled_capture_reports_reclassification_of_an_existing_artifact(self) -> None:
+        first = run_wb("capture", str(self.world), "--session", "s1", stdin=ONE_ARTIFACT)
+        self.assertEqual(first.returncode, 0, first.stderr)
+        payload = json.loads(BUNDLED_ARTIFACTS)
+        payload["artifacts"] = [
+            {"id": "entities/ada", "kind": "entity", "type": "community/guild"},
+            {"id": "entities/guild", "kind": "entity", "type": "community/guild"},
+        ]
+        payload["bundles"] = [
+            {"id": "ada", "headline": "Ada revised", "artifact_ids": ["entities/ada"]},
+            {"id": "guild", "headline": "Guild added", "artifact_ids": ["entities/guild"]},
+        ]
+
+        result = run_wb("capture", str(self.world), "--session", "s2", stdin=json.dumps(payload))
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("Reclassified: entities/ada [entity/person -> entity/community/guild]", result.stdout)
 
 
 class ApprovalTests(WorldCopyTestCase):

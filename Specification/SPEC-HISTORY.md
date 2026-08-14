@@ -135,6 +135,15 @@ as a principle.
 
 ## SCRIBE
 
+### v0.12
+
+Added computed approval-batch accounting through the optional
+`wb.capture/v1` envelope. Bundle membership is checked before writing, and the
+post-capture report derives structural counts from the artifacts actually
+written. For long source passages, the approval summary now distinguishes
+material captured structurally, retained only in prose, and deferred or
+omitted.
+
 ### v0.11
 
 Clarified capture of qualitative mutable properties: reuse or propose a

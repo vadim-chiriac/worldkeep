@@ -126,6 +126,11 @@ launcher's single blocker after it has exhausted every candidate.
 to run while iterating. Both accept `--json` for a stable machine-readable
 form. `--validate-view` exits `1` when the view is invalid.
 
+Read the style-rule match counts in validation too. A literal type such as
+`place` intentionally does not style `place/settlement`; validation notices
+selected descendants that a literal rule misses and suggests a separate
+`place/*` rule, without widening anything automatically.
+
 Always pass `--vendor` for skill-driven renders — the HTML should still
 open with no network in ten years. Use `--json` to diagnose a missing node
 without a browser: it dumps the exact node/edge set that would render.
