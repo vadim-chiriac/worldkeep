@@ -102,6 +102,10 @@ class CaptureTests(WorldCopyTestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("wrote 1 artifact(s)", result.stdout)
         self.assertIn("Validation:", result.stdout)
+        self.assertIn(
+            "newly created artifacts without a relation: entities/ada",
+            result.stdout,
+        )
 
         written = (self.world / "entities" / "ada.md").read_text(encoding="utf-8")
         self.assertIn("status: draft", written)
@@ -150,6 +154,7 @@ class CaptureTests(WorldCopyTestCase):
         self.assertIn("Bundles: ada 2; guild 1", result.stdout)
         self.assertIn("Relations: relations/ada-membership [part_of/membership; 2 members: member 1, whole 1]", result.stdout)
         self.assertIn("New type IDs: none", result.stdout)
+        self.assertNotIn("newly created artifacts without a relation", result.stdout)
 
     def test_bundled_capture_json_preserves_result_envelope_and_adds_report(self) -> None:
         result = run_wb(
@@ -162,6 +167,37 @@ class CaptureTests(WorldCopyTestCase):
         self.assertEqual(document["capture"]["schema"], "wb.capture-report/v1")
         self.assertEqual(document["capture"]["bundles"][0]["artifacts"], 2)
         self.assertEqual(document["capture"]["relations"][0]["roles"], {"member": 1, "whole": 1})
+        self.assertEqual(document["capture"]["unlinked_created_ids"], [])
+
+    def test_capture_notice_ignores_existing_isolated_artifacts_and_updates(self) -> None:
+        first = run_wb("capture", str(self.world), "--session", "s1", stdin=ONE_ARTIFACT)
+        self.assertEqual(first.returncode, 0, first.stderr)
+
+        payload = json.dumps(
+            [
+                {
+                    "id": "entities/ada",
+                    "kind": "entity",
+                    "type": "person",
+                    "name": "Ada Wren revised",
+                },
+                {
+                    "id": "entities/bob",
+                    "kind": "entity",
+                    "type": "person",
+                    "name": "Bob Vale",
+                },
+            ]
+        )
+        result = run_wb("capture", str(self.world), "--session", "s2", stdin=payload)
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        notice = next(
+            line for line in result.stdout.splitlines()
+            if "newly created artifacts without a relation" in line
+        )
+        self.assertIn("entities/bob", notice)
+        self.assertNotIn("entities/ada", notice)
 
     def test_bundled_capture_rejects_unassigned_unknown_or_duplicate_ids_before_writing(self) -> None:
         payload = json.loads(BUNDLED_ARTIFACTS)

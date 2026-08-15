@@ -2,7 +2,7 @@ KERNEL.md version: v0.19
 SCRIBE.md version: v0.13
 
 [worldbuilding-scribe]
-  sha256 4b42efd8fed0d4e33852984011c5e89b8180e57068868af4e1d4f800c330455f  worldbuilding-scribe/SKILL.md
+  sha256 b86a3caa00a80da7800622297bb1204446f664bb95a0db7bd6aa84e8311868cf  worldbuilding-scribe/SKILL.md
   sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  worldbuilding-scribe/assets/seed-world/actions/.gitkeep
   sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  worldbuilding-scribe/assets/seed-world/entities/.gitkeep
   sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  worldbuilding-scribe/assets/seed-world/ideas/.gitkeep
@@ -53,9 +53,9 @@ SCRIBE.md version: v0.13
   sha256 ad315f2061bba078eac1181859d9ab9a61f888564e7692d25efc175fe78891cf  worldbuilding-scribe/scripts/run-python.ps1
   sha256 41f391e56371b7acb3e968c08b8fabda32eeb63596bb0d09fcfe7f3710f1bd4f  worldbuilding-scribe/scripts/run-python.sh
   sha256 84c576116fed6668d2cd2d21c106f4926f3e661a5f89dc55ecc6223fb700e870  worldbuilding-scribe/scripts/validate.py
-  sha256 d1c3ae38859dc68addd79cc5194fff77b63158a36b16c8abc67b091487686477  worldbuilding-scribe/scripts/wb.py
+  sha256 ff1f1e6f97dc3dbb16741d4d38abce4f5272774a001e9cac431ab76c6fcee8eb  worldbuilding-scribe/scripts/wb.py
   sha256 05081356ef6b13cf341183c8919a41f4601fde3c20c13a36a6570959cf20e368  worldbuilding-scribe/scripts/wblib/__init__.py
-  sha256 a16028a8386848658f9e99cb8026bb6b4f89b45acef7fe02bc4dec58fb038f40  worldbuilding-scribe/scripts/wblib/capture_report.py
+  sha256 6fd48952d71574ce51240fd03c5b744fa0a04329d556354a2a3081d267d67fa5  worldbuilding-scribe/scripts/wblib/capture_report.py
   sha256 162bc9ac5729ad16e306b68918304f1628d060b6d41a9a489dce783494e7aedc  worldbuilding-scribe/scripts/wblib/context.py
   sha256 1aa1883a2b53aa047f810703fd1e15e8e25d88edf7b925c27d32969155beb0b7  worldbuilding-scribe/scripts/wblib/delegate.py
   sha256 830ef1c973312f29c92366d39319cab8e38ff987fca66c23d1426e70da505cdd  worldbuilding-scribe/scripts/wblib/discovery.py
@@ -108,9 +108,9 @@ SCRIBE.md version: v0.13
   sha256 89da3f05ffd0b668524ffdabb3e41165b6970f1174a54f38354223799ae2fdfe  canon-viewer/scripts/viewer/project.py
   sha256 d77f6cc5d8a9a525beaab70a2a8f65ac3e1b4d95a18286820124c840c4b89d6c  canon-viewer/scripts/viewer/render_graph.py
   sha256 73b40310c15d598511abb9404fab8f6e633a3cfc704540908dba2d0c12a71c56  canon-viewer/scripts/viewer/validate_view.py
-  sha256 d1c3ae38859dc68addd79cc5194fff77b63158a36b16c8abc67b091487686477  canon-viewer/scripts/wb.py
+  sha256 ff1f1e6f97dc3dbb16741d4d38abce4f5272774a001e9cac431ab76c6fcee8eb  canon-viewer/scripts/wb.py
   sha256 05081356ef6b13cf341183c8919a41f4601fde3c20c13a36a6570959cf20e368  canon-viewer/scripts/wblib/__init__.py
-  sha256 a16028a8386848658f9e99cb8026bb6b4f89b45acef7fe02bc4dec58fb038f40  canon-viewer/scripts/wblib/capture_report.py
+  sha256 6fd48952d71574ce51240fd03c5b744fa0a04329d556354a2a3081d267d67fa5  canon-viewer/scripts/wblib/capture_report.py
   sha256 162bc9ac5729ad16e306b68918304f1628d060b6d41a9a489dce783494e7aedc  canon-viewer/scripts/wblib/context.py
   sha256 1aa1883a2b53aa047f810703fd1e15e8e25d88edf7b925c27d32969155beb0b7  canon-viewer/scripts/wblib/delegate.py
   sha256 830ef1c973312f29c92366d39319cab8e38ff987fca66c23d1426e70da505cdd  canon-viewer/scripts/wblib/discovery.py

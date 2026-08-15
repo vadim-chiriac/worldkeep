@@ -231,7 +231,11 @@ so the semantics below are unchanged.
   approval batch, use a `wb.capture/v1` envelope with `artifacts` plus bundles
   containing `id`, `headline`, and `artifact_ids`. `wb` rejects unknown,
   duplicated, or unassigned IDs before writing and computes all counts; never
-  author a bundle total yourself. In the conversational summary, separately
+  author a bundle total yourself. It also emits a non-blocking notice for any
+  newly created entity or idea that is not yet a member of a relation. Review
+  each one before approval: connect an omitted fact when the author stated it,
+  but leave an intentionally standalone artifact alone and say so. In the
+  conversational summary, separately
   name what was captured structurally, what remains prose-only, and what was
   deferred or omitted.
 - `& scripts/run-python.ps1 wb.py approve <world> <id>…` — flip `status: draft`

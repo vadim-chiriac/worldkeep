@@ -7,6 +7,11 @@ do not rewrite released history.
 
 ### Added
 
+- `wb capture` now emits a non-blocking notice when an entity or idea created
+  in the current batch is not a member of any relation, helping an agent catch
+  accidentally disconnected facts before asking for approval without making
+  standalone canon invalid.
+
 - Added relation-driven pruning for the default Groups view, so it shows only
   members of the selected group relation families and keeps unrelated artifacts
   out of the graph.

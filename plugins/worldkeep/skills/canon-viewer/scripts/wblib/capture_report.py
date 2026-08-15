@@ -42,6 +42,7 @@ def build_report(
     after: dict[str, ArtifactState],
     bundles: tuple[CaptureBundle, ...] | None,
     post_frontmatter: dict[str, dict[str, Any]],
+    canon_frontmatter: dict[str, dict[str, Any]],
 ) -> dict[str, Any]:
     """Produce a stable, compact report from pre- and post-write state."""
     artifact_ids = sorted(after)
@@ -99,9 +100,44 @@ def build_report(
             for artifact_id in artifact_ids
             if artifact_id not in before and after[artifact_id].kind == "type"
         ],
+        "unlinked_created_ids": _unlinked_created_ids(
+            before, after, canon_frontmatter
+        ),
         "relations": relations,
         "reclassified": reclassified,
     }
+
+
+def _unlinked_created_ids(
+    before: dict[str, ArtifactState],
+    after: dict[str, ArtifactState],
+    canon_frontmatter: dict[str, dict[str, Any]],
+) -> list[str]:
+    """New non-structural artifacts that are not members of any relation.
+
+    This is deliberately a non-failing observation.  Standalone artifacts are
+    valid canon, but newly captured ones are worth reviewing before approval.
+    The whole post-write canon is considered so an existing or updated relation
+    can connect a newly created artifact too.
+    """
+    connected: set[str] = set()
+    for frontmatter in canon_frontmatter.values():
+        if (frontmatter.get("kind") or "") != "relation":
+            continue
+        members = frontmatter.get("members") or []
+        if not isinstance(members, list):
+            continue
+        for member in members:
+            if isinstance(member, dict) and isinstance(member.get("id"), str):
+                connected.add(member["id"])
+
+    return [
+        artifact_id
+        for artifact_id in sorted(after)
+        if artifact_id not in before
+        and after[artifact_id].kind not in {"relation", "type"}
+        and artifact_id not in connected
+    ]
 
 
 def _relation_shape(artifact_id: str, frontmatter: dict[str, Any]) -> dict[str, Any]:
@@ -142,6 +178,12 @@ def format_report(report: dict[str, Any]) -> str:
     lines.append(
         "New type IDs: " + (", ".join(report["new_type_ids"]) or "none")
     )
+    if report["unlinked_created_ids"]:
+        lines.append(
+            "Notice (non-blocking): newly created artifacts without a relation: "
+            + ", ".join(report["unlinked_created_ids"])
+            + ". Review before approval; standalone artifacts may be intentional."
+        )
     if report["relations"]:
         relation_parts = []
         for relation in report["relations"]:

@@ -324,7 +324,17 @@ def cmd_capture(args: argparse.Namespace) -> int:
             artifact_id: after_reader.by_id()[artifact_id][2]
             for artifact_id in after
         }
-        report = build_report(before, after, payload.bundles, post_frontmatter)
+        canon_frontmatter = {
+            artifact_id: frontmatter
+            for artifact_id, _path, frontmatter in after_reader.artifacts
+        }
+        report = build_report(
+            before,
+            after,
+            payload.bundles,
+            post_frontmatter,
+            canon_frontmatter,
+        )
 
     if getattr(args, "json", False):
         document = result.as_json()
