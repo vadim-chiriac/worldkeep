@@ -7,6 +7,13 @@ do not rewrite released history.
 
 ### Added
 
+- Added an illustrated viewer guide covering navigation, search, temporary
+  filters, relation cards, one-hop focus, the generated legend, Everything,
+  and saved views; expanded the README onboarding to make semantic correction
+  and iterative custom-view refinement explicit, linked the guide prominently
+  from the start path and view reference, and refreshed the roadmap to
+  distinguish the shipped visual legend from future rule provenance.
+
 - `wb capture` now emits a non-blocking notice when an entity or idea created
   in the current batch is not a member of any relation, helping an agent catch
   accidentally disconnected facts before asking for approval without making

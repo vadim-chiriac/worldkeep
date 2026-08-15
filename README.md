@@ -12,9 +12,26 @@ file stays readable in a text editor long after any tool stops working.
 ![The Lower Fen custom view: rival bell doctrines, communities, practices,
 places nested inside the Fen, and the relation inspector.](Documentation/assets/viewer.png)
 
+**[Explore the viewer](Documentation/VIEWER-GUIDE.md):** search and filter a
+world, inspect relation roles, focus on one neighborhood, and understand saved
+custom views.
+
 **Worked example:** [The Lower Fen](Examples/lower-fen) is small enough to read
 file by file: two communities, one bell, no agreement, a qualitative flooded
 state, and a saved view that makes the dispute readable.
+
+> **You remain the editor.** The agent proposes structure, but a clean
+> validation does not guarantee that it understood every relationship the way
+> you intended. Correct and refine the canon in conversation before approval.
+> Custom views are also not automatic truth: ask for the reading you want,
+> inspect it against `Everything`, and refine it before saving. `Everything`
+> is only the neutral audit baseline: it shows the active world graph, ignores
+> custom selection, styles, and relation lenses, can become crowded, and keeps
+> its filters only for the current browser session. It helps you check what a
+> custom view omitted; it is not expected to be the clearest reading of a
+> world. See
+> [Guide the agent](#guide-the-agent--the-first-result-is-not-the-last) and the
+> illustrated [viewer guide](Documentation/VIEWER-GUIDE.md).
 
 There is no fixed taxonomy of races, realms or character sheets. There are four
 kernel kinds and an open vocabulary you invent as you go. Which is why a
@@ -78,12 +95,61 @@ every change.
 
 You get self-contained HTML (one file, no network) that opens in any
 browser. Ask for something narrower ("just who rules what", "only the religious
-conflicts") and the agent writes a view for it.
+conflicts") and the agent previews and validates a named view, then asks
+whether to save it for reuse.
+
+The [viewer guide](Documentation/VIEWER-GUIDE.md) shows how to search, filter,
+inspect relations, focus on one neighborhood, and read the generated legend.
 
 That is the complete first loop: a new folder at `Worlds/Hask`, an approval you
 can inspect, and a browser-openable `.html` view. Continue with the
 [step-by-step walkthrough](Documentation/GETTING-STARTED.md), or inspect the
 finished [`Lower Fen`](Examples/lower-fen) example before creating anything.
+
+---
+
+## Guide the agent — the first result is not the last
+
+Worldkeep gives an agent structure, validation, and a safe approval boundary;
+it does not make the agent the authority on your world. A clean validation
+means the files are structurally consistent, **not** that every modelling
+choice expresses what you meant.
+
+Read the proposed bundles and correct the semantics in ordinary language:
+
+> These houses do not govern those cities jointly. Make one relation for each
+> house and city pair.
+
+> The cult and the family are different groups even though Mara belongs to
+> both.
+
+> Refine the canon: distinguish political authority from geographic
+> containment, and show me the changed relations before approval.
+
+You can ask the agent to split or combine statements, introduce a more precise
+type, rename a role, leave something deliberately unlinked, or explain why it
+modelled a fact in a particular way. Use `show`, corrections, and selective
+approval until the canon says what you intend. The
+[user guide](Documentation/USER-GUIDE.md) covers that review loop in detail.
+
+Custom views need the same collaboration. `Everything` is a neutral audit
+graph; it cannot guess which political, religious, geographic, or narrative
+reading matters to you. Ask explicitly for a custom view, then refine it:
+
+> Make a view of political authority. Keep geographic containment visible, but
+> colour polities by allegiance.
+
+> This is too busy. Keep only rulers, governed places, and the relations that
+> connect them.
+
+> Save this version so we can reuse it later.
+
+Treat a custom view as a saved interpretation, not as proof that it includes
+every relevant fact. Compare it with `Everything`, inspect surprising
+relations, and ask the agent to adjust selection, relation policy, styles, or
+lenses. The illustrated [viewer guide](Documentation/VIEWER-GUIDE.md) explains
+the interactive tools; [VIEWS.md](Documentation/VIEWS.md) explains how durable
+views are composed and validated.
 
 ---
 
@@ -186,6 +252,7 @@ neither is claimed. If you try it there, the result is worth reporting.
 | [Getting started](Documentation/GETTING-STARTED.md) | first world, from prompt to approved canon |
 | [Installation](Documentation/INSTALLATION.md) | per-host install, updating, uninstalling |
 | [User guide](Documentation/USER-GUIDE.md) | capture, approval, editing, validation |
+| [Viewer guide](Documentation/VIEWER-GUIDE.md) | using the graph, filters, focus, inspector and legend |
 | [Views](Documentation/VIEWS.md) | `Everything`, filters, custom views, modules |
 | [Configuration](Documentation/CONFIGURATION.md) | `scribe.yaml`, manifests, viewer options |
 | [Troubleshooting](Documentation/TROUBLESHOOTING.md) | when something does not work |

@@ -8,6 +8,9 @@ Most of the time you never write one: you ask the agent for what you want and
 it writes the file. This document is for when you want to know what it wrote,
 or write one yourself.
 
+If you want to use the rendered graph rather than author its YAML, start with
+the illustrated [viewer guide](VIEWER-GUIDE.md).
+
 ## Reading a busy view
 
 The right-hand inspector groups an artifact's connections into one card per
@@ -334,9 +337,9 @@ about anything it renders.
 ## In the rendered page
 
 **Find by name** searches names, ids and types, dims everything else, and lists
-the matches. The match set outlives the query text, and a toggle controls
-whether it is painted on the graph — so you can keep a list of results while
-looking at an unhighlighted picture.
+the matches. A toggle controls whether the result set is painted on the graph,
+so you can keep the list while looking at an unhighlighted picture. Clearing
+the query clears the result list.
 
 **Filter this view** switches whole types on and off. Hiding a container keeps
 what was inside it nested, re-attaching the contents to the nearest visible

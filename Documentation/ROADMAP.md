@@ -32,9 +32,11 @@ next, and "keep it in git" is honest advice rather than a solution. This is the
 single largest gap between the current state and one where the format can be
 called stable.
 
-**Generated legends.** A rendered view explains its relation behaviours but not
-its colours: a world that recolours by faction produces a picture only its
-author can read. The information is in the compiled plan already.
+**Style provenance in legends.** The viewer now generates a legend from the
+marks currently on screen, including colours, shapes, directions and counts.
+It does not yet explain which view module or rule produced each appearance;
+that provenance exists during compilation but is not carried into the rendered
+projection.
 
 **Better help writing views.** Composition is powerful and unforgiving —
 `--explain-view` exists because it had to. The gap is between validating a view
