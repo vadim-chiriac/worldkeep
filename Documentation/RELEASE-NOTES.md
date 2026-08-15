@@ -1,130 +1,88 @@
-# Worldkeep 0.2.0 — first public release
+# Worldkeep 0.3.0 — a more usable viewer and safer capture loop
 
 Worldkeep turns worldbuilding conversation into structured canon: plain
 Markdown and YAML files you own, written by an agent that proposes and never
-decides, and rendered into graphs you can look at.
+decides, and rendered into graphs you can inspect.
 
-This is the first version anyone other than its author is meant to try.
+This remains an early release. It is functional and tested, but the format is
+young, migration tooling does not exist yet, and the macOS/Linux pipeline has
+not been tested end to end. Keep worlds in git and review the actual canon
+before approving changes.
 
----
+## What changed since 0.2.0
 
-## What it is for
+### A clearer viewer
 
-Two kinds of tool already exist, and both are frustrating in opposite
-directions.
+- Relation details are grouped into readable member-and-role cards.
+- One-hop relation and neighbourhood focus make dense graphs easier to inspect.
+- The legend is generated from the marks currently shown and stays collapsed
+  until needed.
+- Qualitative and numeric state values render correctly, including ranges.
+- The default Groups view prunes unrelated artifacts.
+- View validation reports deterministic style-rule match counts and useful
+  non-blocking notices.
 
-Prose notes let you write anything and find nothing. There is no way to ask a
-folder of Markdown *who currently rules what*, because nothing in it separates
-a ruler from a sentence containing the word "rules".
+Custom views remain interpretations, not automatic truth. Ask for the reading
+you want, inspect the preview, compare it with `Everything`, and refine it
+before saving. `Everything` is a neutral audit baseline: it ignores custom
+selection, styles, and lenses, can become crowded, and its filters are temporary
+for the current browser session. It helps reveal omissions; it is not expected
+to be the clearest view of a world.
 
-Worldbuilding databases can answer that, because they decided in advance what a
-world contains — character, location, organization, item. Most let you add
-custom fields, and some let you write templates. But the categories stay the
-frame: you are adding fields to a Character, not deciding whether "character"
-is a useful distinction in your setting. And customising is something you stop
-and go configure, which means you only do it once the friction has already
-become annoying enough to interrupt you.
+See [VIEWER-GUIDE.md](VIEWER-GUIDE.md) and [VIEWS.md](VIEWS.md).
 
-Worldkeep aims between the two. Four kernel kinds — entity, idea, relation,
-type — and everything above them is vocabulary you invent while talking. A type
-is a small file the agent writes mid-sentence, the first time you say a word it
-has not heard before.
+### Safer capture and review
 
-That is what lets a contested doctrine, a river with legal rights, and a famine
-that halves a village over two centuries all fit without anyone touching a
-schema.
+- Approval-batch envelopes require every artifact to belong to exactly one
+  semantic bundle before writing.
+- Successful captures report structural counts, relation shapes, new types,
+  and reclassifications.
+- Disconnected entities and ideas receive a non-blocking notice.
+- Merge suggestions respect provenance, descriptions, custom fields, and
+  unreadable relation bodies.
+- Relation modelling distinguishes correspondence-sensitive claims from
+  higher-order grouped relations and warns about repeated endpoint roles.
 
-## What is different about it
+A clean validation result means the files are structurally consistent. It does
+not mean the agent understood every relationship as intended. Correct and
+refine proposed canon before approval.
 
-**Connections are the content.** A relation is its own addressable file, which
-means a relation can be the subject of another relation, or of an idea. Secrecy,
-disputed histories, and beliefs about beliefs fall out of that one property
-rather than out of dedicated features.
+### Current specifications and examples
 
-**Belief and fact are separate.** An entity asserts that something exists. An
-idea asserts only that somebody has the thought. Write `entities/tharos` and
-the god is in your world; write `ideas/tharos` and only the belief is —
-believers can hold it, a real temple can be dedicated to it, and none of it
-makes the god real.
+Qualitative one-member states use a structured top-level `value`; numeric
+states use `amount`. The current public specifications are KERNEL v0.19 and
+SCRIBE v0.13, and the seed world is aligned with them.
 
-**Nothing is decomposed until you decompose it.** An entity is a network nobody
-has needed to open yet, not a claim that a thing is simple. When you want to
-open one, you write `part_of` relations and its inner network appears. No
-migration, no conversion, no permission.
+The release also includes an illustrated viewer guide, clearer onboarding and
+an expanded Lower Fen example with 31 approved world artifacts, weighted
+beliefs, qualitative inundation state, shared containment, and a richer dispute
+view.
 
-**Incompleteness is a supported state.** Loose ends, dormant ideas, connections
-with no stated meaning: content, not a backlog. Nothing nags.
+### Distribution
 
-**You approve decisions, not files.** The agent captures everything it hears as
-drafts immediately — a session that dies loses nothing — and presents them back
-as the things you said, with the file count as a footnote. What it inferred or
-invented is named in the bundle that contains it.
+The plugin identity is consistently `worldkeep` across Claude and
+ChatGPT/Codex. The public
+[vadim-chiriac/worldkeep repository](https://github.com/vadim-chiriac/worldkeep)
+contains both host manifests and the two skills:
 
-**It is local, and it is yours.** No server, no account, no telemetry. The
-canon is a folder. Rendered views are single self-contained HTML files that
-open with no network, now and in ten years.
-
-## What is in this release
-
-Two skills in one plugin, for Claude and for ChatGPT/Codex.
-
-The **scribe** runs the conversation-to-canon loop and owns the writing: a
-deterministic apply-and-validate boundary that stamps provenance, runs the
-validator, and reports exactly which files it touched.
-
-The **viewer** turns "show me who rules what" into a saved view and renders it.
-Views select, filter, style and structure; when the same concern keeps
-recurring you lift it into a reusable module and compose views from modules.
-`Everything` is always there as a neutral audit that ignores everything you
-have configured, for checking what is actually in the folder.
-
-The full documentation set ships with it: an overview, a five-minute start,
-per-host installation, a user guide, views, configuration, troubleshooting, and
-an honest account of the current limitations.
+- Worldbuilding Scribe;
+- Canon Viewer.
 
 ## What it is not
 
-Not a writing application — it stores structure; your prose lives where you
-like writing it. Not a map or timeline generator. Not a continuity engine: it
-will not notice your king died twice, because sometimes that is the point. Not
-a predefined fantasy ontology, and there are no genre templates. Not an
-autonomous author.
+Worldkeep is not a writing application, continuity engine, predefined fantasy
+ontology, map generator, or autonomous author. It stores structure, keeps the
+canon local, and gives an agent a controlled way to propose changes.
 
 ## Before you rely on it
 
-**The format is young and nothing migrates it.** The kernel is at v0.19 and has
-changed several times, twice breakingly in the week before this release. When a
-rule changes the tooling tells you — it will not rewrite your files. Keep your
-worlds in git; the canon is plain text, so a commit is a complete snapshot and
-a diff shows exactly what happened.
+There is no automatic migration path. The project has been used on only a small
+number of worlds, and manual inspection has found issues that automated tests
+did not catch. Treat a generated view as a way to inspect canon, not as proof
+that the canon is complete or semantically correct.
 
-**It has barely been used.** By very few people, on very few worlds. Writing
-this documentation turned up four bugs in already-shipped code, none of which
-the test suites caught, because all of them needed somebody to look at a result
-and say "that is not right". Expect more.
+There is no Worldkeep server or telemetry, but conversation is still processed
+by whichever AI host you use. The local files, validator, and viewer can be
+used independently of an agent.
 
-**Windows only, in practice.** Nothing in the code is Windows-specific and the
-macOS and Linux launchers ship, but the pipeline has never been run end to end
-on either, so neither is claimed.
-
-**Privacy, precisely.** There is no server and nothing here sends your canon
-anywhere. That is not the same as your worldbuilding being private: everything
-you say to the agent is processed by whichever AI host you run it through,
-under that vendor's terms. If it matters for a particular world, the files are
-just files — the validator and the viewer are local scripts, and you can work
-without an agent at all.
-
----
-
-## Getting started
-
-Install per [INSTALLATION.md](INSTALLATION.md), then point the agent at a
-folder and start talking. [GETTING-STARTED.md](GETTING-STARTED.md) walks a
-first world from prompt to rendered view.
-
-[`Examples/lower-fen`](../Examples/lower-fen) is thirty-one world artifacts you
-can read in full: settlements, a crossing, a fever, a flooded Fen, and
-communities that cannot agree what the bell means.
-
-MIT licensed. The reports worth making most are the ones where nothing failed
-and the result was quietly wrong.
+MIT licensed.

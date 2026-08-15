@@ -9,7 +9,7 @@ document are the non-goals at the bottom.
 
 ---
 
-## Shipped in 0.2.0
+## Shipped through 0.3.0
 
 **Release documentation.** The public repository includes the overview,
 installation, first-world walkthrough, user guide, view and configuration
@@ -21,6 +21,11 @@ known locations and reports the blocker when it cannot find one.
 **Diagnostics.** `wb doctor` reports what the tooling found and what it did
 not; `wb session` reports the effective world, configuration and available
 views without requiring the agent to reread the full specifications.
+
+**Viewer exploration.** The graph now has readable relation cards, one-hop
+focus, a generated legend, stronger default projections, and diagnostics for
+custom style rules. These tools help inspect a world without turning a view
+into a claim that the underlying canon is complete or semantically correct.
 
 ---
 

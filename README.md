@@ -259,7 +259,7 @@ neither is claimed. If you try it there, the result is worth reporting.
 | [Limitations](Documentation/LIMITATIONS.md) | current boundaries, honestly stated |
 | [Roadmap](Documentation/ROADMAP.md) | what is next, without promised dates |
 | [Development](Documentation/DEVELOPMENT.md) | building, testing, contributing |
-| [Release notes](Documentation/RELEASE-NOTES.md) | what 0.2.0 is, in prose |
+| [Release notes](Documentation/RELEASE-NOTES.md) | what 0.3.0 adds, in prose |
 
 The normative specifications live in `Specification/`: **KERNEL.md** is the data
 model, **SCRIBE.md** is the capture loop. Both ship verbatim inside the plugin,

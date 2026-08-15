@@ -5,6 +5,10 @@ do not rewrite released history.
 
 ## [Unreleased]
 
+_No unreleased changes._
+
+## [0.3.0] - 2026-08-15
+
 ### Added
 
 - Added an illustrated viewer guide covering navigation, search, temporary

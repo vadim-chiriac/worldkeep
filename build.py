@@ -35,7 +35,7 @@ RUNTIME = SRC / "runtime"
 DIST = ROOT / "dist"
 
 PLUGIN_NAME = "worldkeep"
-PLUGIN_VERSION = "0.2.0"
+PLUGIN_VERSION = "0.3.0"
 PLUGIN_DESCRIPTION = "Worldkeep: capture and view a structured worldbuilding canon"
 PLUGIN_REPOSITORY = "https://github.com/vadim-chiriac/worldkeep"
 PLUGIN_DEVELOPER = "Worldkeep project"
