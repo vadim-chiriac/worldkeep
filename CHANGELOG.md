@@ -11,6 +11,8 @@ do not rewrite released history.
   from AI-host processing, optional viewer network assets, and GitHub support.
 - Added concise public terms covering open-source licensing, user-controlled
   content, AI-output review, third-party hosts, availability, and support.
+- Added the Worldkeep identity mark and transparent marketplace-ready icon
+  sizes, and displayed the mark in the project README.
 
 ### Fixed
 

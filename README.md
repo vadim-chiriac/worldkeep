@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="Documentation/assets/worldkeep-icon.png" width="160" alt="Worldkeep logo">
+</p>
+
 # Worldkeep
 
 **Build a fictional world as structured canon. You write; an agent gives what
