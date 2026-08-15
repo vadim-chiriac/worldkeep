@@ -466,7 +466,7 @@ def run_viewer_tests() -> None:
         str(VENDOR_DIR) + (os.pathsep + existing_pythonpath if existing_pythonpath else "")
     )
     result = subprocess.run(
-        [sys.executable, "-m", "pytest", "tests/", "-q"],
+        [sys.executable, "-m", "pytest", "-p", "no:cacheprovider", "tests/", "-q"],
         cwd=str(VIEWER), capture_output=True, text=True, env=env,
     )
     print(result.stdout)
@@ -482,7 +482,7 @@ def run_wb_tests() -> None:
         str(VENDOR_DIR) + (os.pathsep + existing_pythonpath if existing_pythonpath else "")
     )
     result = subprocess.run(
-        [sys.executable, "-m", "pytest", "tests/", "-q"],
+        [sys.executable, "-m", "pytest", "-p", "no:cacheprovider", "tests/", "-q"],
         cwd=str(WB), capture_output=True, text=True, env=env,
     )
     print(result.stdout)

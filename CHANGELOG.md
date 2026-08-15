@@ -5,7 +5,18 @@ do not rewrite released history.
 
 ## [Unreleased]
 
-_No unreleased changes._
+### Added
+
+- Added a public privacy policy that distinguishes Worldkeep's local storage
+  from AI-host processing, optional viewer network assets, and GitHub support.
+- Added concise public terms covering open-source licensing, user-controlled
+  content, AI-output review, third-party hosts, availability, and support.
+
+### Fixed
+
+- Disabled pytest's cache provider in the build pipeline and made publication
+  ignore declared transient directories, so permission-sensitive test caches
+  cannot block the next public-clone sync.
 
 ## [0.3.0] - 2026-08-15
 

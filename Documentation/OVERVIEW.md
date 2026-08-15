@@ -301,6 +301,9 @@ whichever AI host you are running it through** — Anthropic or OpenAI — under
 that vendor's terms, not this project's. If that matters for a particular
 world, the files are just files: you can edit them without an agent at all.
 
+The full public notice, including viewer network behavior and support reports,
+is in [PRIVACY.md](PRIVACY.md).
+
 ---
 
 ## Where to go next

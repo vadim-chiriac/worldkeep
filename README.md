@@ -257,6 +257,8 @@ neither is claimed. If you try it there, the result is worth reporting.
 | [Configuration](Documentation/CONFIGURATION.md) | `scribe.yaml`, manifests, viewer options |
 | [Troubleshooting](Documentation/TROUBLESHOOTING.md) | when something does not work |
 | [Limitations](Documentation/LIMITATIONS.md) | current boundaries, honestly stated |
+| [Privacy](Documentation/PRIVACY.md) | local files, AI-host processing and viewer network access |
+| [Terms](Documentation/TERMS.md) | open-source use, user responsibility and third-party hosts |
 | [Roadmap](Documentation/ROADMAP.md) | what is next, without promised dates |
 | [Development](Documentation/DEVELOPMENT.md) | building, testing, contributing |
 | [Release notes](Documentation/RELEASE-NOTES.md) | what 0.3.0 adds, in prose |
@@ -273,6 +275,13 @@ Example worlds are in [`Examples/`](Examples/).
 
 Worldkeep is released under the [MIT licence](LICENSE) — use it, change it,
 build on it, commercially or not.
+
+Worldkeep itself has no server, account or telemetry. See the
+[privacy policy](Documentation/PRIVACY.md) for the separate roles of the local
+tooling, your AI host and optional viewer network assets.
+
+Use is subject to the [Worldkeep terms](Documentation/TERMS.md), which do not
+replace or restrict the rights granted by the MIT licence.
 
 Bundled third-party components keep their own licences, all likewise MIT; see
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
