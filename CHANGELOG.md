@@ -7,6 +7,10 @@ do not rewrite released history.
 
 ### Added
 
+- Refreshed `Examples/lower-fen` against the current specifications with 31
+  approved world artifacts, a qualitative inundation state, shared
+  multi-member containment, weighted beliefs, and a richer `The bell dispute`
+  view.
 - `wb capture` now accepts an approval-batch envelope that verifies every
   artifact belongs to exactly one semantic bundle before writing, then reports
   computed structural counts, relation shapes, new type files, and

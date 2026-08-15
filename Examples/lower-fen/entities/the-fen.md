@@ -2,8 +2,10 @@
 id: entities/the-fen
 kind: entity
 type: place
-name: The Fen
+name: The Lower Fen
 status: canon
+scribe.origin: mixed
+scribe.session: lower-fen-refresh-2026-08-14
 ---
 
-Wet country, slow water, few roads. Everything here is reached by boat or not at all.
+Wet low country of reed beds, channels, and stilted settlements.

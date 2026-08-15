@@ -9,14 +9,9 @@ folder of Markdown and YAML artifacts, validates them, and draws them. Nothing
 enters your canon without your approval, nothing leaves your disk, and every
 file stays readable in a text editor long after any tool stops working.
 
-![A rendered view of the Lower Fen: places nested inside the Fen, two rival
-doctrines about what the bell is for, and an inspector panel showing the
-selected doctrine's canon file and everyone who holds
-it.](Documentation/assets/viewer.png)
-
-*Two communities, one bell, no agreement — and the panel on the right answering
-who believes what. Every node is a file you own.
-([the world](Examples/lower-fen))*
+**Worked example:** [The Lower Fen](Examples/lower-fen) is small enough to read
+file by file: two communities, one bell, no agreement, a qualitative flooded
+state, and a saved view that makes the dispute readable.
 
 There is no fixed taxonomy of races, realms or character sheets. There are four
 kernel kinds and an open vocabulary you invent as you go. Which is why a

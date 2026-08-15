@@ -1,13 +1,12 @@
-# Two communities, one bell, and no agreement about what it is for. This is the
-# view worth looking at first: the places nest, the doctrines sit outside them
-# as ideas, and the holds edges are as thick as the conviction behind them.
+# A compact reading of the Lower Fen example: nested places, rival
+# beliefs, a community membership, and the practice that keeps the bell in use.
 name: "The bell dispute"
 render: graph
 select:
   kinds: [entity, idea, relation]
   status: [canon]
 edges:
-  include: [part_of, part_of/membership, holds, opposes, participates]
+  include: [part_of, part_of/membership, holds, opposes, participates, state]
 layout: fcose
 emphasis:
   size_by: weight

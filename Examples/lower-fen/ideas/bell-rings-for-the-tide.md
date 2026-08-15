@@ -1,9 +1,10 @@
 ---
 id: ideas/bell-rings-for-the-tide
 kind: idea
-type: doctrine
 name: The bell rings for the tide
 status: canon
+scribe.origin: mixed
+scribe.session: lower-fen-refresh-2026-08-14
 ---
 
-It is a tide signal and always was. The Wardens made the rest up, and charge for it.
+The Rope's doctrine about the bell.

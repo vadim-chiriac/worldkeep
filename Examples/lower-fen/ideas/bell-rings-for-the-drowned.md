@@ -1,9 +1,10 @@
 ---
 id: ideas/bell-rings-for-the-drowned
 kind: idea
-type: doctrine
 name: The bell rings for the drowned
 status: canon
+scribe.origin: mixed
+scribe.session: lower-fen-refresh-2026-08-14
 ---
 
-Every toll is counted against a name the water took. The Wardens keep the count.
+The Wardens' doctrine about the bell.

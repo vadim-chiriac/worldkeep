@@ -1,49 +1,38 @@
 # The Lower Fen
 
-A small worked canon — 16 artifacts and 12 relations — built to show what the
-kernel does that a fixed-category tool cannot.
+A small current Worldkeep canon: 31 world artifacts plus 19 type definitions.
+It is deliberately compact enough to read file by file while exercising the
+same structures used by larger worlds.
 
-Wet country, a village on stilts, a tidewater town, and one brick bell tower
-that two communities cannot agree about.
+Wet low country contains two settlements, a ford, a deep channel, and a bell
+tower. Its communities disagree about what the bell means and whether a fever
+was judgement; people keep the bell watch and work the Crossing.
 
 ## What to look at
 
-Open `views/the-bell-dispute.yaml`, which is the view worth seeing first.
+Open `views/the-bell-dispute.yaml` first. Its validated projection contains 18
+nodes and 17 edges, with no warnings.
 
-**Places nest, two levels deep.** The Ford is inside Marrow Reach is inside the
-Fen; the Bell Tower is inside Sallow Quay. Containment is a `part_of` relation,
-not a field, so a place can be moved by editing one file.
-
-**The disagreement is structure, not prose.** The Bell Wardens hold that the
-bell rings for the drowned. The Rope holds that it is a tide signal and always
-was. Neither doctrine is true or false — an idea's content asserts nothing —
-but both exist, both are held, and an `opposes` relation ties them. Ask the
-canon who believes what and it can answer, because belief was never written
-into a paragraph.
-
-**Conviction has a thickness.** The `holds` edges are weighted: the Wardens at
-0.95, the Rope at 0.8, the fenfolk hedging at 0.4. The view scales edge width
-by weight, so the strength of a belief is visible before you read a label.
-
-**Things that happen are entities.** The Fever and the Crossing are typed
-`action` and `action/practice`, drawn as hexagons because `types/action`
-declares that lens — the shape lives in the canon, not in the renderer.
-
-**One statement, one file.** Three places sit in the Fen, and that is one
-`part_of` relation with three `part` members rather than three near-identical
-files. It draws exactly the same picture — the same sixteen nodes and fourteen
-edges — because a relation is one addressable statement, not one edge. Split it
-only when the parts differ in something: a different date, a different source,
-a link something else needs to point at.
+- **One shared containment statement.** Marrow Reach and Sallow Quay are both
+  parts of the Fen in one multi-member `part_of` relation. The Bell Tower is
+  separately part of Sallow Quay because that fact has a different whole.
+- **A qualitative state.** `state/inundation` records that the Fen is currently
+  `flooded`; the property type was proposed and approved with the canon.
+- **Ideas remain first-class.** The two doctrines about the bell are connected
+  by `opposes`, while `holds` records who believes each one and how strongly.
+- **Several readable threads coexist.** The Fever, Crossing, Fenfolk, and
+  Harbormistress add connected sub-stories without making the graph large.
+- **A shared practice.** The bell watch is an `action/practice` with the Wardens
+  as performer and the Bell Tower as place.
+- **A durable custom view.** The saved YAML selects only the relation types
+  needed for this reading. `Everything` remains the neutral audit graph.
 
 ## Reproducing it
 
-```
-wb view Examples/lower-fen --all-views -o lower-fen.html
+```text
 wb validate Examples/lower-fen
+wb view Examples/lower-fen --all-views --vendor --output lower-fen.html
 ```
 
-Expected: 16 nodes, 14 edges, no warnings, and zero errors. The validator
-counts 47 artifacts, because it counts everything in the folder: the 16 above,
-the 12 relations that draw as edges rather than nodes, and 19 type definitions,
-all but one of which came with the seed.
+Expected validation: 50 artifacts, zero errors, zero warnings and zero notices.
+The total includes 31 world artifacts and 19 type definitions.

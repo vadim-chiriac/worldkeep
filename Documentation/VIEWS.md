@@ -56,15 +56,15 @@ select:
   kinds: [entity, idea, relation]
   status: [canon]
 edges:
-  include: [part_of, part_of/membership, holds, opposes, participates]
+  include: [part_of, part_of/membership, holds, opposes, participates, state]
 layout: fcose
 emphasis:
   size_by: weight
 ```
 
 That is a real view, from [`Examples/lower-fen`](../Examples/lower-fen). It
-selects entities, ideas and relations; draws five relation types; scales edge
-width by `weight`, so conviction has a thickness.
+selects entities, ideas and relations; draws only the six relation families
+needed for this reading; and leaves `Everything` as the neutral audit graph.
 
 Save it as `views/the-bell-dispute.yaml` and it appears in the view picker.
 
@@ -122,8 +122,8 @@ wb validate <world> --view views/the-bell-dispute.yaml
 ```
 view: The bell dispute (views/the-bell-dispute.yaml)
 result: VALID
-projected: 16 node(s), 14 edge(s)
-fingerprint: 620b24fe80797355…
+projected: 18 node(s), 17 edge(s)
+fingerprint: 1117f4414d33f74f…
 lock: absent
 ```
 

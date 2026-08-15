@@ -4,6 +4,8 @@ kind: entity
 type: community
 name: The Rope
 status: canon
+scribe.origin: mixed
+scribe.session: lower-fen-refresh-2026-08-14
 ---
 
-The ferrymen's guild. Named for the crossing line, not for hanging.
+A river-workers' community at Sallow Quay.

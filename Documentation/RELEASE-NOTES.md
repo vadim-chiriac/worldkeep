@@ -122,9 +122,9 @@ Install per [INSTALLATION.md](INSTALLATION.md), then point the agent at a
 folder and start talking. [GETTING-STARTED.md](GETTING-STARTED.md) walks a
 first world from prompt to rendered view.
 
-[`Examples/lower-fen`](../Examples/lower-fen) is sixteen artifacts you can read
-in full: a village on stilts, a tidewater town, and one bell tower two
-communities cannot agree about.
+[`Examples/lower-fen`](../Examples/lower-fen) is thirty-one world artifacts you
+can read in full: settlements, a crossing, a fever, a flooded Fen, and
+communities that cannot agree what the bell means.
 
 MIT licensed. The reports worth making most are the ones where nothing failed
 and the result was quietly wrong.

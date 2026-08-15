@@ -7,15 +7,16 @@ Generated from artifact frontmatter. Artifacts are the source of truth; run `app
 
 | id | kind | type | name |
 |---|---|---|---|
+| `actions/the-bell-watch` | entity | action/practice | The bell watch |
 | `actions/the-crossing` | entity | action/practice | The Crossing |
 | `actions/the-fever` | entity | action | The Fever |
 | `entities/deep-channel` | entity | place | The Deep Channel |
-| `entities/marrow-reach` | entity | place/village | Marrow Reach |
+| `entities/marrow-reach` | entity | place | Marrow Reach |
 | `entities/old-coll` | entity | person | Old Coll |
-| `entities/sallow-quay` | entity | place/town | Sallow Quay |
+| `entities/sallow-quay` | entity | place | Sallow Quay |
 | `entities/the-bell-tower` | entity | place | The Bell Tower |
 | `entities/the-bell-wardens` | entity | community | The Bell Wardens |
-| `entities/the-fen` | entity | place | The Fen |
+| `entities/the-fen` | entity | place | The Lower Fen |
 | `entities/the-fenfolk` | entity | community | The Fenfolk |
 | `entities/the-ford` | entity | place | The Ford |
 | `entities/the-harbormistress` | entity | person | The Harbormistress |
@@ -25,26 +26,28 @@ Generated from artifact frontmatter. Artifacts are the source of truth; run `app
 
 | id | kind | type | name |
 |---|---|---|---|
-| `ideas/bell-rings-for-the-drowned` | idea | doctrine | The bell rings for the drowned |
-| `ideas/bell-rings-for-the-tide` | idea | doctrine | The bell rings for the tide |
-| `ideas/the-fever-was-a-judgement` | idea | doctrine | The fever was a judgement |
+| `ideas/bell-rings-for-the-drowned` | idea |  | The bell rings for the drowned |
+| `ideas/bell-rings-for-the-tide` | idea |  | The bell rings for the tide |
+| `ideas/the-fever-was-a-judgement` | idea |  | The fever was a judgement |
 
 ## Relation
 
 | id | kind | type | name |
 |---|---|---|---|
-| `relations/bell-doctrines-oppose` | relation | opposes |  |
-| `relations/coll-in-the-rope` | relation | part_of/membership |  |
-| `relations/coll-works-the-crossing` | relation | participates |  |
-| `relations/fenfolk-hold-drowned` | relation | holds |  |
-| `relations/fenfolk-hold-judgement` | relation | holds |  |
-| `relations/fever-at-marrow-reach` | relation | participates |  |
-| `relations/ford-in-marrow-reach` | relation | part_of |  |
-| `relations/harbormistress-in-wardens` | relation | part_of/membership |  |
-| `relations/in-the-fen` | relation | part_of |  |
-| `relations/rope-holds-tide` | relation | holds |  |
-| `relations/tower-in-quay` | relation | part_of |  |
-| `relations/wardens-hold-drowned` | relation | holds |  |
+| `relations/bell-doctrines-oppose` | relation | opposes | The bell doctrines oppose |
+| `relations/coll-in-the-rope` | relation | part_of/membership | Old Coll in the Rope |
+| `relations/coll-works-the-crossing` | relation | participates | Old Coll works the Crossing |
+| `relations/fen-current-condition` | relation | state/inundation | The Fen's current condition |
+| `relations/fenfolk-hold-drowned` | relation | holds | Some Fenfolk hold the drowned doctrine |
+| `relations/fenfolk-hold-judgement` | relation | holds | Some Fenfolk call the Fever a judgement |
+| `relations/fever-at-marrow-reach` | relation | participates | The Fever struck Marrow Reach |
+| `relations/ford-in-marrow-reach` | relation | part_of | The Ford in Marrow Reach |
+| `relations/harbormistress-in-wardens` | relation | part_of/membership | The Harbormistress belongs to the Bell Wardens |
+| `relations/rope-holds-tide` | relation | holds | The Rope holds the tide doctrine |
+| `relations/settlements-in-the-fen` | relation | part_of | Places in the Lower Fen |
+| `relations/tower-in-sallow-quay` | relation | part_of | The Bell Tower in Sallow Quay |
+| `relations/wardens-hold-drowned` | relation | holds | Wardens hold the drowned doctrine |
+| `relations/wardens-keep-the-bell-watch` | relation | participates | Wardens keep the bell watch |
 
 ## Type
 
@@ -53,7 +56,6 @@ Generated from artifact frontmatter. Artifacts are the source of truth; run `app
 | `types/action` | type |  | Action |
 | `types/action/practice` | type |  | Practice |
 | `types/community` | type |  | Community |
-| `types/doctrine` | type |  | Doctrine |
 | `types/holds` | type |  | Holds |
 | `types/law` | type |  | Law |
 | `types/object` | type |  | Object |
@@ -66,6 +68,7 @@ Generated from artifact frontmatter. Artifacts are the source of truth; run `app
 | `types/place` | type |  | Place |
 | `types/precedes` | type |  | Precedes |
 | `types/state` | type |  | State |
+| `types/state/inundation` | type |  | Inundation |
 | `types/state/population` | type |  | Population |
 | `types/subordinate_to` | type |  | Subordinate to |
 | `types/text` | type |  | Text |

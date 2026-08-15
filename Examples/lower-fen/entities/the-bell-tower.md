@@ -4,6 +4,8 @@ kind: entity
 type: place
 name: The Bell Tower
 status: canon
+scribe.origin: mixed
+scribe.session: lower-fen-refresh-2026-08-14
 ---
 
-Brick, leaning, older than the quay around it.
+A brick bell tower at Sallow Quay.

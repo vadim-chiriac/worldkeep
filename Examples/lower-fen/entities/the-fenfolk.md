@@ -4,6 +4,8 @@ kind: entity
 type: community
 name: The Fenfolk
 status: canon
+scribe.origin: mixed
+scribe.session: lower-fen-hybrid-2026-08-15
 ---
 
-Everyone else who lives out on the water.
+The people who live out on the water beyond the larger settlements.

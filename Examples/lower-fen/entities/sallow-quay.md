@@ -1,9 +1,11 @@
 ---
 id: entities/sallow-quay
 kind: entity
-type: place/town
+type: place
 name: Sallow Quay
 status: canon
+scribe.origin: mixed
+scribe.session: lower-fen-refresh-2026-08-14
 ---
 
-Where the fen meets tidewater, and where the fen sells what it has.
+A tidewater town in the Lower Fen.
