@@ -30,15 +30,27 @@ python.exe to PATH** in the installer.
 
 ## Claude
 
-Claude installs plugins from a **marketplace**, which is just a repository
-containing a catalogue file. Add the marketplace once, then install from it.
+The simplest installation does not require a marketplace:
+
+1. Download [`plugin.zip` from the latest Worldkeep release](https://github.com/vadim-chiriac/worldkeep/releases/latest/download/plugin.zip).
+2. In Claude, open **Customize → Plugins** and choose the option to upload a
+   plugin file.
+3. Select the downloaded `plugin.zip`, then start a new chat or Cowork task.
+
+Upload the complete `plugin.zip`, not either of the individual `.skill` build
+artifacts. Worldkeep needs Worldbuilding Scribe and Canon Viewer together.
+
+### Installing from the Worldkeep marketplace
+
+A marketplace makes later updates and repository installs more convenient. Add
+the Worldkeep repository once, then install from it:
 
 ```
 /plugin marketplace add vadim-chiriac/worldkeep
 /plugin install worldkeep@worldkeep
 ```
 
-Restart Claude afterwards so it loads the plugin.
+Start a new Claude session afterwards so it loads the plugin.
 
 To check it took, ask for something a skill handles:
 
@@ -122,8 +134,12 @@ is the fastest way to tell a bad install from a bad path.
 
 ## Updating
 
-**Claude:** refresh the marketplace, then update or reinstall the plugin from
-Claude's plugin manager:
+**Claude, direct upload:** download the new release's `plugin.zip` and upload
+it from **Customize → Plugins**. Confirm replacement of the existing Worldkeep
+plugin if Claude asks, then start a new session.
+
+**Claude, marketplace install:** refresh the marketplace, then update or
+reinstall the plugin from Claude's plugin manager:
 
 ```
 /plugin marketplace update worldkeep

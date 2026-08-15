@@ -119,6 +119,12 @@ If you change how a manifest is written, keep the explicit newline. Without it,
 `dist/plugin.zip` hashes differently on Windows than everywhere else and
 `build.py --check` fails outside Windows.
 
+`build.py` also produces one `.skill` archive for each component. Keep those
+artifacts for isolated validation and advanced distribution, but do not attach
+them to ordinary GitHub releases: they are not the complete Worldkeep product.
+The public install asset is `dist/plugin.zip`, which carries both skills and
+both host manifests.
+
 ---
 
 ## Vendored dependencies

@@ -66,7 +66,9 @@ lens — into exactly the picture you want.
 
 ## Five-minute start
 
-Once the plugin is installed (see [INSTALLATION.md](Documentation/INSTALLATION.md)):
+Once the plugin is installed (see [INSTALLATION.md](Documentation/INSTALLATION.md);
+in Claude, the quickest route is to upload the latest release's complete
+[`plugin.zip`](https://github.com/vadim-chiriac/worldkeep/releases/latest/download/plugin.zip)):
 
 **1. Say what you want.** In Claude or Codex, point at a folder and start:
 

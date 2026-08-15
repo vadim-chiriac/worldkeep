@@ -68,6 +68,10 @@ contains both host manifests and the two skills:
 - Worldbuilding Scribe;
 - Canon Viewer.
 
+For a direct Claude installation, download the release's `plugin.zip` and
+upload it from **Customize → Plugins**. The two skills are distributed together
+because capture and viewing are designed to work as one workflow.
+
 ## What it is not
 
 Worldkeep is not a writing application, continuity engine, predefined fantasy

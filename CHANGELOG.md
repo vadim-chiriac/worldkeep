@@ -16,6 +16,9 @@ do not rewrite released history.
 
 ### Fixed
 
+- Simplified Claude installation around direct upload of the complete
+  `plugin.zip`, and documented that individual `.skill` archives are internal
+  or advanced artifacts rather than separate end-user installs.
 - Disabled pytest's cache provider in the build pipeline and made publication
   ignore declared transient directories, so permission-sensitive test caches
   cannot block the next public-clone sync.
