@@ -9,6 +9,9 @@ folder of Markdown and YAML artifacts, validates them, and draws them. Nothing
 enters your canon without your approval, nothing leaves your disk, and every
 file stays readable in a text editor long after any tool stops working.
 
+![The Lower Fen custom view: rival bell doctrines, communities, practices,
+places nested inside the Fen, and the relation inspector.](Documentation/assets/viewer.png)
+
 **Worked example:** [The Lower Fen](Examples/lower-fen) is small enough to read
 file by file: two communities, one bell, no agreement, a qualitative flooded
 state, and a saved view that makes the dispute readable.
