@@ -649,6 +649,17 @@ def compile_view(
     # established warn-and-default behaviour; strictness applies to module and
     # compose fields, which are new surface.
     local_select = _mapping(data.get("select"), field="select", warnings=warnings)
+    relation_members_only = local_select.get("relation_members_only")
+    if composed and relation_members_only is not None and not isinstance(relation_members_only, bool):
+        warnings.append("view: 'select.relation_members_only' must be a boolean; ignored")
+        relation_members_only = False
+    # This is a view-local selector. It must not affect the ordinary candidate
+    # evaluation used to compose selection modules; composed relation policy
+    # determines its final candidate set below.
+    selector_for_composition = {
+        key: value for key, value in local_select.items()
+        if key != "relation_members_only"
+    }
     edges_config = _mapping(data.get("edges"), field="edges", warnings=warnings)
     emphasis = _mapping(data.get("emphasis"), field="emphasis", warnings=warnings)
 
@@ -737,8 +748,8 @@ def compile_view(
         selected -= excluded
 
         # 5. The view-local select narrows last and can only remove.
-        if local_select:
-            local_ids = _evaluate(canon, local_select, warnings)
+        if selector_for_composition:
+            local_ids = _evaluate(canon, selector_for_composition, warnings)
             resurrected = sorted((local_ids & excluded) - selected)
             if resurrected:
                 diagnostics.append(
@@ -769,7 +780,7 @@ def compile_view(
         # policy below decides which survive, and projection still drops any
         # whose endpoints are not visible.
         relation_scope = {
-            key: value for key, value in local_select.items() if key != "kinds"
+            key: value for key, value in selector_for_composition.items() if key != "kinds"
         }
         _, relation_candidates = select_candidates(
             canon, relation_scope, {}, warnings=warnings
@@ -841,6 +852,17 @@ def compile_view(
         base_map, relation_map = apply_anchor_policy(
             canon, base_map, relation_map, anchor.as_select() if anchor else {}, warnings=warnings
         )
+        if relation_members_only:
+            member_ids = {
+                member_id
+                for relation in relation_map.values()
+                for member_id, _role in _roles_and_members(relation)
+            }
+            base_map = {
+                artifact_id: artifact
+                for artifact_id, artifact in base_map.items()
+                if artifact_id in member_ids
+            }
         # Anchor narrowing is still selection: it decides which artifacts the
         # recipe positively chose. Everything an anchor policy merely kept
         # around is projection support, settled below.

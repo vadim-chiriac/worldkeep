@@ -7,6 +7,7 @@ render: graph
 select:
   kinds: [entity, idea, relation]
   status: [canon, draft]
+  relation_members_only: true
 edges:
   include: [part_of/membership, subordinate_to, participates, part_of]
 # fcose, not dagre: this view includes part_of, which renders as nesting, and

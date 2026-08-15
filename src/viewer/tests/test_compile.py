@@ -8,6 +8,7 @@ import unittest
 from viewer.compile import CompileError, compile_view
 from viewer.load import load_canon, load_view
 from viewer.modules import MODULE_SCHEMA, load_module_index
+from viewer.project import project_view
 
 
 def _artifact(kind: str, artifact_id: str, *, type_: str | None = None, **extra: object) -> str:
@@ -366,6 +367,32 @@ class AnchorPolicyTests(CompositionTestCase):
 
 
 class RelationAlgebraTests(CompositionTestCase):
+    def test_view_local_relation_members_only_applies_after_composed_relations(self) -> None:
+        path = self.world.view(
+            "relation-members-only",
+            """
+            name: Relation members
+            select:
+              kinds: [entity, relation]
+              relation_members_only: true
+            compose:
+              relations:
+                include: [affiliations]
+            """,
+        )
+        plan = self.compile(path)
+        self.assertEqual(plan.endpoint_completions, frozenset())
+        self.assertEqual(
+            plan.base_ids,
+            frozenset({"entities/mara", "entities/guild"}),
+        )
+        projection = project_view(load_canon(self.root), load_view(self.root, path), plan=plan)
+        self.assertEqual(
+            {node["id"] for node in projection["nodes"]},
+            {"entities/mara", "entities/guild"},
+        )
+        self.assertEqual({edge["id"] for edge in projection["edges"]}, {"relations/mara-member-guild"})
+
     def test_relation_includes_union(self) -> None:
         path = self.world.view(
             "both-relations",

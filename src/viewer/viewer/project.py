@@ -686,6 +686,25 @@ def select_candidates(
                 continue
             relation_artifacts[artifact.id] = artifact
 
+    relation_members_only = select.get("relation_members_only")
+    if relation_members_only is not None and not isinstance(relation_members_only, bool):
+        _warn(
+            warnings,
+            "view: 'select.relation_members_only' must be a boolean; ignored",
+        )
+        relation_members_only = False
+    if relation_members_only:
+        member_ids = {
+            member_id
+            for relation in relation_artifacts.values()
+            for member_id, _role in _roles_and_members(relation)
+        }
+        base_artifacts = {
+            artifact_id: artifact
+            for artifact_id, artifact in base_artifacts.items()
+            if artifact_id in member_ids
+        }
+
     return base_artifacts, relation_artifacts
 
 

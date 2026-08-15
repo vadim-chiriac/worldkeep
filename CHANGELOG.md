@@ -7,6 +7,10 @@ do not rewrite released history.
 
 ### Added
 
+- Added relation-driven pruning for the default Groups view, so it shows only
+  members of the selected group relation families and keeps unrelated artifacts
+  out of the graph.
+
 - Refreshed `Examples/lower-fen` against the current specifications with 31
   approved world artifacts, a qualitative inundation state, shared
   multi-member containment, weighted beliefs, and a richer `The bell dispute`

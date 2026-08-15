@@ -80,12 +80,22 @@ Save it as `views/the-bell-dispute.yaml` and it appears in the view picker.
 | `tags` | list | keeps artifacts carrying at least one of these tags |
 | `where_under` | one id | keeps only what is inside that artifact, down the `part_of` chain |
 | `when_range` | `{from, to}` | keeps artifacts whose `when.sort` falls in range, endpoints included |
+| `relation_members_only` | boolean | keeps only non-relation artifacts named by the selected relation candidates |
 | `connected_to_kinds` | list | **anchor**: keep these, plus whatever an included relation ties to them |
 | `connected_to_types` | list | the same, by type path; globs allowed |
 
 The two `connected_to_*` keys are anchors rather than filters. They answer "the
 guilds, and whoever deals with them" — a question a plain filter cannot express,
 because you do not know the names of the neighbours in advance.
+
+`relation_members_only: true` is a view-local selector for ordinary and composed
+views (it is not valid inside a `view-modules/` selection module). It is a
+relation-driven pruning mode. After the
+ordinary kind, type, status and scope filters and `edges.include`/`exclude`
+choose relation candidates, only their directly named non-relation members are
+kept. It never widens those ordinary filters, and a view with no matching
+relations is empty. The built-in Groups view uses it so unrelated isolated
+artifacts do not appear.
 
 ## `edges:` — which relations
 

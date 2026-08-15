@@ -147,6 +147,7 @@ select:
   kinds: [entity, relation]        # optional; default: everything
   types: [place/*, community/*]    # glob on the type path
   status: [canon, draft]           # default: canon + draft
+  relation_members_only: true      # optional: keep only members of selected relations
   where_under: entities/the-realm  # optional: place-chain filter
   connected_to_kinds: [idea]       # optional: keep these kinds even isolated
   connected_to_types: [person, person/*] # optional: typed anchors plus direct neighbours
@@ -174,6 +175,13 @@ same exact paths/globs as `types`; use both `person` and `person/*` when both
 are wanted. It is one hop only and does not justify changing canon, tags, or
 types just to force a viewer result. Save the outcome as an ordinary durable
 view and explain its selection in plain language.
+
+Use the view-local selector `relation_members_only: true` (in ordinary or
+composed views, not a selection-module field) for a relation-driven view such as Groups:
+after the selected relation families are known, unrelated isolated entities
+and ideas are removed while their directly named members remain. Ordinary
+kind/type/status filters still win, and no matching relation produces an empty
+projection.
 
 Every rendered view has a local **Filter this view** panel with exact types
 used in that projection. It is presentation-only and resets on a named-view

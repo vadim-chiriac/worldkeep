@@ -128,6 +128,101 @@ class ExampleProjectionTests(unittest.TestCase):
 
 
 class BehaviorProjectionTests(unittest.TestCase):
+    def test_relation_members_only_prunes_isolated_artifacts_and_preserves_shapes(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            for artifact_id, kind in (
+                ("entities/member", "entity"),
+                ("entities/group", "entity"),
+                ("entities/isolated", "entity"),
+                ("ideas/unrelated", "idea"),
+                ("entities/draft-member", "entity"),
+            ):
+                status = "draft" if artifact_id.endswith("draft-member") else "canon"
+                write_artifact(root, artifact_id, f"kind: {kind}\ntype: person\nstatus: {status}\n")
+            write_artifact(
+                root,
+                "relations/membership",
+                "kind: relation\ntype: part_of/membership\nstatus: canon\nmembers:\n"
+                "  - {id: entities/member, role: part}\n"
+                "  - {id: entities/group, role: whole}\n",
+            )
+            write_artifact(
+                root,
+                "relations/participation",
+                "kind: relation\ntype: participates\nstatus: canon\nmembers:\n"
+                "  - {id: entities/member, role: participant}\n"
+                "  - {id: entities/group, role: action}\n"
+                "  - {id: entities/isolated, role: witness}\n",
+            )
+            write_artifact(
+                root,
+                "relations/custom",
+                "kind: relation\ntype: invented\nstatus: canon\nmembers: [entities/isolated, ideas/unrelated]\n",
+            )
+            write_view(
+                root,
+                "name: Groups\nselect:\n  kinds: [entity, idea, relation]\n"
+                "  status: [canon]\n  relation_members_only: true\n"
+                "edges:\n  include: [part_of/membership, participates]\n",
+            )
+            projection = project_view(load_canon(root), load_view(root, "views/test.yaml"))
+            self.assertEqual(
+                {node["id"] for node in projection["nodes"]},
+                {"entities/member", "entities/group", "entities/isolated", "relations/participation"},
+            )
+            self.assertEqual(
+                {edge["id"] for edge in projection["edges"]},
+                {"relations/membership", "relations/participation::member:1", "relations/participation::member:2", "relations/participation::member:3"},
+            )
+
+    def test_relation_members_only_empty_when_no_selected_relations_and_warns_on_bad_value(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            write_artifact(root, "entities/isolated", "kind: entity\nstatus: canon\n")
+            write_view(root, 'name: Empty\nselect:\n  relation_members_only: "yes"\nedges:\n  include: [part_of/membership]\n')
+            projection = project_view(load_canon(root), load_view(root, "views/test.yaml"))
+            self.assertEqual({node["id"] for node in projection["nodes"]}, {"entities/isolated"})
+            self.assertEqual(projection["edges"], [])
+            self.assertEqual(sum("relation_members_only" in warning for warning in projection["warnings"]), 1)
+            write_view(root, "name: Empty\nselect:\n  relation_members_only: true\nedges:\n  include: [part_of/membership]\n")
+            empty = project_view(load_canon(root), load_view(root, "views/test.yaml"))
+            self.assertEqual(empty["nodes"], [])
+            self.assertEqual(empty["edges"], [])
+
+    def test_relation_members_only_respects_filters_and_part_of_nesting(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            write_artifact(root, "entities/child", "kind: entity\ntype: person\nstatus: canon\n")
+            write_artifact(root, "entities/container", "kind: entity\ntype: community\nstatus: canon\n")
+            write_artifact(root, "entities/wrong-type", "kind: entity\ntype: deity\nstatus: canon\n")
+            write_artifact(root, "entities/draft", "kind: entity\ntype: person\nstatus: draft\n")
+            write_artifact(root, "entities/unrelated", "kind: entity\ntype: person\nstatus: canon\n")
+            write_artifact(
+                root,
+                "relations/containment",
+                "kind: relation\ntype: part_of\nstatus: canon\nmembers:\n"
+                "  - {id: entities/child, role: part}\n  - {id: entities/container, role: whole}\n",
+            )
+            write_artifact(
+                root,
+                "relations/excluded-endpoint",
+                "kind: relation\ntype: part_of\nstatus: canon\nmembers:\n"
+                "  - {id: entities/draft, role: part}\n  - {id: entities/container, role: whole}\n",
+            )
+            write_view(
+                root,
+                "name: Groups\nselect:\n  kinds: [entity, relation]\n  types: [person, community, part_of]\n"
+                "  status: [canon]\n  relation_members_only: true\n"
+                "edges:\n  include: [part_of]\n",
+            )
+            projection = project_view(load_canon(root), load_view(root, "views/test.yaml"))
+            node_ids = {node["id"] for node in projection["nodes"]}
+            self.assertEqual(node_ids, {"entities/child", "entities/container"})
+            self.assertEqual({edge["id"] for edge in projection["edges"]}, {"relations/containment"})
+            self.assertEqual(next(node for node in projection["nodes"] if node["id"] == "entities/child")["parent"], "entities/container")
+            self.assertTrue(any("excluded-endpoint" in warning for warning in projection["warnings"]))
+
     def test_connected_to_kinds_keeps_anchors_and_direct_neighbors_only(self) -> None:
         with TemporaryDirectory() as directory:
             root = Path(directory)

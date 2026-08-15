@@ -202,6 +202,9 @@ class ManifestParsingTests(unittest.TestCase):
         with self.assertRaisesRegex(ModuleError, "unknown field.*'expr'"):
             self._parse(SELECTION_MODULE + "  expr: 'kind == entity'\n")
 
+        with self.assertRaisesRegex(ModuleError, "unknown field.*'relation_members_only'"):
+            self._parse(SELECTION_MODULE + "  relation_members_only: true\n")
+
         overlay = LENS_MODULE.replace("set: {as: nest", "set: {rank: 3, as: nest")
         with self.assertRaisesRegex(ModuleError, "unknown field.*'rank'"):
             self._parse(overlay)
