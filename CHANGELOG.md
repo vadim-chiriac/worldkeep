@@ -5,6 +5,13 @@ do not rewrite released history.
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-08-16
+
+### Fixed
+
+- Packaged square composer and directory logo assets in the Codex manifest so
+  the OpenAI Plugin Directory accepts the skills-only archive.
+
 ## [0.3.1] - 2026-08-16
 
 ### Added

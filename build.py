@@ -33,9 +33,10 @@ VIEWER = SRC / "viewer"
 WB = SRC / "wb"
 RUNTIME = SRC / "runtime"
 DIST = ROOT / "dist"
+DOCUMENTATION_ASSETS = ROOT / "Documentation" / "assets"
 
 PLUGIN_NAME = "worldkeep"
-PLUGIN_VERSION = "0.3.1"
+PLUGIN_VERSION = "0.3.2"
 PLUGIN_DESCRIPTION = "Worldkeep: capture and view a structured worldbuilding canon"
 PLUGIN_REPOSITORY = "https://github.com/vadim-chiriac/worldkeep"
 PLUGIN_DEVELOPER = "Worldkeep project"
@@ -322,6 +323,8 @@ def codex_plugin_manifest() -> dict:
                 "Render a graph of my worldbuilding canon.",
                 "Show me who rules what in this canon.",
             ],
+            "composerIcon": "./assets/worldkeep-icon-128.png",
+            "logo": "./assets/worldkeep-icon-512.png",
         },
     }
 
@@ -345,6 +348,11 @@ def assemble_plugin(build_dir: Path, plugin_dir: Path, kernel_version: str, scri
         encoding="utf-8",
         newline="\n",
     )
+
+    assets_dir = plugin_dir / "assets"
+    assets_dir.mkdir(parents=True, exist_ok=True)
+    for filename in ("worldkeep-icon-128.png", "worldkeep-icon-512.png"):
+        shutil.copy2(DOCUMENTATION_ASSETS / filename, assets_dir / filename)
 
     skills_dir = plugin_dir / "skills"
     shutil.copytree(build_dir / "worldbuilding-scribe", skills_dir / "worldbuilding-scribe", dirs_exist_ok=True)

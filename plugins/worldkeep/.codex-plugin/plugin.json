@@ -1,6 +1,6 @@
 {
   "name": "worldkeep",
-  "version": "0.3.1+codex.20260816135857",
+  "version": "0.3.2+codex.20260816150037",
   "description": "Worldkeep: capture and view a structured worldbuilding canon",
   "author": {
     "name": "Worldkeep project",
@@ -28,6 +28,8 @@
       "Help me capture this worldbuilding into canon.",
       "Render a graph of my worldbuilding canon.",
       "Show me who rules what in this canon."
-    ]
+    ],
+    "composerIcon": "./assets/worldkeep-icon-128.png",
+    "logo": "./assets/worldkeep-icon-512.png"
   }
 }

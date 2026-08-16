@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import os
 import shutil
+import struct
 import subprocess
 import sys
 import unittest
@@ -134,6 +136,29 @@ class CanonicalSourceTests(unittest.TestCase):
         ]
 
         self.assertEqual(stray, [], f"unexpected extra wb.py: {stray}")
+
+    def test_codex_manifest_icons_are_packaged_and_square(self) -> None:
+        build = load_build()
+
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            build_dir = root / "build"
+            build.build_scribe(build_dir)
+            build.build_viewer(build_dir)
+            plugin = root / "plugin"
+            build.assemble_plugin(build_dir, plugin, "test-kernel", "test-scribe")
+
+            manifest = json.loads(
+                (plugin / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8")
+            )
+            for field in ("composerIcon", "logo"):
+                relative = manifest["interface"][field]
+                self.assertTrue(relative.startswith("./assets/"))
+                image = plugin / relative.removeprefix("./")
+                data = image.read_bytes()
+                self.assertEqual(data[:8], b"\x89PNG\r\n\x1a\n")
+                width, height = struct.unpack(">II", data[16:24])
+                self.assertEqual(width, height, f"{field} must reference a square image")
 
 
 class InstalledLayoutTests(unittest.TestCase):
