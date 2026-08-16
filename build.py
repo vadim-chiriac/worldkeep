@@ -36,7 +36,7 @@ DIST = ROOT / "dist"
 DOCUMENTATION_ASSETS = ROOT / "Documentation" / "assets"
 
 PLUGIN_NAME = "worldkeep"
-PLUGIN_VERSION = "0.3.2"
+PLUGIN_VERSION = "0.3.3"
 PLUGIN_DESCRIPTION = "Worldkeep: capture and view a structured worldbuilding canon"
 PLUGIN_REPOSITORY = "https://github.com/vadim-chiriac/worldkeep"
 PLUGIN_DEVELOPER = "Worldkeep project"
@@ -310,18 +310,19 @@ def codex_plugin_manifest() -> dict:
         "skills": "./skills/",
         "interface": {
             "displayName": "Worldkeep",
-            "shortDescription": "Capture and visualize structured worldbuilding canon.",
+            "shortDescription": "Structure and view your world",
             "longDescription": (
-                "Capture freeform worldbuilding into a Markdown/YAML canon, "
-                "validate it, and render configurable offline graph views."
+                "Turn natural-language worldbuilding into a structured, approval-gated "
+                "Markdown/YAML canon. Review the meanings the agent modeled, validate "
+                "consistency, and refine configurable offline graph views."
             ),
             "developerName": PLUGIN_DEVELOPER,
-            "category": "Productivity",
+            "category": "Creativity",
             "capabilities": ["Read", "Write"],
             "defaultPrompt": [
                 "Help me capture this worldbuilding into canon.",
                 "Render a graph of my worldbuilding canon.",
-                "Show me who rules what in this canon.",
+                "Help me review my canon's semantics and create a meaningful custom view.",
             ],
             "composerIcon": "./assets/worldkeep-icon-128.png",
             "logo": "./assets/worldkeep-icon-512.png",

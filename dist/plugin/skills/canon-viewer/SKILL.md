@@ -7,9 +7,10 @@ description: >-
   "show me my world", "render the graph", "visualise my canon", "make a
   political map of my setting", "who rules what", "just the coastline
   towns", or when they point at a folder with world.yaml and ask what's in
-  it. Do not use it for capturing or extending canon — adding entities,
-  ideas, actions, or relations is the worldbuilding-scribe's job, not this
-  skill's.
+  it. Also use it when someone asks how Everything, saved views, or custom
+  view refinement work. Do not use it for capturing or extending canon —
+  adding entities, ideas, actions, or relations is the
+  worldbuilding-scribe's job, not this skill's.
 ---
 
 # Canon viewer
@@ -22,6 +23,14 @@ You turn a sentence into a picture. The author says what they want to see —
 towns" — and your job is to find or write the **view** that shows it, then
 render it. Running `view.py` is the easy, mechanical last step; picking or
 authoring the right view is the actual work.
+
+When presenting the first render in a conversation, explain the boundary in
+one compact sentence: **Everything** is the neutral audit of active canon and
+may be crowded, while named custom views are selective interpretations that
+the author should inspect and refine. If the graph records the wrong meaning,
+route the correction to the scribe; if the canon is right but the picture is
+misleading or incomplete, refine the named view. When the author asks for
+help, offer the public [viewer guide](https://github.com/vadim-chiriac/worldkeep/blob/main/Documentation/VIEWER-GUIDE.md).
 
 **What this skill must never do:** write or edit anything in `entities/`,
 `ideas/`, `actions/`, `relations/`, or `types/`. Those are canon and belong

@@ -160,6 +160,45 @@ class CanonicalSourceTests(unittest.TestCase):
                 width, height = struct.unpack(">II", data[16:24])
                 self.assertEqual(width, height, f"{field} must reference a square image")
 
+    def test_codex_manifest_exposes_the_public_onboarding_path(self) -> None:
+        build = load_build()
+
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            build_dir = root / "build"
+            build.build_scribe(build_dir)
+            build.build_viewer(build_dir)
+            plugin = root / "plugin"
+            build.assemble_plugin(build_dir, plugin, "test-kernel", "test-scribe")
+
+            manifest = json.loads(
+                (plugin / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8")
+            )
+            interface = manifest["interface"]
+            self.assertEqual(manifest["version"], "0.3.3")
+            self.assertEqual(interface["category"], "Creativity")
+            self.assertEqual(interface["shortDescription"], "Structure and view your world")
+            self.assertIn("Review the meanings", interface["longDescription"])
+            self.assertIn(
+                "Help me review my canon's semantics and create a meaningful custom view.",
+                interface["defaultPrompt"],
+            )
+
+    def test_both_packaged_skills_explain_the_author_view_boundary(self) -> None:
+        build = load_build()
+
+        with TemporaryDirectory() as directory:
+            build_dir = Path(directory)
+            scribe_bundle, _ = build.build_scribe(build_dir)
+            viewer_bundle, _ = build.build_viewer(build_dir)
+
+            scribe = (scribe_bundle / "SKILL.md").read_text(encoding="utf-8")
+            viewer = (viewer_bundle / "SKILL.md").read_text(encoding="utf-8")
+            self.assertIn("Orient the author once", scribe)
+            self.assertIn("Validation checks structural consistency", scribe)
+            self.assertIn("Everything", viewer)
+            self.assertIn("selective interpretations", viewer)
+
 
 class InstalledLayoutTests(unittest.TestCase):
     """Compare whole resolved paths, not trailing text.

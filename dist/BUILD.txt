@@ -2,7 +2,7 @@ KERNEL.md version: v0.19
 SCRIBE.md version: v0.13
 
 [worldbuilding-scribe]
-  sha256 13cc5d1d89d046373bf62d09950da97908d4412588b91e341e72c774f054a6dd  worldbuilding-scribe/SKILL.md
+  sha256 b2c70fa92cbe1d2c2b14d4011b9362fc11263852abc8242952620a6dab55a4d4  worldbuilding-scribe/SKILL.md
   sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  worldbuilding-scribe/assets/seed-world/actions/.gitkeep
   sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  worldbuilding-scribe/assets/seed-world/entities/.gitkeep
   sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  worldbuilding-scribe/assets/seed-world/ideas/.gitkeep
@@ -65,7 +65,7 @@ SCRIBE.md version: v0.13
   sha256 777a47bffb42bac3801c2f8351d8c0b2457de1d858da66714a145014e86ea824  worldbuilding-scribe/scripts/wblib/session.py
 
 [canon-viewer]
-  sha256 fe32524b7884164a13c223bb0025a2b0c5b9bb44e221cd641e42f908eb78c749  canon-viewer/SKILL.md
+  sha256 2a53703e8fa6c64a68e03dcc05613f8aa52bbbbd64489314382bcc819c94af44  canon-viewer/SKILL.md
   sha256 bf674af2f58ec118ac3b34c407a6808ac3804f7d8103a77c55eb684461b4202b  canon-viewer/assets/views-library/canon-only.yaml
   sha256 9bc946e0a9688651ad328ccb714ecf34f042798e7c6486094b5e13ff327d51be  canon-viewer/assets/views-library/groups.yaml
   sha256 8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4  canon-viewer/scripts/_vendor/PyYAML-LICENSE.txt

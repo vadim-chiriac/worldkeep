@@ -1,6 +1,6 @@
 {
   "name": "worldkeep",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Worldkeep: capture and view a structured worldbuilding canon",
   "author": {
     "name": "Worldkeep project",
@@ -16,10 +16,10 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Worldkeep",
-    "shortDescription": "Capture and visualize structured worldbuilding canon.",
-    "longDescription": "Capture freeform worldbuilding into a Markdown/YAML canon, validate it, and render configurable offline graph views.",
+    "shortDescription": "Structure and view your world",
+    "longDescription": "Turn natural-language worldbuilding into a structured, approval-gated Markdown/YAML canon. Review the meanings the agent modeled, validate consistency, and refine configurable offline graph views.",
     "developerName": "Worldkeep project",
-    "category": "Productivity",
+    "category": "Creativity",
     "capabilities": [
       "Read",
       "Write"
@@ -27,7 +27,7 @@
     "defaultPrompt": [
       "Help me capture this worldbuilding into canon.",
       "Render a graph of my worldbuilding canon.",
-      "Show me who rules what in this canon."
+      "Help me review my canon's semantics and create a meaningful custom view."
     ],
     "composerIcon": "./assets/worldkeep-icon-128.png",
     "logo": "./assets/worldkeep-icon-512.png"

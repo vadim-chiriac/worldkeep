@@ -5,6 +5,16 @@ do not rewrite released history.
 
 ## [Unreleased]
 
+## [0.3.3] - 2026-08-16
+
+### Changed
+
+- Added concise first-use guidance that distinguishes structural validation
+  from semantic correctness, presents Everything as a neutral audit rather
+  than an automatically readable view, and asks authors to refine named custom
+  views; exposed that workflow through the public starter prompts and aligned
+  the packaged listing metadata with the Creativity category.
+
 ## [0.3.2] - 2026-08-16
 
 ### Fixed
