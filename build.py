@@ -35,7 +35,7 @@ RUNTIME = SRC / "runtime"
 DIST = ROOT / "dist"
 
 PLUGIN_NAME = "worldkeep"
-PLUGIN_VERSION = "0.3.0"
+PLUGIN_VERSION = "0.3.1"
 PLUGIN_DESCRIPTION = "Worldkeep: capture and view a structured worldbuilding canon"
 PLUGIN_REPOSITORY = "https://github.com/vadim-chiriac/worldkeep"
 PLUGIN_DEVELOPER = "Worldkeep project"
@@ -553,7 +553,7 @@ def write_build_txt(
         for rel_path, digest in sorted(manifest.items()):
             lines.append(f"  sha256 {digest}  {rel_path}")
         lines.append("")
-    dest.write_text("\n".join(lines), encoding="utf-8")
+    dest.write_text("\n".join(lines), encoding="utf-8", newline="\n")
 
 
 def parse_build_txt(path: Path) -> dict[str, str]:

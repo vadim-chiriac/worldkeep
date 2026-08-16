@@ -5,6 +5,8 @@ do not rewrite released history.
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-08-16
+
 ### Added
 
 - Added a public privacy policy that distinguishes Worldkeep's local storage
@@ -16,6 +18,9 @@ do not rewrite released history.
 
 ### Fixed
 
+- Made tracked text and packaged plugin line endings deterministic across
+  operating systems, so marketplace files, release archives, and `BUILD.txt`
+  describe the same bytes regardless of Git's local `core.autocrlf` setting.
 - Simplified Claude installation around direct upload of the complete
   `plugin.zip`, and documented that individual `.skill` archives are internal
   or advanced artifacts rather than separate end-user installs.

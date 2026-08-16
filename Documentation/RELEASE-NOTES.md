@@ -1,4 +1,4 @@
-# Worldkeep 0.3.0 — a more usable viewer and safer capture loop
+# Worldkeep 0.3.1 — a more usable viewer and safer capture loop
 
 Worldkeep turns worldbuilding conversation into structured canon: plain
 Markdown and YAML files you own, written by an agent that proposes and never
@@ -8,6 +8,10 @@ This remains an early release. It is functional and tested, but the format is
 young, migration tooling does not exist yet, and the macOS/Linux pipeline has
 not been tested end to end. Keep worlds in git and review the actual canon
 before approving changes.
+
+Version 0.3.1 is a packaging and documentation hardening release. It preserves
+the 0.3.0 application behavior while making installation guidance, public
+policies, branding, and release bytes more consistent.
 
 ## What changed since 0.2.0
 

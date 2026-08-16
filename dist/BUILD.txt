@@ -93,7 +93,7 @@ SCRIBE.md version: v0.13
   sha256 b9e9d704119970f4255c035baa98d778e94af4b2efd2bdba20a601a869417223  canon-viewer/scripts/vendor/cytoscape-dagre.min.js
   sha256 4b1cab218d74996aa59cd8473f9239cc6398b8c1774d84d7e59ad9a68959cb57  canon-viewer/scripts/vendor/cytoscape-fcose.js
   sha256 9c2a3bf2592e0b14a1f7bec07c03a54f16dedf32af9cd0af155c716aa6c87bc3  canon-viewer/scripts/vendor/cytoscape.min.js
-  sha256 ec15ab5df9af3f20708f4faab994accf91cda71848cd5bb10a23432cc50b6745  canon-viewer/scripts/vendor/layout-base.js
+  sha256 f5c66be21c9cca16c4f25a576bffbd16ed1a48181c1c2dcbb8d905ec822e76b5  canon-viewer/scripts/vendor/layout-base.js
   sha256 5fb3cf4a14c3c5af6e473a192df8bca10c77754e3a0c6492c79fb92a76a5478a  canon-viewer/scripts/vendor/licenses/cose-base-LICENSE.txt
   sha256 eb319c6e6f233607f71e8e2f450391751883cfc0eeb3ca7ef574c13d1d9c2203  canon-viewer/scripts/vendor/licenses/cytoscape-LICENSE.txt
   sha256 5a95593c1f02e238aaa61b3f9e62da7d5ff51532b69b0a3f67b47956296a40dd  canon-viewer/scripts/vendor/licenses/cytoscape-dagre-LICENSE.txt

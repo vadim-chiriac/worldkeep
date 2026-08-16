@@ -9,7 +9,7 @@ document are the non-goals at the bottom.
 
 ---
 
-## Shipped through 0.3.0
+## Shipped through 0.3.1
 
 **Release documentation.** The public repository includes the overview,
 installation, first-world walkthrough, user guide, view and configuration
