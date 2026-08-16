@@ -54,7 +54,7 @@ words and theirs — not a progress log, and never repeated for later reads.
 ## Start with one command
 
 ```
-scripts/wb session <path> --task capture
+& scripts/run-python.ps1 wb.py session <path> --task capture
 ```
 
 `wb` is the agent-facing entrypoint; run it the way this skill runs any bundled

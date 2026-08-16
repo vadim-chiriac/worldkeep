@@ -22,6 +22,10 @@ do not rewrite released history.
 - Disabled pytest's cache provider in the build pipeline and made publication
   ignore declared transient directories, so permission-sensitive test caches
   cannot block the next public-clone sync.
+- Made both skills' opening `wb session` example a runnable Windows command
+  through the bundled launcher, and stopped recommending the viewer's `-o`
+  alias through `run-python.ps1`, which PowerShell rejects as an ambiguous
+  common parameter; `--output` is now used throughout.
 
 ## [0.3.0] - 2026-08-15
 

@@ -34,7 +34,7 @@ adjacent `views/<stem>.view.lock.yaml`.
 ## Start with one command
 
 ```
-scripts/wb session <path> --task view
+& scripts/run-python.ps1 wb.py session <path> --task view
 ```
 
 `wb` is the agent-facing entrypoint; run it through the same bundled launcher
@@ -51,9 +51,9 @@ listed rather than chosen between. It is read-only.
 Then use `wb` for the work itself:
 
 ```
-& scripts/run-python.ps1 wb.py view <canon> --all-views --vendor -o <out>.html
-& scripts/run-python.ps1 wb.py view <canon> --everything --vendor -o <out>.html
-& scripts/run-python.ps1 wb.py view <canon> --view views/<name>.yaml --vendor -o <out>.html
+& scripts/run-python.ps1 wb.py view <canon> --all-views --vendor --output <out>.html
+& scripts/run-python.ps1 wb.py view <canon> --everything --vendor --output <out>.html
+& scripts/run-python.ps1 wb.py view <canon> --view views/<name>.yaml --vendor --output <out>.html
 & scripts/run-python.ps1 wb.py view <canon> --list-views
 & scripts/run-python.ps1 wb.py validate <canon> --view views/<name>.yaml
 & scripts/run-python.ps1 wb.py explain <canon> --view views/<name>.yaml --artifact entities/<id>
